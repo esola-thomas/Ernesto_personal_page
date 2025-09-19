@@ -1,0 +1,27 @@
+{
+  "hero": {
+    "name": "Ernesto Sola-Thomas",
+    "title": "Electrical & Computer Engineer",
+    "tagline": "Engineer at the Intersection of Hardware, Software, Silicon, Artificial Inteligence, Secure Systems, and my Curiosity.",
+    "statements": [
+      "Silicon verification engineer at Microsoft.",
+      "Bringing blockchain + post-quantum cryptography research into practical platforms.",
+      "Architecting resilient cloud and hardware systems end-to-end."
+    ],
+    "ctas": [
+      { "label": "View Experience", "href": "#experience" },
+      { "label": "Let's Collaborate", "href": "#contact" }
+    ]
+  },
+  "quickFacts": [
+    { "label": "Current", "value": "AI silicon verification engineer · Microsoft" },
+    { "label": "Independent projects", "value": "Personal, non-Microsoft (Huitzo • Findmily • Knowonomy • ST Solutions)" },
+    { "label": "Focus", "value": "AI silicon · Secure systems · Venture building" }
+  ],
+  "contact": {
+    "email": "ernesto@solathomas.com",
+    "calendly": "https://outlook.office.com/bookwithme/user/95e7dbd873b54372b06826a7ccf26690@solathomas.com/meetingtype/aKn-w1y1gUm4i66h9xNc4Q2?bookingcode=150df60b-d5e9-4fef-8e7d-453621ba4d3e&anonymous&ismsaljsauthenabled&ep=mlink",
+    "location": "Raleigh, NC"
+  },
+  "disclaimer": "I am employed by Microsoft. My personal projects and ventures are independent, conducted outside my Microsoft role. I do not use Microsoft resources or confidential information, and I do not represent Microsoft in these activities."
+}

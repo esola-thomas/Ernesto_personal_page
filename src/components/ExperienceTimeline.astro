@@ -1,0 +1,53 @@
+---
+import type { CollectionEntry } from "astro:content";
+import SectionHeading from "./SectionHeading.astro";
+
+interface Props {
+  entries: CollectionEntry<"experience">[];
+}
+
+const { entries } = Astro.props as Props;
+---
+<section id="experience" class="py-24">
+  <div class="container section-grid">
+    <SectionHeading
+      eyebrow="Journey"
+      title="Professional Experience"
+      description="From AI silicon verification to research and consulting, I bridge deep engineering with purposeful outcomes."
+    />
+
+    <ol class="relative border-l border-soft">
+      {entries.map((entry) => (
+        <li class="group ml-8 pb-10 last:pb-0" key={entry.id}>
+          <div class="absolute -left-[1.125rem] mt-1 h-4 w-4 rounded-full border-2 border-[color:var(--surface-base)] bg-[var(--color-accent)]"></div>
+          <div class="glass-panel p-8">
+            <div class="flex flex-wrap items-center justify-between gap-2 text-sm text-muted">
+              <span class="font-semibold uppercase tracking-[0.3em] text-soft">{entry.data.role}</span>
+              <span>{entry.data.start} — {entry.data.end ?? "Present"}</span>
+            </div>
+            <h3 class="mt-4 font-display text-2xl text-primary">
+              {entry.data.organization}
+            </h3>
+            {entry.data.location && <p class="text-sm text-muted">{entry.data.location}</p>}
+            <p class="mt-4 text-secondary">{entry.data.summary}</p>
+            <ul class="mt-6 grid gap-3 text-sm text-muted">
+              {entry.data.highlights.map((item, index) => (
+                <li class="flex items-start gap-3" key={`highlight-${index}`}>
+                  <span aria-hidden="true" class="mt-1 inline-flex h-1.5 w-1.5 flex-none rounded-full bg-[var(--color-highlight)]"></span>
+                  <span set:html={item} />
+                </li>
+              ))}
+            </ul>
+            {entry.data.stack.length > 0 && (
+              <div class="mt-6 flex flex-wrap gap-2">
+                {entry.data.stack.map((tech) => (
+                  <span class="tag" key={`${entry.id}-tech-${tech}`}>{tech}</span>
+                ))}
+              </div>
+            )}
+          </div>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>

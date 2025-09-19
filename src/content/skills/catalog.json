@@ -1,0 +1,42 @@
+[
+  {
+    "label": "Silicon & Embedded",
+    "items": [
+      "Chip verification",
+      "Floating point pipelines",
+      "FPGA & RTL",
+      "Embedded firmware",
+      "Constrained random testing"
+    ]
+  },
+  {
+    "label": "Cloud & Platforms",
+    "items": [
+      "Azure Kubernetes Service",
+      "Docker + Nginx",
+      "Supabase",
+      "Stripe integration",
+      "CI/CD automation"
+    ]
+  },
+  {
+    "label": "Personal & Leadership",
+    "items": [
+      "Mentorship & coaching",
+      "Cross-functional collaboration",
+      "Strategic decision making",
+      "Resilient team building",
+      "Stakeholder empathy"
+    ]
+  },
+  {
+    "label": "Emerging Tech",
+    "items": [
+      "Blockchain protocols",
+      "Post-quantum cryptography",
+      "AI/ML experimentation",
+      "Neurotech & EEG",
+      "Human-centered robotics"
+    ]
+  }
+]

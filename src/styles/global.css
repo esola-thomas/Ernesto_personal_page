@@ -1,0 +1,264 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark, .dark *));
+
+:root {
+  color-scheme: light;
+  --font-display: "Space Grotesk", "Inter", system-ui, sans-serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+
+  --surface-base: #f8fafc;
+  --surface-elevated: rgba(255, 255, 255, 0.78);
+  --surface-muted: rgba(15, 23, 42, 0.08);
+  --surface-overlay: rgba(255, 255, 255, 0.6);
+
+  --border-soft: rgba(15, 23, 42, 0.12);
+  --border-strong: rgba(15, 23, 42, 0.2);
+
+  --text-primary: #0f172a;
+  --text-secondary: #1f2937;
+  --text-muted: rgba(15, 23, 42, 0.7);
+  --text-soft: rgba(15, 23, 42, 0.5);
+
+  --color-accent: #22d3b6;
+  --color-highlight: #f97383;
+  --color-muted: #5b6f92;
+  --color-on-accent: #032226;
+
+  --gradient-hero: radial-gradient(circle at 20% 20%, rgba(34, 211, 182, 0.18), transparent 55%),
+    radial-gradient(circle at 85% 0%, rgba(249, 115, 131, 0.22), transparent 52%);
+  --shadow-glass: 0 40px 70px -50px rgba(12, 22, 45, 0.3);
+  --radius-pill: 999px;
+  --radius-xl: 2.75rem;
+}
+
+.dark {
+  color-scheme: dark;
+  --surface-base: #0f172a;
+  --surface-elevated: rgba(30, 41, 59, 0.85);
+  --surface-muted: rgba(30, 41, 59, 0.65);
+  --surface-overlay: rgba(30, 41, 59, 0.75);
+
+  --border-soft: rgba(226, 232, 240, 0.4);
+  --border-strong: rgba(226, 232, 240, 0.55);
+
+  --text-primary: #f8fafc;
+  --text-secondary: rgba(226, 232, 240, 0.98);
+  --text-muted: rgba(203, 213, 225, 0.88);
+  --text-soft: rgba(148, 163, 184, 0.7);
+
+  --color-accent: #2dd4bf;
+  --color-highlight: #fb7185;
+  --color-muted: rgba(148, 163, 184, 0.65);
+  --color-on-accent: #041925;
+
+  --gradient-hero: radial-gradient(circle at top right, rgba(45, 212, 191, 0.36), transparent 45%),
+    radial-gradient(circle at 20% 20%, rgba(251, 113, 133, 0.22), transparent 55%);
+  --shadow-glass: 0 30px 60px -40px rgba(7, 14, 28, 0.85);
+}
+
+body {
+  @apply min-h-dvh font-sans antialiased transition-colors duration-300 ease-out;
+  font-family: var(--font-sans);
+  background-color: var(--surface-base);
+  color: var(--text-primary);
+}
+
+a {
+  @apply transition-colors duration-200 ease-out;
+  color: var(--color-accent);
+}
+
+a:hover {
+  color: var(--color-highlight);
+}
+
+::selection {
+  background: rgba(34, 211, 182, 0.25);
+  color: var(--text-primary);
+}
+
+main {
+  @apply flex-1;
+}
+
+.container {
+  @apply mx-auto max-w-[110rem] px-6 md:px-10 lg:px-12;
+}
+
+.section-grid {
+  @apply grid gap-10 md:gap-16 lg:gap-20;
+}
+
+.section-heading {
+  @apply flex flex-col gap-4;
+}
+
+.section-heading .eyebrow {
+  @apply text-xs uppercase tracking-[0.4em] font-semibold;
+  color: var(--color-muted);
+}
+
+.section-heading h2 {
+  @apply text-3xl md:text-4xl lg:text-5xl font-medium;
+  color: var(--text-primary);
+  font-family: var(--font-display);
+}
+
+.section-heading p {
+  color: var(--text-muted);
+}
+
+.badge {
+  @apply inline-flex items-center gap-2 rounded-full px-4 py-1 text-xs uppercase tracking-[0.45em] backdrop-blur;
+  background-color: var(--surface-elevated);
+  border: 1px solid var(--border-soft);
+  color: var(--color-muted);
+}
+
+.glass-panel {
+  @apply rounded-[var(--radius-xl)] backdrop-blur-lg;
+  background-color: var(--surface-elevated);
+  border: 1px solid var(--border-soft);
+  box-shadow: var(--shadow-glass);
+}
+
+.card-grid {
+  @apply grid gap-6 md:grid-cols-2 xl:grid-cols-3;
+}
+
+.tag {
+  @apply inline-flex items-center rounded-full px-3 py-1 text-xs uppercase tracking-wide;
+  background-color: var(--surface-muted);
+  color: var(--text-secondary);
+}
+
+.scroll-prompt {
+  @apply absolute bottom-12 left-1/2 flex -translate-x-1/2 items-center gap-3 text-xs uppercase tracking-[0.4em];
+  color: var(--text-soft);
+}
+
+.header-shell {
+  background-color: var(--surface-overlay);
+  background-color: color-mix(in srgb, var(--surface-base) 88%, transparent);
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.button-primary {
+  @apply inline-flex items-center gap-2 rounded-full px-7 py-3 text-sm font-semibold transition;
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+}
+
+.button-primary:hover {
+  background: var(--color-highlight);
+  color: #fff;
+}
+
+.button-ghost {
+  @apply inline-flex items-center gap-2 rounded-full border px-6 py-3 text-sm font-semibold transition;
+  border-color: var(--border-strong);
+  color: var(--text-primary);
+}
+
+.button-ghost:hover {
+  border-color: var(--color-highlight);
+  color: var(--color-highlight);
+}
+
+.button-outline {
+  @apply inline-flex items-center gap-2 rounded-full border px-6 py-3 text-sm font-semibold transition;
+  border-color: var(--border-soft);
+  color: var(--text-primary);
+  background-color: var(--surface-elevated);
+}
+
+.button-outline:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.text-primary {
+  color: var(--text-primary);
+}
+
+.text-secondary {
+  color: var(--text-secondary);
+}
+
+.text-muted {
+  color: var(--text-muted);
+}
+
+.text-soft {
+  color: var(--text-soft);
+}
+
+.surface-chip {
+  background-color: var(--surface-muted);
+  border: 1px solid var(--border-soft);
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+.font-sans {
+  font-family: var(--font-sans);
+}
+
+.border-soft {
+  border-color: var(--border-soft);
+}
+
+.border-strong {
+  border-color: var(--border-strong);
+}
+
+.bg-overlay {
+  background-color: var(--surface-overlay);
+}
+
+/* Markdown content styling for lists - only for content areas */
+.personal-content ul,
+.content ul {
+  @apply space-y-3;
+}
+
+.personal-content ul li,
+.content ul li {
+  @apply flex items-start gap-3;
+  color: var(--text-muted);
+  list-style: none;
+}
+
+.personal-content ul li::before,
+.content ul li::before {
+  content: '';
+  @apply mt-1 inline-flex h-2 w-2 flex-none rounded-full;
+  background-color: var(--color-accent);
+}
+
+/* Specific styling for personal section lists */
+.personal-content ul li {
+  @apply text-base leading-relaxed;
+}
+
+.personal-content ul li::before {
+  @apply mt-2;
+  background-color: var(--color-highlight);
+}
+
+/* Reset any default list styling */
+.personal-content ul,
+.content ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+@media (max-width: 640px) {
+  .container {
+    @apply px-5;
+  }
+}

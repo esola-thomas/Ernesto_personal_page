@@ -1,0 +1,73 @@
+---
+import type { CollectionEntry } from "astro:content";
+import SectionHeading from "./SectionHeading.astro";
+
+interface Props {
+  entries: CollectionEntry<"ventures">[];
+}
+
+const { entries } = Astro.props as Props;
+
+const ventures = await Promise.all(
+  entries.map(async (entry) => {
+    const { Content } = await entry.render();
+    return { entry, Content };
+  })
+);
+---
+<section id="ventures" class="py-24">
+  <div class="container section-grid">
+    <SectionHeading
+      eyebrow="Ventures"
+      title="Building beyond the lab"
+      description="Each venture extends my mission to build technology that strengthens human connection and decision-making."
+    />
+
+    <div class="card-grid">
+      {ventures.map(({ entry, Content }) => (
+        <article class="glass-panel flex flex-col gap-6 p-8" key={entry.id}>
+          <div class="flex items-center justify-between gap-4">
+            <div>
+              <h3 class="font-display text-2xl text-primary">{entry.data.name}</h3>
+              <p class="text-sm uppercase tracking-[0.3em] text-soft">{entry.data.stage}</p>
+            </div>
+            {entry.data.founded && (
+              <span class="rounded-full border border-soft px-3 py-1 text-xs uppercase tracking-[0.3em] text-soft">
+                Since {entry.data.founded}
+              </span>
+            )}
+          </div>
+          <p class="text-secondary">{entry.data.focus}</p>
+          {entry.data.metrics.length > 0 && (
+            <ul class="space-y-3 text-sm text-muted">
+              {entry.data.metrics.map((metric, index) => (
+                <li class="flex items-start gap-3" key={`metric-${index}`}>
+                  <span aria-hidden="true" class="mt-2 inline-flex h-1 w-1 flex-none rounded-full bg-[var(--color-accent)]"></span>
+                  <span>{metric}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+          <div class="space-y-4 text-muted">
+            <Content />
+          </div>
+          {entry.data.links.length > 0 && (
+            <div class="mt-auto flex flex-wrap gap-3 text-sm">
+              {entry.data.links.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  class="button-ghost px-4 py-2"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {link.label}
+                </a>
+              ))}
+            </div>
+          )}
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

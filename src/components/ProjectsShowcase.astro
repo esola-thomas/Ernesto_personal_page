@@ -1,0 +1,104 @@
+---
+import type { CollectionEntry } from "astro:content";
+import SectionHeading from "./SectionHeading.astro";
+
+interface Props {
+  entries: CollectionEntry<"projects">[];
+}
+
+const { entries } = Astro.props as Props;
+
+const projects = await Promise.all(
+  entries.map(async (entry) => {
+    const { Content } = await entry.render();
+    return { entry, Content };
+  })
+);
+
+const categoryLabels: Record<string, string> = {
+  hardware: "Hardware & Embedded",
+  software: "Software & Platforms",
+  research: "Research & Exploration",
+  venture: "Venture Experiments",
+  education: "Learning Initiatives"
+};
+
+const groups = Object.entries(categoryLabels)
+  .map(([category, label]) => ({
+    category,
+    label,
+    items: projects.filter((project) => project.entry.data.category === category)
+  }))
+  .filter((group) => group.items.length > 0);
+---
+<section id="projects" class="py-24">
+  <div class="container section-grid">
+    <SectionHeading
+      eyebrow="Projects"
+      title="Making ideas tangible"
+      description="A list of past pojects ranging from robotics, secure compute, simulation tooling, and cloud platforms."
+    />
+
+    <div class="grid gap-16">
+      {groups.map((group) => (
+        <div class="space-y-8" id={`projects-${group.category}`} key={group.category}>
+          <div class="flex flex-wrap items-baseline justify-between gap-4">
+            <h3 class="font-display text-3xl text-primary">{group.label}</h3>
+            <span class="text-xs uppercase tracking-[0.35em] text-soft">{group.items.length} initiatives</span>
+          </div>
+          <div class="card-grid">
+            {group.items.map(({ entry, Content }) => (
+              <article class="glass-panel flex flex-col gap-5 p-8" key={entry.id}>
+                <div class="flex flex-wrap items-center justify-between gap-3">
+                  <div>
+                    <h4 class="font-display text-2xl text-primary">{entry.data.title}</h4>
+                    <p class="text-xs uppercase tracking-[0.3em] text-soft">{entry.data.timeframe}</p>
+                  </div>
+                  <span class="rounded-full border border-soft px-3 py-1 text-xs uppercase tracking-[0.3em] text-soft">
+                    {entry.data.status}
+                  </span>
+                </div>
+                <p class="text-secondary">{entry.data.summary}</p>
+                {entry.data.impact.length > 0 && (
+                  <ul class="space-y-3 text-sm text-muted">
+                    {entry.data.impact.map((point, index) => (
+                      <li class="flex items-start gap-3" key={`impact-${index}`}>
+                        <span aria-hidden="true" class="mt-1 inline-flex h-1.5 w-1.5 flex-none rounded-full bg-[var(--color-accent)]"></span>
+                        <span>{point}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+                {entry.data.stack.length > 0 && (
+                  <div class="flex flex-wrap gap-2">
+                    {entry.data.stack.map((tech) => (
+                      <span class="tag" key={`${entry.id}-tech-${tech}`}>{tech}</span>
+                    ))}
+                  </div>
+                )}
+                {entry.data.links.length > 0 && (
+                  <div class="flex flex-wrap gap-2 text-sm">
+                    {entry.data.links.map((link) => (
+                      <a
+                        key={link.href}
+                        href={link.href}
+                        class="button-ghost px-4 py-2"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        {link.label}
+                      </a>
+                    ))}
+                  </div>
+                )}
+                <div class="space-y-4 text-muted">
+                  <Content />
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

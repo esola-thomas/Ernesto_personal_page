@@ -1,0 +1,32 @@
+---
+interface SkillGroup {
+  label: string;
+  items: string[];
+}
+
+const { groups }: { groups: SkillGroup[] } = Astro.props;
+---
+<section id="skills" class="py-24">
+  <div class="container section-grid">
+    <div class="section-heading">
+      <span class="eyebrow">Expertise</span>
+      <h2>Skills & Capabilities</h2>
+      <p class="max-w-2xl text-base text-muted">
+        A toolbox tuned for silicon verification, secure systems, venture delivery, and multidisciplinary experimentation.
+      </p>
+    </div>
+
+    <div class="grid gap-6 md:grid-cols-2">
+      {groups.map((group) => (
+        <article class="glass-panel p-8" key={group.label}>
+          <h3 class="font-display text-xl text-primary">{group.label}</h3>
+          <ul class="mt-6 flex flex-wrap gap-2">
+            {group.items.map((item) => (
+              <li class="tag" key={`${group.label}-${item}`}>{item}</li>
+            ))}
+          </ul>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

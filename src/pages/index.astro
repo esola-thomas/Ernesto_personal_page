@@ -1,0 +1,71 @@
+---
+import { getCollection, getEntry } from "astro:content";
+import SiteLayout from "../layouts/SiteLayout.astro";
+import Hero from "../components/Hero.astro";
+import ExperienceTimeline from "../components/ExperienceTimeline.astro";
+import VenturesGrid from "../components/VenturesGrid.astro";
+import ProjectsShowcase from "../components/ProjectsShowcase.astro";
+import SkillsShowcase from "../components/SkillsShowcase.astro";
+import PersonalSection from "../components/PersonalSection.astro";
+import ContactSection from "../components/ContactSection.astro";
+import AchievementsSection from "../components/AchievementsSection.astro";
+
+const siteMeta = await getEntry("site", "meta");
+const skillsEntry = await getEntry("skills", "catalog");
+
+const experiences = (await getCollection("experience")).sort(
+  (a, b) => Number(b.data.start) - Number(a.data.start)
+);
+
+const ventures = (await getCollection("ventures")).sort((a, b) => {
+  const aYear = a.data.founded ? Number(a.data.founded) : 0;
+  const bYear = b.data.founded ? Number(b.data.founded) : 0;
+  return bYear - aYear;
+});
+
+const parseTimeframe = (value: string) => {
+  const years = value.match(/\d{4}/g);
+  if (!years) return 0;
+  const last = years[years.length - 1];
+  return Number(last);
+};
+
+const projects = (await getCollection("projects")).sort(
+  (a, b) => parseTimeframe(b.data.timeframe) - parseTimeframe(a.data.timeframe)
+);
+
+const personal = await getCollection("personal");
+
+const achievements = [
+  {
+    title: "Professional focus",
+    description: "Delivering as a silicon verification engineer, building reusable testing environments for RTL. Expanding my horizons with personal projects."
+  },
+  {
+    title: "Chip design & verification",
+    description: "Deep experience across floating point pipelines, constrained random testing, coverage automation, formal and functional verification."
+  },
+  {
+    title: "Cloud-native architecture",
+    description: "Deploy personal and side projects as resilient, production-grade platforms using Kubernetes, Docker, Supabase, Stripe, Terraform, and end-to-end CI/CD with observability and automated rollouts.",
+  },
+  {
+    title: "Secure emerging tech",
+    description: "I feed my curiosity through research in blockchain, post-quantum cryptography, neurotech, and human-centered robotics."
+  }
+];
+---
+<SiteLayout
+  title="Ernesto Sola-Thomas • Electrical & Computer Engineer"
+  description="Portfolio, ventures, and research from Ernesto Sola-Thomas—silicon engineer, founder, and systems builder."
+  siteMeta={siteMeta}
+>
+  <Hero hero={siteMeta.data.hero} quickFacts={siteMeta.data.quickFacts} />
+  <AchievementsSection achievements={achievements} />
+  <ExperienceTimeline entries={experiences} />
+  <VenturesGrid entries={ventures} />
+  <ProjectsShowcase entries={projects} />
+  <SkillsShowcase groups={skillsEntry.data} />
+  <PersonalSection entries={personal} />
+  <ContactSection contact={siteMeta.data.contact} />
+</SiteLayout>

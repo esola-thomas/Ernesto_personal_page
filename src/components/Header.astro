@@ -1,0 +1,84 @@
+---
+const navItems = [
+  { href: "#about", label: "About" },
+  { href: "#experience", label: "Experience" },
+  { href: "#ventures", label: "Ventures" },
+  { href: "#projects", label: "Projects" },
+  { href: "#skills", label: "Skills" },
+  { href: "#contact", label: "Contact" }
+];
+---
+<header class="sticky top-0 z-50 backdrop-blur-xl backdrop-saturate-150">
+  <div class="header-shell">
+    <div class="container flex h-20 items-center justify-between">
+      <a
+        href="/"
+        class="inline-flex items-center gap-3 rounded-full border border-soft px-4 py-2 font-display text-sm uppercase tracking-[0.6em] text-muted backdrop-blur"
+        aria-label="Ernesto Sola-Thomas home"
+      >
+        <span>ES</span>
+        <span class="hidden text-[color:var(--color-accent)] sm:inline">/</span>
+        <span class="hidden sm:inline">Engineer</span>
+      </a>
+
+      <nav class="hidden items-center gap-8 text-sm font-medium tracking-wide text-muted md:flex">
+        {navItems.map(({ href, label }) => (
+          <a
+            href={href}
+            class="relative transition-colors duration-200 hover:text-primary"
+          >
+            <span>{label}</span>
+          </a>
+        ))}
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <button
+          type="button"
+          class="surface-chip inline-flex h-10 w-10 items-center justify-center rounded-full text-soft transition hover:text-primary"
+          data-theme-toggle
+          aria-label="Toggle color theme"
+        >
+          <svg
+            aria-hidden="true"
+            class="sun-icon h-5 w-5"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="12" cy="12" r="4" />
+            <path d="M12 2v2m0 16v2M5 5l1.5 1.5M17.5 17.5 19 19M2 12h2m16 0h2M5 19l1.5-1.5M17.5 6.5 19 5" />
+          </svg>
+          <svg
+            aria-hidden="true"
+            class="moon-icon hidden h-5 w-5"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z" />
+          </svg>
+        </button>
+        <a href="#contact" class="button-primary px-6 py-2">
+          Collaborate
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <nav class="md:hidden">
+    <div class="container flex gap-4 overflow-x-auto border-b border-soft py-3 text-xs uppercase tracking-[0.4em] text-soft">
+      {navItems.map(({ href, label }) => (
+        <a href={href} class="whitespace-nowrap rounded-full border border-soft px-3 py-1 text-muted">
+          {label}
+        </a>
+      ))}
+    </div>
+  </nav>
+</header>

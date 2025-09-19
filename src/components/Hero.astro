@@ -1,0 +1,84 @@
+---
+interface HeroData {
+  name: string;
+  title: string;
+  tagline: string;
+  statements: string[];
+  ctas: { label: string; href: string }[];
+}
+
+interface Fact {
+  label: string;
+  value: string;
+}
+
+const { hero, quickFacts }: { hero: HeroData; quickFacts: Fact[] } = Astro.props;
+---
+<section id="hero" class="relative overflow-hidden pb-28 pt-28">
+  <div aria-hidden="true" class="absolute inset-0 bg-[var(--gradient-hero)] opacity-70"></div>
+  <div class="absolute inset-x-0 bottom-0 h-64 bg-gradient-to-t from-[color:var(--surface-base)]"></div>
+
+  <div class="container relative">
+    <div class="grid gap-16 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
+      <div class="space-y-10">
+        <span class="badge">{hero.title}</span>
+        <div class="space-y-6">
+          <h1 class="font-display text-5xl font-semibold leading-tight text-primary md:text-6xl">
+            {hero.name}
+          </h1>
+          <p class="max-w-2xl text-xl text-secondary">
+            {hero.tagline}
+          </p>
+        </div>
+        <ul class="space-y-4 text-base text-muted">
+          {hero.statements.map((statement, index) => (
+            <li class="flex items-start gap-3" key={`statement-${index}`}>
+              <span aria-hidden="true" class="mt-1 inline-flex h-2 w-2 flex-none rounded-full bg-[var(--color-highlight)]"></span>
+              <span>{statement}</span>
+            </li>
+          ))}
+        </ul>
+        <div class="flex flex-wrap items-center gap-4">
+          {hero.ctas.map((cta, index) => (
+            index === 0 ? (
+              <a key={cta.href} href={cta.href} class="button-primary">
+                {cta.label}
+              </a>
+            ) : (
+              <a key={cta.href} href={cta.href} class="button-ghost">
+                {cta.label}
+              </a>
+            )
+          ))}
+        </div>
+      </div>
+
+      <aside class="glass-panel relative grid gap-6 p-10">
+        <div class="absolute -top-4 left-10 hidden rounded-full border border-soft bg-overlay px-4 py-1 text-xs uppercase tracking-[0.4em] text-soft shadow-[var(--shadow-glass)] lg:inline-flex">
+          Creating with Passion
+        </div>
+        <div class="relative flex flex-col items-center gap-6 text-center">
+          <div class="relative h-48 w-48 overflow-hidden rounded-full border border-soft bg-overlay">
+            <img src="https://tse1.mm.bing.net/th/id/OIP.hPYSzHHEbkC3WzghsU_xjAHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Headshot" class="w-full h-full object-cover" />
+          </div>
+        </div>
+        <dl class="grid gap-3 text-sm text-left text-muted">
+          {quickFacts.map((fact, index) => (
+            <div class="flex items-center justify-between rounded-lg border border-soft bg-overlay px-4 py-3" key={`fact-${index}`}>
+              <dt class="text-xs uppercase tracking-[0.35em] text-soft">{fact.label}</dt>
+              <dd class="text-right text-sm font-medium text-primary">{fact.value}</dd>
+            </div>
+          ))}
+        </dl>
+      </aside>
+    </div>
+  </div>
+
+  <div class="scroll-prompt">
+    <span>Explore Profile</span>
+    <svg aria-hidden="true" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <path d="M12 5v14" />
+      <path d="m18 13-6 6-6-6" />
+    </svg>
+  </div>
+</section>

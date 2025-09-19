@@ -1,0 +1,37 @@
+---
+const socials = [
+  { href: "https://www.linkedin.com/in/sola-thomas", label: "LinkedIn" },
+  { href: "https://github.com/esola-thomas", label: "GitHub" },
+  { href: "mailto:ernesto@solathomas.com", label: "Email" }
+];
+---
+<footer class="border-t border-soft bg-overlay">
+  <div class="container grid gap-10 py-12 md:grid-cols-[1.25fr_1fr] md:gap-16">
+    <div class="space-y-6">
+      <span class="badge">Let’s collaborate</span>
+      <h3 class="font-display text-3xl font-semibold text-primary">Building resilient systems that uplift people.</h3>
+      <p class="max-w-xl text-sm text-muted">
+        I’m actively exploring new collaborations building/creating new technology.
+        Drop a line and let’s architect what’s next.
+      </p>
+      <a href="mailto:ernesto@solathomas.com" class="button-primary px-6 py-2">
+        ernesto@solathomas.com
+      </a>
+    </div>
+    <div class="flex flex-col justify-between gap-6 text-sm text-soft">
+      <div>
+        <p class="uppercase tracking-[0.4em] text-xs text-soft">Connect</p>
+        <ul class="mt-4 space-y-3">
+          {socials.map((social) => (
+            <li>
+              <a class="transition hover:text-primary" href={social.href} rel="noreferrer" target="_blank">
+                {social.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <p class="text-xs text-soft">© {new Date().getFullYear()} Ernesto Sola-Thomas. Created with curiosity.</p>
+    </div>
+  </div>
+</footer>
