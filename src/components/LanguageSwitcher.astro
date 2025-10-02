@@ -1,0 +1,209 @@
+---
+interface Props {
+  currentLocale: string;
+}
+
+const { currentLocale } = Astro.props;
+
+// Define available languages - easy to extend in the future
+const languages = [
+  { code: 'en', label: 'EN', name: 'English', url: '/' },
+  { code: 'es', label: 'ES', name: 'Español', url: '/es' }
+];
+
+const currentLanguage = languages.find(lang => lang.code === currentLocale) || languages[0];
+---
+
+<div class="language-switcher">
+  <button
+    type="button"
+    class="language-button"
+    aria-label="Select language"
+    data-language-toggle
+  >
+    <svg
+      class="h-5 w-5"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+    >
+      <path d="m5 8 6 6"/>
+      <path d="m4 14 6-6 2-3"/>
+      <path d="M2 5h12"/>
+      <path d="M7 2h1"/>
+      <path d="m22 22-5-10-5 10"/>
+      <path d="M14 18h6"/>
+    </svg>
+    <span class="language-label">{currentLanguage.label}</span>
+  </button>
+
+  <div class="language-menu" data-language-menu>
+    {languages.map((lang) => (
+      <a
+        href={lang.url}
+        class={`language-option ${lang.code === currentLocale ? 'active' : ''}`}
+        aria-current={lang.code === currentLocale ? 'page' : undefined}
+      >
+        <span class="language-option-label">{lang.label}</span>
+        <span class="language-option-name">{lang.name}</span>
+      </a>
+    ))}
+  </div>
+</div>
+
+<style>
+  .language-switcher {
+    position: relative;
+  }
+
+  .language-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    height: 2.5rem;
+    width: 2.5rem;
+    justify-content: center;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: rgb(var(--color-soft));
+    transition: color 0.2s;
+    background: rgb(var(--color-surface) / 0.5);
+  }
+
+  .language-button:hover {
+    color: rgb(var(--color-primary));
+  }
+
+  .language-label {
+    display: none;
+  }
+
+  .language-menu {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    right: 0;
+    min-width: 9rem;
+    background: rgb(var(--color-surface));
+    backdrop-filter: blur(12px) saturate(180%);
+    border: 1px solid rgb(var(--color-soft) / 0.3);
+    border-radius: 0.5rem;
+    padding: 0.25rem;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-0.5rem);
+    transition: all 0.2s ease;
+    z-index: 50;
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.3), 0 4px 6px -4px rgb(0 0 0 / 0.2);
+  }
+
+  .language-menu::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgb(var(--color-surface));
+    border-radius: 0.5rem;
+    z-index: -1;
+  }
+
+  .language-menu[data-open="true"] {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .language-option {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.375rem;
+    color: rgb(var(--color-muted));
+    text-decoration: none;
+    transition: all 0.15s ease;
+    position: relative;
+    z-index: 1;
+  }
+
+  .language-option:hover {
+    background: rgb(var(--color-soft) / 0.2);
+    color: rgb(var(--color-primary));
+  }
+
+  .language-option.active {
+    background: rgb(var(--color-accent) / 0.15);
+    color: rgb(var(--color-accent));
+  }
+
+  .language-option-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    min-width: 1.5rem;
+  }
+
+  .language-option-name {
+    font-size: 0.875rem;
+  }
+
+  @media (max-width: 768px) {
+    .language-button {
+      height: 2rem;
+      width: 2rem;
+    }
+
+    .language-menu {
+      right: auto;
+      left: 50%;
+      transform: translateX(-50%) translateY(-0.5rem);
+    }
+
+    .language-menu[data-open="true"] {
+      transform: translateX(-50%) translateY(0);
+    }
+  }
+</style>
+
+<script>
+  function initLanguageSwitcher() {
+    const toggleButton = document.querySelector('[data-language-toggle]');
+    const menu = document.querySelector('[data-language-menu]');
+
+    if (!toggleButton || !menu) return;
+
+    // Toggle menu
+    toggleButton.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = menu.getAttribute('data-open') === 'true';
+      menu.setAttribute('data-open', isOpen ? 'false' : 'true');
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!menu.contains(e.target as Node) && e.target !== toggleButton) {
+        menu.setAttribute('data-open', 'false');
+      }
+    });
+
+    // Close on escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        menu.setAttribute('data-open', 'false');
+      }
+    });
+  }
+
+  // Support both regular page loads and Astro view transitions
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initLanguageSwitcher);
+  } else {
+    initLanguageSwitcher();
+  }
+
+  document.addEventListener('astro:page-load', initLanguageSwitcher);
+</script>

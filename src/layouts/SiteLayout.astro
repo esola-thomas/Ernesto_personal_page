@@ -10,17 +10,19 @@ export interface Props {
   description?: string;
   ogImage?: string;
   siteMeta?: CollectionEntry<"site">;
+  locale?: string;
 }
 
 const {
   title = "Ernesto Sola-Thomas • Electrical & Computer Engineer",
   description = "Silicon engineer and founder shaping dependable, human-centered technology across chips, cloud, and emerging ventures.",
   ogImage = "/og-default.svg",
-  siteMeta
+  siteMeta,
+  locale = "en"
 } = Astro.props as Props;
 ---
 <!DOCTYPE html>
-<html lang="en" class="dark scroll-smooth">
+<html lang={locale} class="dark scroll-smooth">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -98,11 +100,11 @@ const {
         async src="//gc.zgo.at/count.js"></script>
   </head>
   <body class="flex min-h-dvh flex-col">
-    <Header />
+    <Header locale={locale} />
     <main id="main" class="flex-1">
       <slot />
     </main>
-    <Footer />
+    <Footer locale={locale} />
     <script type="module" src="/theme-toggle.js" defer></script>
   </body>
 </html>

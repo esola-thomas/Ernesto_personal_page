@@ -1,4 +1,6 @@
 ---
+import { getTranslations, type Locale } from "../i18n/translations";
+
 interface HeroData {
   name: string;
   title: string;
@@ -12,7 +14,14 @@ interface Fact {
   value: string;
 }
 
-const { hero, quickFacts }: { hero: HeroData; quickFacts: Fact[] } = Astro.props;
+interface Props {
+  hero: HeroData;
+  quickFacts: Fact[];
+  locale?: Locale;
+}
+
+const { hero, quickFacts, locale = 'en' } = Astro.props;
+const t = getTranslations(locale);
 ---
 <section id="hero" class="relative overflow-hidden pb-28 pt-28">
   <div aria-hidden="true" class="absolute inset-0 bg-[var(--gradient-hero)] opacity-70"></div>
@@ -55,7 +64,7 @@ const { hero, quickFacts }: { hero: HeroData; quickFacts: Fact[] } = Astro.props
 
       <aside class="glass-panel relative grid gap-6 p-10">
         <div class="absolute -top-4 left-10 hidden rounded-full border border-soft bg-overlay px-4 py-1 text-xs uppercase tracking-[0.4em] text-soft shadow-[var(--shadow-glass)] lg:inline-flex">
-          Creating with Passion
+          {t.hero.creatingWithPassion}
         </div>
         <div class="relative flex flex-col items-center gap-6 text-center">
           <div class="relative h-48 w-48 overflow-hidden rounded-full border border-soft bg-overlay">
@@ -75,7 +84,7 @@ const { hero, quickFacts }: { hero: HeroData; quickFacts: Fact[] } = Astro.props
   </div>
 
   <div class="scroll-prompt">
-    <span>Explore Profile</span>
+    <span>{t.hero.exploreProfile}</span>
     <svg aria-hidden="true" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
       <path d="M12 5v14" />
       <path d="m18 13-6 6-6-6" />

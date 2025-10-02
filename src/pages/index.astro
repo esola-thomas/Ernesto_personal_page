@@ -13,11 +13,11 @@ import AchievementsSection from "../components/AchievementsSection.astro";
 const siteMeta = await getEntry("site", "meta");
 const skillsEntry = await getEntry("skills", "catalog");
 
-const experiences = (await getCollection("experience")).sort(
+const experiences = (await getCollection("experience", ({ id }) => !id.startsWith("es/"))).sort(
   (a, b) => Number(b.data.start) - Number(a.data.start)
 );
 
-const ventures = (await getCollection("ventures")).sort((a, b) => {
+const ventures = (await getCollection("ventures", ({ id }) => !id.startsWith("es/"))).sort((a, b) => {
   const aYear = a.data.founded ? Number(a.data.founded) : 0;
   const bYear = b.data.founded ? Number(b.data.founded) : 0;
   return bYear - aYear;
@@ -30,11 +30,11 @@ const parseTimeframe = (value: string) => {
   return Number(last);
 };
 
-const projects = (await getCollection("projects")).sort(
+const projects = (await getCollection("projects", ({ id }) => !id.startsWith("es/"))).sort(
   (a, b) => parseTimeframe(b.data.timeframe) - parseTimeframe(a.data.timeframe)
 );
 
-const personal = await getCollection("personal");
+const personal = await getCollection("personal", ({ id }) => !id.startsWith("es/"));
 
 const achievements = [
   {
@@ -59,13 +59,14 @@ const achievements = [
   title="Ernesto Sola-Thomas • Electrical & Computer Engineer"
   description="Portfolio, ventures, and research from Ernesto Sola-Thomas—silicon engineer, founder, and systems builder."
   siteMeta={siteMeta}
+  locale="en"
 >
-  <Hero hero={siteMeta.data.hero} quickFacts={siteMeta.data.quickFacts} />
-  <AchievementsSection achievements={achievements} />
-  <ExperienceTimeline entries={experiences} />
-  <VenturesGrid entries={ventures} />
-  <ProjectsShowcase entries={projects} />
-  <SkillsShowcase groups={skillsEntry.data} />
-  <PersonalSection entries={personal} />
-  <ContactSection contact={siteMeta.data.contact} />
+  <Hero hero={siteMeta.data.hero} quickFacts={siteMeta.data.quickFacts} locale="en" />
+  <AchievementsSection achievements={achievements} locale="en" />
+  <ExperienceTimeline entries={experiences} locale="en" />
+  <VenturesGrid entries={ventures} locale="en" />
+  <ProjectsShowcase entries={projects} locale="en" />
+  <SkillsShowcase groups={skillsEntry.data} locale="en" />
+  <PersonalSection entries={personal} locale="en" />
+  <ContactSection contact={siteMeta.data.contact} locale="en" />
 </SiteLayout>

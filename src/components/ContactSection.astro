@@ -1,36 +1,44 @@
 ---
+import { getTranslations, type Locale } from "../i18n/translations";
+
 interface ContactData {
   email: string;
   calendly?: string;
   location?: string;
 }
 
-const { contact }: { contact: ContactData } = Astro.props;
+interface Props {
+  contact: ContactData;
+  locale?: Locale;
+}
+
+const { contact, locale = 'en' } = Astro.props;
+const t = getTranslations(locale);
 ---
 <section id="contact" class="py-24">
   <div class="container section-grid">
     <div class="section-heading">
-      <span class="eyebrow">Collaborate</span>
-      <h2>Let’s build what’s next</h2>
+      <span class="eyebrow">{t.headings.contactEyebrow}</span>
+      <h2>{t.headings.contact}</h2>
       <p class="max-w-2xl text-base text-muted">
-        Whether you’re shipping silicon, scaling a venture, or exploring secure systems, I’d love to hear about the challenge.
+        {t.headings.contactDesc}
       </p>
     </div>
 
     <div class="glass-panel grid gap-8 p-10 md:grid-cols-[1.25fr_1fr] md:items-center">
       <div class="space-y-6">
         <div class="space-y-2">
-          <p class="text-sm uppercase tracking-[0.35em] text-soft">Primary contact</p>
+          <p class="text-sm uppercase tracking-[0.35em] text-soft">{t.contact.primaryContact}</p>
           <a href={`mailto:${contact.email}`} class="text-2xl font-semibold text-[color:var(--color-accent)]">
             {contact.email}
           </a>
         </div>
         <p class="text-muted">
-          Share a brief note about your project, what impact you’re aiming for, and how I can help.
+          {t.contact.shareNote}
         </p>
         <div class="flex flex-wrap gap-4">
           <a href={`mailto:${contact.email}`} class="button-primary">
-            Send an email
+            {t.contact.sendEmail}
           </a>
           {contact.calendly && (
             <a
@@ -39,7 +47,7 @@ const { contact }: { contact: ContactData } = Astro.props;
               target="_blank"
               rel="noreferrer"
             >
-              Book a conversation
+              {t.contact.bookConversation}
             </a>
           )}
         </div>
@@ -47,14 +55,14 @@ const { contact }: { contact: ContactData } = Astro.props;
       <div class="space-y-6 text-sm text-soft">
         {contact.location && (
           <div>
-            <p class="uppercase tracking-[0.35em] text-xs text-soft">Location</p>
+            <p class="uppercase tracking-[0.35em] text-xs text-soft">{t.contact.location}</p>
             <p class="mt-2 text-base text-secondary">{contact.location}</p>
           </div>
         )}
         <div>
-          <p class="uppercase tracking-[0.35em] text-xs text-soft">Current availability</p>
+          <p class="uppercase tracking-[0.35em] text-xs text-soft">{t.contact.availability}</p>
           <p class="mt-2 text-muted">
-            Open for select advisory, prototyping engagements, and speaking with founders shaping technology.
+            {t.contact.availabilityText}
           </p>
         </div>
       </div>

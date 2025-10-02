@@ -1,12 +1,15 @@
 ---
 import type { CollectionEntry } from "astro:content";
 import SectionHeading from "./SectionHeading.astro";
+import { getTranslations, type Locale } from "../i18n/translations";
 
 interface Props {
   entries: CollectionEntry<"projects">[];
+  locale?: Locale;
 }
 
-const { entries } = Astro.props as Props;
+const { entries, locale = 'en' } = Astro.props as Props;
+const t = getTranslations(locale);
 
 const projects = await Promise.all(
   entries.map(async (entry) => {
@@ -16,11 +19,11 @@ const projects = await Promise.all(
 );
 
 const categoryLabels: Record<string, string> = {
-  hardware: "Hardware & Embedded",
-  software: "Software & Platforms",
-  research: "Research & Exploration",
-  venture: "Venture Experiments",
-  education: "Learning Initiatives"
+  hardware: t.projects.category.hardware,
+  software: t.projects.category.software,
+  research: t.projects.category.research,
+  venture: t.projects.category.venture,
+  education: t.projects.category.education
 };
 
 const groups = Object.entries(categoryLabels)
@@ -34,9 +37,9 @@ const groups = Object.entries(categoryLabels)
 <section id="projects" class="py-24">
   <div class="container section-grid">
     <SectionHeading
-      eyebrow="Projects"
-      title="Making ideas tangible"
-      description="A list of past pojects ranging from robotics, secure compute, simulation tooling, and cloud platforms."
+      eyebrow={t.headings.projectsEyebrow}
+      title={t.headings.projects}
+      description={t.headings.projectsDesc}
     />
 
     <div class="grid gap-16">
@@ -44,7 +47,7 @@ const groups = Object.entries(categoryLabels)
         <div class="space-y-8" id={`projects-${group.category}`} key={group.category}>
           <div class="flex flex-wrap items-baseline justify-between gap-4">
             <h3 class="font-display text-3xl text-primary">{group.label}</h3>
-            <span class="text-xs uppercase tracking-[0.35em] text-soft">{group.items.length} initiatives</span>
+            <span class="text-xs uppercase tracking-[0.35em] text-soft">{group.items.length} {t.projects.initiatives}</span>
           </div>
           <div class="card-grid">
             {group.items.map(({ entry, Content }) => (

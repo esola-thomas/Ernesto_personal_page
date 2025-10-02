@@ -1,18 +1,26 @@
 ---
+import { getTranslations, type Locale } from "../i18n/translations";
+
 interface Achievement {
   title: string;
   description: string;
 }
 
-const { achievements }: { achievements: Achievement[] } = Astro.props;
+interface Props {
+  achievements: Achievement[];
+  locale?: Locale;
+}
+
+const { achievements, locale = 'en' } = Astro.props;
+const t = getTranslations(locale);
 ---
 <section id="achievements" class="py-24">
   <div class="container section-grid">
     <div class="section-heading">
-      <span class="eyebrow">Highlights</span>
-      <h2>Achievements & Focus Areas</h2>
+      <span class="eyebrow">{t.headings.achievementsEyebrow}</span>
+      <h2>{t.headings.achievements}</h2>
       <p class="max-w-2xl text-base text-muted">
-        A snapshot of how engineering, research, and entrepreneurship intersect across my work.
+        {t.headings.achievementsDesc}
       </p>
     </div>
 

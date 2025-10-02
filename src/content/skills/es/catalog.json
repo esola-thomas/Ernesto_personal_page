@@ -1,0 +1,42 @@
+[
+  {
+    "label": "Silicio y Embebidos",
+    "items": [
+      "Verificación de chips",
+      "Pipelines de punto flotante",
+      "FPGA y RTL",
+      "Firmware embebido",
+      "Pruebas aleatorias restringidas"
+    ]
+  },
+  {
+    "label": "Nube y Plataformas",
+    "items": [
+      "Azure Kubernetes Service",
+      "Docker + Nginx",
+      "Supabase",
+      "Integración Stripe",
+      "Automatización CI/CD"
+    ]
+  },
+  {
+    "label": "Personal y Liderazgo",
+    "items": [
+      "Mentoría y coaching",
+      "Colaboración interfuncional",
+      "Toma de decisiones estratégicas",
+      "Construcción de equipos resilientes",
+      "Empatía con stakeholders"
+    ]
+  },
+  {
+    "label": "Tecnologías Emergentes",
+    "items": [
+      "Protocolos blockchain",
+      "Criptografía post-cuántica",
+      "Experimentación IA/ML",
+      "Neurotecnología y EEG",
+      "Robótica centrada en humanos"
+    ]
+  }
+]

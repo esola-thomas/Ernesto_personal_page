@@ -1,18 +1,26 @@
 ---
+import { getTranslations, type Locale } from "../i18n/translations";
+
 interface SkillGroup {
   label: string;
   items: string[];
 }
 
-const { groups }: { groups: SkillGroup[] } = Astro.props;
+interface Props {
+  groups: SkillGroup[];
+  locale?: Locale;
+}
+
+const { groups, locale = 'en' } = Astro.props;
+const t = getTranslations(locale);
 ---
 <section id="skills" class="py-24">
   <div class="container section-grid">
     <div class="section-heading">
-      <span class="eyebrow">Expertise</span>
-      <h2>Skills & Capabilities</h2>
+      <span class="eyebrow">{t.headings.skillsEyebrow}</span>
+      <h2>{t.headings.skills}</h2>
       <p class="max-w-2xl text-base text-muted">
-        A toolbox tuned for silicon verification, secure systems, venture delivery, and multidisciplinary experimentation.
+        {t.headings.skillsDesc}
       </p>
     </div>
 

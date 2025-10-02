@@ -1,12 +1,15 @@
 ---
 import type { CollectionEntry } from "astro:content";
 import SectionHeading from "./SectionHeading.astro";
+import { getTranslations, type Locale } from "../i18n/translations";
 
 interface Props {
   entries: CollectionEntry<"personal">[];
+  locale?: Locale;
 }
 
-const { entries } = Astro.props as Props;
+const { entries, locale = 'en' } = Astro.props as Props;
+const t = getTranslations(locale);
 
 const personalEntries = await Promise.all(
   entries.map(async (entry) => {
@@ -18,9 +21,9 @@ const personalEntries = await Promise.all(
 <section id="personal" class="py-24">
   <div class="container section-grid">
     <SectionHeading
-      eyebrow="Beyond Engineering"
-      title="Personal Dimensions"
-      description="The passions and values that keep me grounded and curious outside of the lab."
+      eyebrow={t.headings.personalEyebrow}
+      title={t.headings.personal}
+      description={t.headings.personalDesc}
     />
 
     <div class="grid gap-10 md:grid-cols-2">

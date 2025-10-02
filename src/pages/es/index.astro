@@ -1,0 +1,72 @@
+---
+import { getCollection, getEntry } from "astro:content";
+import SiteLayout from "../../layouts/SiteLayout.astro";
+import Hero from "../../components/Hero.astro";
+import ExperienceTimeline from "../../components/ExperienceTimeline.astro";
+import VenturesGrid from "../../components/VenturesGrid.astro";
+import ProjectsShowcase from "../../components/ProjectsShowcase.astro";
+import SkillsShowcase from "../../components/SkillsShowcase.astro";
+import PersonalSection from "../../components/PersonalSection.astro";
+import ContactSection from "../../components/ContactSection.astro";
+import AchievementsSection from "../../components/AchievementsSection.astro";
+
+const siteMeta = await getEntry("site", "es/meta");
+const skillsEntry = await getEntry("skills", "es/catalog");
+
+const experiences = (await getCollection("experience", ({ id }) => id.startsWith("es/"))).sort(
+  (a, b) => Number(b.data.start) - Number(a.data.start)
+);
+
+const ventures = (await getCollection("ventures", ({ id }) => id.startsWith("es/"))).sort((a, b) => {
+  const aYear = a.data.founded ? Number(a.data.founded) : 0;
+  const bYear = b.data.founded ? Number(b.data.founded) : 0;
+  return bYear - aYear;
+});
+
+const parseTimeframe = (value: string) => {
+  const years = value.match(/\d{4}/g);
+  if (!years) return 0;
+  const last = years[years.length - 1];
+  return Number(last);
+};
+
+const projects = (await getCollection("projects", ({ id }) => id.startsWith("es/"))).sort(
+  (a, b) => parseTimeframe(b.data.timeframe) - parseTimeframe(a.data.timeframe)
+);
+
+const personal = await getCollection("personal", ({ id }) => id.startsWith("es/"));
+
+const achievements = [
+  {
+    title: "Enfoque profesional",
+    description: "Entregando como ingeniero de verificación de silicio, construyendo entornos de prueba reutilizables para RTL. Expandiendo mis horizontes con proyectos personales."
+  },
+  {
+    title: "Diseño y verificación de chips",
+    description: "Experiencia profunda en pipelines de punto flotante, pruebas aleatorias restringidas, automatización de cobertura, verificación formal y funcional."
+  },
+  {
+    title: "Arquitectura cloud-native",
+    description: "Despliego proyectos personales y paralelos como plataformas resilientes de grado de producción usando Kubernetes, Docker, Supabase, Stripe, Terraform, y CI/CD de extremo a extremo con observabilidad y despliegues automatizados.",
+  },
+  {
+    title: "Tecnología emergente segura",
+    description: "Alimento mi curiosidad a través de investigación en blockchain, criptografía post-cuántica, neurotecnología y robótica centrada en humanos."
+  }
+];
+---
+<SiteLayout
+  title="Ernesto Sola-Thomas • Ingeniero Eléctrico y de Computación"
+  description="Portafolio, emprendimientos e investigación de Ernesto Sola-Thomas—ingeniero de silicio, fundador y constructor de sistemas."
+  siteMeta={siteMeta}
+  locale="es"
+>
+  <Hero hero={siteMeta.data.hero} quickFacts={siteMeta.data.quickFacts} locale="es" />
+  <AchievementsSection achievements={achievements} locale="es" />
+  <ExperienceTimeline entries={experiences} locale="es" />
+  <VenturesGrid entries={ventures} locale="es" />
+  <ProjectsShowcase entries={projects} locale="es" />
+  <SkillsShowcase groups={skillsEntry.data} locale="es" />
+  <PersonalSection entries={personal} locale="es" />
+  <ContactSection contact={siteMeta.data.contact} locale="es" />
+</SiteLayout>

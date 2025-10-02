@@ -1,11 +1,21 @@
 ---
+import LanguageSwitcher from "./LanguageSwitcher.astro";
+import { getTranslations, type Locale } from "../i18n/translations";
+
+interface Props {
+  locale?: Locale;
+}
+
+const { locale = "en" } = Astro.props;
+const t = getTranslations(locale);
+
 const navItems = [
-  { href: "#about", label: "About" },
-  { href: "#experience", label: "Experience" },
-  { href: "#ventures", label: "Ventures" },
-  { href: "#projects", label: "Projects" },
-  { href: "#skills", label: "Skills" },
-  { href: "#contact", label: "Contact" }
+  { href: "#about", label: t.nav.about },
+  { href: "#experience", label: t.nav.experience },
+  { href: "#ventures", label: t.nav.ventures },
+  { href: "#projects", label: t.nav.projects },
+  { href: "#skills", label: t.nav.skills },
+  { href: "#contact", label: t.nav.contact }
 ];
 ---
 <header class="sticky top-0 z-50 backdrop-blur-xl backdrop-saturate-150">
@@ -16,9 +26,9 @@ const navItems = [
         class="inline-flex items-center gap-3 rounded-full border border-soft px-4 py-2 font-display text-sm uppercase tracking-[0.6em] text-muted backdrop-blur"
         aria-label="Ernesto Sola-Thomas home"
       >
-        <span>ES</span>
+        <span>EST</span>
         <span class="hidden text-[color:var(--color-accent)] sm:inline">/</span>
-        <span class="hidden sm:inline">Engineer</span>
+        <span class="hidden sm:inline">Visionary Engineer</span>
       </a>
 
       <nav class="hidden items-center gap-8 text-sm font-medium tracking-wide text-muted md:flex">
@@ -33,6 +43,7 @@ const navItems = [
       </nav>
 
       <div class="flex items-center gap-3">
+        <LanguageSwitcher currentLocale={locale} />
         <button
           type="button"
           class="surface-chip inline-flex h-10 w-10 items-center justify-center rounded-full text-soft transition hover:text-primary"
@@ -66,7 +77,7 @@ const navItems = [
           </svg>
         </button>
         <a href="#contact" class="button-primary px-6 py-2">
-          Collaborate
+          {t.nav.collaborate}
         </a>
       </div>
     </div>

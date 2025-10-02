@@ -1,4 +1,13 @@
 ---
+import { getTranslations, type Locale } from "../i18n/translations";
+
+interface Props {
+  locale?: Locale;
+}
+
+const { locale = 'en' } = Astro.props;
+const t = getTranslations(locale);
+
 const socials = [
   { href: "https://www.linkedin.com/in/sola-thomas", label: "LinkedIn" },
   { href: "https://github.com/esola-thomas", label: "GitHub" },
@@ -8,11 +17,10 @@ const socials = [
 <footer class="border-t border-soft bg-overlay">
   <div class="container grid gap-10 py-12 md:grid-cols-[1.25fr_1fr] md:gap-16">
     <div class="space-y-6">
-      <span class="badge">Let’s collaborate</span>
-      <h3 class="font-display text-3xl font-semibold text-primary">Building resilient systems that uplift people.</h3>
+      <span class="badge">{t.footer.collaborate}</span>
+      <h3 class="font-display text-3xl font-semibold text-primary">{t.footer.tagline}</h3>
       <p class="max-w-xl text-sm text-muted">
-        I’m actively exploring new collaborations building/creating new technology.
-        Drop a line and let’s architect what’s next.
+        {t.footer.description}
       </p>
       <a href="mailto:ernesto@solathomas.com" class="button-primary px-6 py-2">
         ernesto@solathomas.com
@@ -20,7 +28,7 @@ const socials = [
     </div>
     <div class="flex flex-col justify-between gap-6 text-sm text-soft">
       <div>
-        <p class="uppercase tracking-[0.4em] text-xs text-soft">Connect</p>
+        <p class="uppercase tracking-[0.4em] text-xs text-soft">{t.footer.connect}</p>
         <ul class="mt-4 space-y-3">
           {socials.map((social) => (
             <li>
@@ -31,7 +39,7 @@ const socials = [
           ))}
         </ul>
       </div>
-      <p class="text-xs text-soft">© {new Date().getFullYear()} Ernesto Sola-Thomas. Created with curiosity.</p>
+      <p class="text-xs text-soft">© {new Date().getFullYear()} Ernesto Sola-Thomas. {t.footer.copyright}</p>
     </div>
   </div>
 </footer>

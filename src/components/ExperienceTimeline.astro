@@ -1,19 +1,22 @@
 ---
 import type { CollectionEntry } from "astro:content";
 import SectionHeading from "./SectionHeading.astro";
+import { getTranslations, type Locale } from "../i18n/translations";
 
 interface Props {
   entries: CollectionEntry<"experience">[];
+  locale?: Locale;
 }
 
-const { entries } = Astro.props as Props;
+const { entries, locale = 'en' } = Astro.props as Props;
+const t = getTranslations(locale);
 ---
 <section id="experience" class="py-24">
   <div class="container section-grid">
     <SectionHeading
-      eyebrow="Journey"
-      title="Professional Experience"
-      description="From AI silicon verification to research and consulting, I bridge deep engineering with purposeful outcomes."
+      eyebrow={t.headings.experienceEyebrow}
+      title={t.headings.experience}
+      description={t.headings.experienceDesc}
     />
 
     <ol class="relative border-l border-soft">
@@ -23,7 +26,7 @@ const { entries } = Astro.props as Props;
           <div class="glass-panel p-8">
             <div class="flex flex-wrap items-center justify-between gap-2 text-sm text-muted">
               <span class="font-semibold uppercase tracking-[0.3em] text-soft">{entry.data.role}</span>
-              <span>{entry.data.start} — {entry.data.end ?? "Present"}</span>
+              <span>{entry.data.start} — {entry.data.end ?? t.experience.present}</span>
             </div>
             <h3 class="mt-4 font-display text-2xl text-primary">
               {entry.data.organization}
