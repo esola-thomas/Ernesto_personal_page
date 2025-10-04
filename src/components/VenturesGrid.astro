@@ -28,14 +28,14 @@ const ventures = await Promise.all(
 
     <div class="card-grid">
       {ventures.map(({ entry, Content }) => (
-        <article class="glass-panel flex flex-col gap-6 p-8" key={entry.id}>
+        <article class="bento-card flex flex-col gap-6 p-8" key={entry.id}>
           <div class="flex items-center justify-between gap-4">
             <div>
               <h3 class="font-display text-2xl text-primary">{entry.data.name}</h3>
               <p class="text-sm uppercase tracking-[0.3em] text-soft">{entry.data.stage}</p>
             </div>
             {entry.data.founded && (
-              <span class="rounded-full border border-soft px-3 py-1 text-xs uppercase tracking-[0.3em] text-soft">
+              <span class="rounded-md border border-soft px-3 py-1 text-xs uppercase tracking-[0.3em] text-soft">
                 {t.ventures.since} {entry.data.founded}
               </span>
             )}

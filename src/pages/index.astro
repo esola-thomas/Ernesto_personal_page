@@ -9,6 +9,7 @@ import SkillsShowcase from "../components/SkillsShowcase.astro";
 import PersonalSection from "../components/PersonalSection.astro";
 import ContactSection from "../components/ContactSection.astro";
 import AchievementsSection from "../components/AchievementsSection.astro";
+import Reveal from "../components/motion/Reveal.tsx";
 
 const siteMeta = await getEntry("site", "meta");
 const skillsEntry = await getEntry("skills", "catalog");
@@ -62,11 +63,25 @@ const achievements = [
   locale="en"
 >
   <Hero hero={siteMeta.data.hero} quickFacts={siteMeta.data.quickFacts} locale="en" />
-  <AchievementsSection achievements={achievements} locale="en" />
-  <ExperienceTimeline entries={experiences} locale="en" />
-  <VenturesGrid entries={ventures} locale="en" />
-  <ProjectsShowcase entries={projects} locale="en" />
-  <SkillsShowcase groups={skillsEntry.data} locale="en" />
-  <PersonalSection entries={personal} locale="en" />
-  <ContactSection contact={siteMeta.data.contact} locale="en" />
+  <Reveal client:visible>
+    <AchievementsSection achievements={achievements} locale="en" />
+  </Reveal>
+  <Reveal client:visible>
+    <ExperienceTimeline entries={experiences} locale="en" />
+  </Reveal>
+  <Reveal client:visible>
+    <VenturesGrid entries={ventures} locale="en" />
+  </Reveal>
+  <Reveal client:visible>
+    <ProjectsShowcase entries={projects} locale="en" />
+  </Reveal>
+  <Reveal client:visible>
+    <SkillsShowcase groups={skillsEntry.data} locale="en" />
+  </Reveal>
+  <Reveal client:visible>
+    <PersonalSection entries={personal} locale="en" />
+  </Reveal>
+  <Reveal client:visible>
+    <ContactSection contact={siteMeta.data.contact} locale="en" />
+  </Reveal>
 </SiteLayout>

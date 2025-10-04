@@ -29,7 +29,7 @@ const Reveal = ({ children, className, delay = 0, y = 32, ...rest }: RevealProps
   return (
     <motion.div
       className={className}
-      initial={initial}
+      // Removed initial prop for testing
       whileInView={animate}
       viewport={viewportOnce}
       transition={{ duration: 0.6, ease: motionEasing.out, delay }}
