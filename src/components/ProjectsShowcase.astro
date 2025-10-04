@@ -51,13 +51,13 @@ const groups = Object.entries(categoryLabels)
           </div>
           <div class="card-grid">
             {group.items.map(({ entry, Content }) => (
-              <article class="glass-panel flex flex-col gap-5 p-8" key={entry.id}>
+              <article class="bento-card flex flex-col gap-5 p-8" key={entry.id}>
                 <div class="flex flex-wrap items-center justify-between gap-3">
                   <div>
                     <h4 class="font-display text-2xl text-primary">{entry.data.title}</h4>
                     <p class="text-xs uppercase tracking-[0.3em] text-soft">{entry.data.timeframe}</p>
                   </div>
-                  <span class="rounded-full border border-soft px-3 py-1 text-xs uppercase tracking-[0.3em] text-soft">
+                  <span class="rounded-md border border-soft px-3 py-1 text-xs uppercase tracking-[0.3em] text-soft">
                     {entry.data.status}
                   </span>
                 </div>

@@ -24,9 +24,15 @@ const t = getTranslations(locale);
       </p>
     </div>
 
-    <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-      {achievements.map((item) => (
-        <article class="glass-panel h-full p-6" key={item.title}>
+    <div class="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-4 xl:grid-flow-dense">
+      {achievements.map((item, index) => (
+        <article
+          class:list={[
+            "bento-card h-full p-6",
+            { "xl:col-span-2 xl:row-span-2": index === 0 },
+          ]}
+          key={item.title}
+        >
           <h3 class="font-display text-xl text-primary">{item.title}</h3>
           <p class="mt-3 text-sm text-muted">{item.description}</p>
         </article>
