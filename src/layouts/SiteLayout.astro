@@ -16,7 +16,7 @@ export interface Props {
 const {
   title = "Ernesto Sola-Thomas • Electrical & Computer Engineer",
   description = "Silicon engineer and founder shaping dependable, human-centered technology across chips, cloud, and emerging ventures.",
-  ogImage = "/og-default.svg",
+  ogImage = "https://tse1.mm.bing.net/th/id/OIP.hPYSzHHEbkC3WzghsU_xjAHaHa?rs=1&pid=ImgDetMain&o=7&rm=3",
   siteMeta,
   locale = "en"
 } = Astro.props as Props;
@@ -30,6 +30,7 @@ const {
     <meta name="generator" content={Astro.generator} />
     <link rel="canonical" href={Astro.url.href} />
     <title>{title}</title>
+    <link rel="icon" href="https://tse1.mm.bing.net/th/id/OIP.hPYSzHHEbkC3WzghsU_xjAHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" type="image/jpeg">
 
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
