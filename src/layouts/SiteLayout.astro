@@ -16,7 +16,7 @@ export interface Props {
 const {
   title = "Ernesto Sola-Thomas • Electrical & Computer Engineer",
   description = "Silicon engineer and founder shaping dependable, human-centered technology across chips, cloud, and emerging ventures.",
-  ogImage = "https://tse1.mm.bing.net/th/id/OIP.hPYSzHHEbkC3WzghsU_xjAHaHa?rs=1&pid=ImgDetMain&o=7&rm=3",
+  ogImage = `${Astro.site}og-default.svg`,
   siteMeta,
   locale = "en"
 } = Astro.props as Props;
@@ -27,10 +27,25 @@ const {
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
+    <meta name="author" content="Ernesto Sola-Thomas" />
+    <meta name="keywords" content="Ernesto Sola-Thomas, silicon verification engineer, electrical engineer, computer engineer, AI silicon, Microsoft, hardware verification, SystemVerilog, FPGA, blockchain, post-quantum cryptography" />
+    <meta name="theme-color" content="#FF4F00" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#00FF7F" media="(prefers-color-scheme: dark)" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     <meta name="generator" content={Astro.generator} />
     <link rel="canonical" href={Astro.url.href} />
+
+    <!-- Hreflang tags for multi-language support -->
+    <link rel="alternate" hreflang="en" href={`${Astro.site}`} />
+    <link rel="alternate" hreflang="es" href={`${Astro.site}es/`} />
+    <link rel="alternate" hreflang="x-default" href={`${Astro.site}`} />
+
     <title>{title}</title>
-    <link rel="icon" href="https://tse1.mm.bing.net/th/id/OIP.hPYSzHHEbkC3WzghsU_xjAHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" type="image/jpeg">
+
+    <!-- Favicon - Multiple formats for better browser support -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon.svg" />
+    <link rel="manifest" href="/site.webmanifest" />
 
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -54,6 +69,7 @@ const {
             "url": "${Astro.site}",
             "name": "${title}",
             "description": "${description}",
+            "inLanguage": ["en", "es"],
             "publisher": {
               "@id": "${Astro.site}#person"
             }
@@ -65,11 +81,156 @@ const {
             "jobTitle": "${siteMeta.data.hero.title}",
             "url": "${Astro.site}",
             "email": "${siteMeta.data.contact.email}",
+            "sameAs": [
+              "https://github.com/esola-thomas",
+              "https://www.linkedin.com/in/ernesto-sola-thomas"
+            ],
+            "knowsAbout": [
+              "Silicon Verification",
+              "Hardware Verification",
+              "SystemVerilog",
+              "FPGA Development",
+              "AI",
+              "Huitzo",
+              "AI Accelerators",
+              "Blockchain Technology",
+              "Post-Quantum Cryptography",
+              "Cloud Architecture",
+              "Kubernetes",
+              "Python",
+              "Embedded Systems"
+            ],
+            "alumniOf": {
+              "@type": "EducationalOrganization",
+              "name": "Clarkson University",
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Potsdam",
+                "addressRegion": "NY"
+              }
+            },
+            "worksFor": {
+              "@type": "Organization",
+              "name": "Microsoft"
+            },
             "address": {
               "@type": "PostalAddress",
               "addressLocality": "${siteMeta.data.contact.location.split(',')[0].trim()}",
               "addressRegion": "${siteMeta.data.contact.location.split(',')[1].trim()}"
             }
+          },
+          {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "${Astro.site}"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "About",
+                "item": "${Astro.site}#about"
+              },
+              {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "Experience",
+                "item": "${Astro.site}#experience"
+              },
+              {
+                "@type": "ListItem",
+                "position": 4,
+                "name": "Ventures",
+                "item": "${Astro.site}#ventures"
+              },
+              {
+                "@type": "ListItem",
+                "position": 5,
+                "name": "Projects",
+                "item": "${Astro.site}#projects"
+              },
+              {
+                "@type": "ListItem",
+                "position": 6,
+                "name": "Skills",
+                "item": "${Astro.site}#skills"
+              },
+              {
+                "@type": "ListItem",
+                "position": 7,
+                "name": "Contact",
+                "item": "${Astro.site}#contact"
+              }
+            ]
+          },
+          {
+            "@type": "Organization",
+            "@id": "${Astro.site}#sola-thomas-solutions",
+            "name": "Sola-Thomas Solutions LLC",
+            "founder": {
+              "@id": "${Astro.site}#person"
+            },
+            "foundingDate": "2025",
+            "description": "Consulting studio accelerating hardware-software prototypes, analytics platforms, and cloud automation",
+            "knowsAbout": [
+              "Technology Consulting",
+              "Web Development",
+              "Networking Infrastructure",
+              "Security Systems",
+              "Small Business IT Support"
+            ]
+          },
+          {
+            "@type": "Organization",
+            "@id": "${Astro.site}#knowonomy",
+            "name": "Knowonomy",
+            "alternateName": "Knowa",
+            "founder": {
+              "@id": "${Astro.site}#person"
+            },
+            "foundingDate": "2025",
+            "description": "Marketplace for actionable knowledge where creators, learners, and brand partners collaborate on outcome-driven content",
+            "knowsAbout": [
+              "Education Technology",
+              "Knowledge Management",
+              "Online Learning",
+              "Content Marketing"
+            ]
+          },
+          {
+            "@type": "Organization",
+            "@id": "${Astro.site}#findmily",
+            "name": "Findmily",
+            "founder": {
+              "@id": "${Astro.site}#person"
+            },
+            "foundingDate": "2023",
+            "description": "Family coordination and scheduling platform connecting busy families through shared calendars and location services",
+            "knowsAbout": [
+              "Family Organization",
+              "Mobile Applications",
+              "Calendar Management",
+              "Location Services"
+            ]
+          },
+          {
+            "@type": "Organization",
+            "@id": "${Astro.site}#huitzo",
+            "name": "Huitzo",
+            "founder": {
+              "@id": "${Astro.site}#person"
+            },
+            "foundingDate": "2024",
+            "description": "Web development CLI tooling for modern full-stack applications with integrated testing and deployment pipelines",
+            "knowsAbout": [
+              "Web Development",
+              "CLI Tools",
+              "Developer Tools",
+              "Full-Stack Development"
+            ]
           }
         ]
       }

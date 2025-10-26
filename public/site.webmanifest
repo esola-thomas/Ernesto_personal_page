@@ -1,0 +1,21 @@
+{
+  "name": "Ernesto Sola-Thomas",
+  "short_name": "EST",
+  "description": "Portfolio of Ernesto Sola-Thomas - Silicon verification engineer, founder, and systems builder",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0A0A0A",
+  "theme_color": "#00FF7F",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["technology", "engineering", "portfolio"],
+  "lang": "en",
+  "dir": "ltr"
+}
