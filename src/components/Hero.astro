@@ -68,11 +68,11 @@ const t = getTranslations(locale);
         <div class="flex flex-wrap items-center gap-4">
           {hero.ctas.map((cta, index) => (
             index === 0 ? (
-              <a key={cta.href} href={cta.href} class="button-primary">
+              <a key={cta.href} href={cta.href} class="button-primary" data-goatcounter-click="hero-cta-primary">
                 {cta.label}
               </a>
             ) : (
-              <a key={cta.href} href={cta.href} class="button-ghost">
+              <a key={cta.href} href={cta.href} class="button-ghost" data-goatcounter-click="hero-cta-secondary">
                 {cta.label}
               </a>
             )

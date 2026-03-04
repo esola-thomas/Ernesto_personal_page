@@ -50,7 +50,14 @@ const projects = defineCollection({
           href: z.string()
         })
       )
-      .default([])
+      .default([]),
+    // Optional case-study fields
+    context: z.string().optional(),
+    problem: z.string().optional(),
+    constraints: z.string().optional(),
+    approach: z.string().optional(),
+    outcome: z.string().optional(),
+    lessons: z.string().optional()
   })
 });
 

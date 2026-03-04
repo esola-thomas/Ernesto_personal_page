@@ -14,6 +14,14 @@ interface Props {
 
 const { contact, locale = 'en' } = Astro.props;
 const t = getTranslations(locale);
+
+const intents = [
+  { key: "huitzo", subject: "Huitzo — Let's discuss" },
+  { key: "speaking", subject: "Speaking / Podcast Inquiry" },
+  { key: "research", subject: "Research Collaboration" },
+  { key: "advisory", subject: "Advisory / Strategic Discussion" },
+  { key: "general", subject: "General Inquiry" },
+];
 ---
 <section id="contact" class="py-24">
   <div class="container section-grid">
@@ -25,7 +33,7 @@ const t = getTranslations(locale);
       </p>
     </div>
 
-    <div class="glass-panel grid gap-8 p-10 md:grid-cols-[1.25fr_1fr] md:items-center">
+    <div class="glass-panel grid gap-8 p-10 md:grid-cols-[1.25fr_1fr] md:items-start">
       <div class="space-y-6">
         <div class="space-y-2">
           <p class="text-sm uppercase tracking-[0.35em] text-soft">{t.contact.primaryContact}</p>
@@ -33,11 +41,19 @@ const t = getTranslations(locale);
             {contact.email}
           </a>
         </div>
-        <p class="text-muted">
-          {t.contact.shareNote}
-        </p>
-        <div class="flex flex-wrap gap-4">
-          <a href={`mailto:${contact.email}`} class="button-primary">
+        <p class="text-sm text-muted">{t.contact.intentPrompt}</p>
+        <div class="flex flex-wrap gap-2">
+          {intents.map((intent) => (
+            <a
+              href={`mailto:${contact.email}?subject=${encodeURIComponent(intent.subject)}`}
+              class="rounded-md border border-soft bg-overlay px-3 py-2 text-xs font-medium text-secondary transition-colors hover:border-[var(--color-accent)] hover:text-primary"
+            >
+              {t.contact.intents[intent.key as keyof typeof t.contact.intents]}
+            </a>
+          ))}
+        </div>
+        <div class="flex flex-wrap gap-4 pt-2">
+          <a href={`mailto:${contact.email}`} class="button-primary" data-goatcounter-click="contact-send-email">
             {t.contact.sendEmail}
           </a>
           {contact.calendly && (
@@ -46,6 +62,7 @@ const t = getTranslations(locale);
               class="button-ghost"
               target="_blank"
               rel="noreferrer"
+              data-goatcounter-click="contact-book-conversation"
             >
               {t.contact.bookConversation}
             </a>

@@ -1,0 +1,117 @@
+---
+import SiteLayout from "../../layouts/SiteLayout.astro";
+import { getEntry } from "astro:content";
+
+const siteMeta = await getEntry("site", "es/meta");
+
+const lessons = [
+  {
+    title: "Empieza a construir antes de sentirte listo",
+    description: "Mi primera app fue una calculadora sin soporte para decimales. La envié de todos modos, y me enseñó más que cualquier libro de texto. El impulso supera a la perfección."
+  },
+  {
+    title: "El mejor aprendizaje ocurre en las intersecciones",
+    description: "Mi trabajo más fuerte vino de combinar campos — hardware + software, investigación + emprendimiento, ingeniería + pensamiento de diseño. No te encasilles."
+  },
+  {
+    title: "Publica tu trabajo, aunque no sea perfecto",
+    description: "Cada paper de IEEE que publiqué tenía cosas que cambiaría. Pero poner el trabajo ahí fuera creó oportunidades que nunca esperé."
+  },
+  {
+    title: "Construye cosas que ayuden a las personas",
+    description: "Los proyectos de los que más orgulloso estoy — la silla de ruedas, las gafas de visión — fueron impulsados por necesidades humanas reales."
+  },
+  {
+    title: "Tu historia es tu superpoder",
+    description: "Vine de un camino no tradicional. Esa perspectiva — ver los problemas de manera diferente — resultó ser lo más valioso que aporté a cada equipo."
+  },
+  {
+    title: "Di que sí a los problemas difíciles",
+    description: "Criptografía post-cuántica, silicio de IA, ML embebido — se sentían imposibles al principio. Pero los problemas difíciles son donde está el crecimiento."
+  }
+];
+
+const resources = [
+  { title: "Aprender SystemVerilog", description: "chipverify.com — gratis, completo y práctico para verificación de hardware.", href: "https://www.chipverify.com" },
+  { title: "Sistemas Embebidos", description: "Empieza con Arduino, gradúate a STM32. Construye algo físico temprano.", href: "https://www.arduino.cc" },
+  { title: "Cloud e Infraestructura", description: "Docker → Kubernetes → Terraform. Construye un despliegue real antes de aprender la siguiente herramienta.", href: "https://kubernetes.io/docs/tutorials/" },
+  { title: "Fundamentos de IA/ML", description: "Los cursos de Andrew Ng siguen siendo el mejor punto de partida. Luego construye algo con datos reales.", href: "https://www.coursera.org/specializations/deep-learning" },
+  { title: "Escritura Académica", description: "Lee 10 papers en tu campo antes de escribir uno. Entiende la estructura y convenciones.", href: "https://scholar.google.com" },
+  { title: "Pensamiento Startup", description: "Startup School de Y Combinator es gratis y honesto sobre lo que realmente implica construir una empresa.", href: "https://www.startupschool.org" }
+];
+---
+<SiteLayout
+  title="Mi Trayectoria — Notas para Estudiantes | Ernesto Sola-Thomas"
+  description="Trayectoria personal, lecciones aprendidas y recursos para estudiantes y aspirantes a ingenieros."
+  siteMeta={siteMeta}
+  locale="es"
+>
+  <section class="relative overflow-hidden pb-16 pt-32">
+    <div aria-hidden="true" class="absolute inset-0 bg-[var(--gradient-hero)] opacity-40"></div>
+    <div class="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[color:var(--surface-base)]"></div>
+    <div class="container relative">
+      <span class="badge">Para Estudiantes</span>
+      <h1 class="mt-6 font-display text-5xl font-semibold leading-tight text-primary md:text-6xl">
+        Mi Trayectoria
+      </h1>
+      <p class="mt-4 max-w-2xl text-xl text-secondary">
+        Notas, lecciones y recursos para estudiantes y aspirantes a ingenieros que quieren construir cosas que importan.
+      </p>
+    </div>
+  </section>
+
+  <section class="py-16">
+    <div class="container max-w-3xl space-y-16">
+      <div class="space-y-6">
+        <h2 class="font-display text-2xl font-semibold text-primary">La Versión Corta</h2>
+        <div class="space-y-4 text-muted">
+          <p>
+            Construí mi primera app a los 13 años — una calculadora en Xcode sin soporte para decimales. Construí mi primer circuito a los 15 — un piano hecho con timers 555. Descubrí problemas de calidad del agua en mi escuela a los 16 y lo convertí en un proyecto de feria de ciencias.
+          </p>
+          <p>
+            En Clarkson University, pasé de investigador de pregrado a posgrado, publicando papers sobre sillas de ruedas autónomas y sistemas de visión asistiva en IEEE. Mi tesis de maestría abordó criptografía post-cuántica.
+          </p>
+          <p>
+            Hoy verifico silicio de aceleración de IA en Microsoft y construyo Huitzo — una plataforma de inteligencia como servicio — de forma independiente. He entregado más de 15 compromisos de consultoría, publicado 6 papers revisados por pares, y aprendido que la habilidad más importante no es ninguna tecnología en particular. Es la capacidad de aprender rápido, construir rápido, y preocuparte por las personas a las que tu trabajo sirve.
+          </p>
+        </div>
+      </div>
+
+      <div class="space-y-8">
+        <h2 class="font-display text-2xl font-semibold text-primary">Lecciones que Desearía Haber Sabido Antes</h2>
+        <div class="space-y-4">
+          {lessons.map((lesson) => (
+            <article class="bento-card p-6">
+              <h3 class="font-display text-lg font-semibold text-primary">{lesson.title}</h3>
+              <p class="mt-2 text-sm text-muted">{lesson.description}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+
+      <div class="space-y-8">
+        <h2 class="font-display text-2xl font-semibold text-primary">Recursos que Recomiendo</h2>
+        <div class="grid gap-4 md:grid-cols-2">
+          {resources.map((resource) => (
+            <a href={resource.href} target="_blank" rel="noreferrer" class="bento-card block p-5 transition-colors hover:border-[var(--color-accent)]" data-goatcounter-click={`journey-resource-${resource.title.toLowerCase().replace(/\s+/g, '-').slice(0, 20)}`}>
+              <h3 class="font-display text-base font-semibold text-primary">{resource.title}</h3>
+              <p class="mt-1 text-xs text-muted">{resource.description}</p>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <div class="rounded-lg border border-soft bg-overlay p-8 text-center">
+        <h3 class="font-display text-xl font-semibold text-primary">¿Quieres conectar?</h3>
+        <p class="mt-2 text-sm text-muted">
+          Si eres estudiante o ingeniero en etapa temprana y mi historia resuena, no dudes en contactarme.
+        </p>
+        <div class="mt-6">
+          <a href={`mailto:${siteMeta.data.contact.email}?subject=${encodeURIComponent('Estudiante / Mentee contactando')}`} class="button-primary" data-goatcounter-click="journey-contact-cta">
+            Saludar
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</SiteLayout>

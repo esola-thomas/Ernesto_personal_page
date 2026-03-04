@@ -1,0 +1,133 @@
+---
+import SiteLayout from "../layouts/SiteLayout.astro";
+import { getEntry } from "astro:content";
+
+const siteMeta = await getEntry("site", "meta");
+
+const publications = [
+  {
+    title: "Post-Quantum Secured File Transfer Protocol with Blockchain Auditability",
+    venue: "arXiv preprint",
+    year: "2025",
+    description: "Master's thesis presenting a file transfer protocol secured against quantum computing threats with blockchain-based audit trails.",
+    href: "https://arxiv.org/html/2504.07938v1"
+  },
+  {
+    title: "Smart Wheelchair with Autonomous Navigation",
+    venue: "IEEE SoutheastCon 2021",
+    year: "2021",
+    description: "Low-cost autonomous wheelchair platform with dual control modes for indoor navigation in hospital environments.",
+    href: "https://ieeexplore.ieee.org/abstract/document/9476093"
+  },
+  {
+    title: "Smart Wheelchair System (Co-Author)",
+    venue: "IEEE International Conference 2022",
+    year: "2022",
+    description: "Extended work on autonomous wheelchair systems with improved sensor fusion and navigation capabilities.",
+    href: "https://ieeexplore.ieee.org/abstract/document/9826969"
+  },
+  {
+    title: "Ultra-Low-Power Smart Wearable Stereo Camera for Blind Navigation",
+    venue: "IEEE SoutheastCon 2021",
+    year: "2021",
+    description: "Wearable assistive device with onboard neural network processing for real-time object detection and blind navigation.",
+    href: "https://ieeexplore.ieee.org/abstract/document/9401833"
+  },
+  {
+    title: "ECG-Based Emotion Recognition (Co-Author)",
+    venue: "IEEE 2024",
+    year: "2024",
+    description: "Enhanced emotion recognition using wearable ECG data and machine learning models across valence, arousal, and dominance dimensions.",
+    href: "https://ieeexplore.ieee.org/abstract/document/10754745"
+  },
+  {
+    title: "FPGA Vision Processing for Prosthetic Hands",
+    venue: "IEEE 2023",
+    year: "2023",
+    description: "Vision-based automated control for prosthetic hands using FPGA processors with deep learning object detection.",
+    href: "https://ieeexplore.ieee.org/abstract/document/10174491"
+  }
+];
+
+const researchInterests = [
+  "AI silicon verification and accelerator architectures",
+  "Post-quantum cryptography and secure distributed systems",
+  "Assistive robotics and human-centered hardware",
+  "Embedded machine learning and edge intelligence",
+  "Neurotech and brain-computer interfaces"
+];
+---
+<SiteLayout
+  title="Research & Publications | Ernesto Sola-Thomas"
+  description="Publications, research interests, and academic work by Ernesto Sola-Thomas — spanning AI silicon, post-quantum cryptography, and assistive robotics."
+  siteMeta={siteMeta}
+  locale="en"
+>
+  <section class="relative overflow-hidden pb-16 pt-32">
+    <div aria-hidden="true" class="absolute inset-0 bg-[var(--gradient-hero)] opacity-40"></div>
+    <div class="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[color:var(--surface-base)]"></div>
+    <div class="container relative">
+      <span class="badge">Academic</span>
+      <h1 class="mt-6 font-display text-5xl font-semibold leading-tight text-primary md:text-6xl">
+        Research & Publications
+      </h1>
+      <p class="mt-4 max-w-2xl text-xl text-secondary">
+        Peer-reviewed work at the intersection of hardware, AI, security, and human-centered systems.
+      </p>
+    </div>
+  </section>
+
+  <section class="py-16">
+    <div class="container max-w-3xl space-y-16">
+      <div class="space-y-8">
+        <h2 class="font-display text-2xl font-semibold text-primary">Publications</h2>
+        <div class="space-y-6">
+          {publications.map((pub) => (
+            <article class="bento-card p-6">
+              <div class="flex items-start justify-between gap-4">
+                <div class="space-y-2">
+                  <h3 class="font-display text-lg font-semibold text-primary">{pub.title}</h3>
+                  <p class="text-xs uppercase tracking-[0.3em] text-soft">{pub.venue} · {pub.year}</p>
+                  <p class="text-sm text-muted">{pub.description}</p>
+                </div>
+              </div>
+              <a
+                href={pub.href}
+                target="_blank"
+                rel="noreferrer"
+                class="mt-4 inline-flex items-center gap-1 text-sm font-medium text-[var(--color-accent)] hover:underline"
+                data-goatcounter-click={`research-pub-${pub.year}`}
+              >
+                Read paper →
+              </a>
+            </article>
+          ))}
+        </div>
+      </div>
+
+      <div class="space-y-6">
+        <h2 class="font-display text-2xl font-semibold text-primary">Research Interests</h2>
+        <ul class="space-y-3 text-muted">
+          {researchInterests.map((interest) => (
+            <li class="flex items-start gap-3">
+              <span aria-hidden="true" class="mt-2 inline-flex h-1.5 w-1.5 flex-none rounded-full bg-[var(--color-accent)]"></span>
+              <span>{interest}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="rounded-lg border border-soft bg-overlay p-8 text-center">
+        <h3 class="font-display text-xl font-semibold text-primary">Interested in collaborating?</h3>
+        <p class="mt-2 text-sm text-muted">
+          I'm open to research collaborations in post-quantum systems, assistive technology, and AI infrastructure.
+        </p>
+        <div class="mt-6">
+          <a href={`mailto:${siteMeta.data.contact.email}?subject=${encodeURIComponent('Research Collaboration')}`} class="button-primary" data-goatcounter-click="research-collaborate-cta">
+            Start a conversation
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</SiteLayout>

@@ -30,9 +30,19 @@ export const translations = {
       personal: "Personal Dimensions",
       personalEyebrow: "Beyond Engineering",
       personalDesc: "The passions and values that keep me grounded and curious outside of the lab.",
+      proof: "Selected Proof",
+      proofEyebrow: "Track Record",
+      proofDesc: "High-signal work across silicon, AI, research, and venture building.",
+      waysIHelp: "Ways I Can Help",
+      waysIHelpEyebrow: "Engagement",
+      waysIHelpDesc: "Outcome-driven engagements for founders, teams, and organizations building at the edge of what's possible.",
       contact: "Let's build what's next",
       contactEyebrow: "Collaborate",
       contactDesc: "Whether you're shipping silicon, scaling a venture, or exploring secure systems, I'd love to hear about the challenge."
+    },
+    // Proof section
+    proof: {
+      learnMore: "Learn more"
     },
     // Experience section
     experience: {
@@ -75,12 +85,28 @@ export const translations = {
     // Contact section
     contact: {
       primaryContact: "Primary contact",
-      shareNote: "Share a brief note about your project, what impact you're aiming for, and how I can help.",
+      intentPrompt: "What would you like to discuss?",
+      intents: {
+        huitzo: "Discuss Huitzo",
+        speaking: "Speaking / Podcast",
+        research: "Research Collaboration",
+        advisory: "Advisory",
+        general: "General"
+      },
       sendEmail: "Send an email",
       bookConversation: "Book a conversation",
       location: "Location",
       availability: "Current availability",
       availabilityText: "Open for select advisory, prototyping engagements, and speaking with founders shaping technology."
+    },
+    // Ways I Can Help section
+    waysIHelp: {
+      startConversation: "Start a conversation",
+      disclaimer: "Select engagements only. All advisory work is independent of my role at Microsoft."
+    },
+    // Trust strip
+    trustStrip: {
+      label: "Trusted by and affiliated with"
     },
     // Hero section
     hero: {
@@ -127,9 +153,19 @@ export const translations = {
       personal: "Dimensiones Personales",
       personalEyebrow: "Más Allá de la Ingeniería",
       personalDesc: "Las pasiones y valores que me mantienen conectado y curioso fuera del laboratorio.",
+      proof: "Pruebas Seleccionadas",
+      proofEyebrow: "Trayectoria",
+      proofDesc: "Trabajo de alto impacto en silicio, IA, investigación y construcción de empresas.",
+      waysIHelp: "Cómo Puedo Ayudar",
+      waysIHelpEyebrow: "Compromisos",
+      waysIHelpDesc: "Compromisos orientados a resultados para fundadores, equipos y organizaciones construyendo al límite de lo posible.",
       contact: "Construyamos lo que sigue",
       contactEyebrow: "Colaborar",
       contactDesc: "Ya sea que estés escalando un emprendimiento o explorando sistemas seguros, me encantaría conocer el desafío."
+    },
+    // Sección de prueba
+    proof: {
+      learnMore: "Conocer más"
     },
     // Sección de experiencia
     experience: {
@@ -172,12 +208,28 @@ export const translations = {
     // Sección de contacto
     contact: {
       primaryContact: "Contacto principal",
-      shareNote: "Comparte una breve nota sobre tu proyecto, qué impacto buscas y cómo puedo ayudar.",
+      intentPrompt: "¿Sobre qué te gustaría conversar?",
+      intents: {
+        huitzo: "Discutir Huitzo",
+        speaking: "Charlas / Podcast",
+        research: "Colaboración de Investigación",
+        advisory: "Asesoría",
+        general: "General"
+      },
       sendEmail: "Enviar un correo",
       bookConversation: "Agendar una conversación",
       location: "Ubicación",
       availability: "Disponibilidad actual",
       availabilityText: "Abierto para asesoría selecta, compromisos de prototipado y conversaciones con fundadores que dan forma a la tecnología."
+    },
+    // Sección de formas en que puedo ayudar
+    waysIHelp: {
+      startConversation: "Iniciar una conversación",
+      disclaimer: "Solo compromisos selectos. Todo el trabajo de asesoría es independiente de mi rol en Microsoft."
+    },
+    // Franja de confianza
+    trustStrip: {
+      label: "Afiliado y reconocido por"
     },
     // Sección hero
     hero: {

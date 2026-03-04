@@ -1,0 +1,35 @@
+---
+import { getTranslations, type Locale } from "../i18n/translations";
+
+interface Props {
+  locale?: Locale;
+}
+
+const { locale = 'en' } = Astro.props;
+const t = getTranslations(locale);
+
+const anchors = [
+  { label: "Microsoft", href: "https://www.microsoft.com" },
+  { label: "Clarkson University", href: "https://www.clarkson.edu" },
+  { label: "IEEE Published", href: "https://ieeexplore.ieee.org/author/37089713498" },
+  { label: "Huitzo", href: "https://huitzo.com" },
+  { label: "GitHub", href: "https://github.com/esola-thomas" },
+];
+---
+<section aria-label={t.trustStrip.label} class="border-y border-soft bg-overlay/50 py-6">
+  <div class="container">
+    <div class="flex flex-wrap items-center justify-center gap-x-10 gap-y-4">
+      {anchors.map((anchor) => (
+        <a
+          href={anchor.href}
+          target="_blank"
+          rel="noreferrer"
+          class="text-sm font-medium uppercase tracking-[0.25em] text-soft transition-colors hover:text-primary"
+          data-goatcounter-click={`trust-strip-${anchor.label.toLowerCase().replace(/\s+/g, '-')}`}
+        >
+          {anchor.label}
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

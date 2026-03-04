@@ -1,0 +1,89 @@
+---
+import SiteLayout from "../../layouts/SiteLayout.astro";
+import { getTranslations } from "../../i18n/translations";
+import { getEntry } from "astro:content";
+
+const siteMeta = await getEntry("site", "es/meta");
+const t = getTranslations("es");
+---
+<SiteLayout
+  title="Huitzo — Inteligencia como Servicio | Ernesto Sola-Thomas"
+  description="Huitzo ofrece capacidades avanzadas de IA como servicio, haciendo la inteligencia accesible a empresas y startups que construyen el futuro."
+  siteMeta={siteMeta}
+  locale="es"
+>
+  <section class="relative overflow-hidden pb-16 pt-32">
+    <div aria-hidden="true" class="absolute inset-0 bg-[var(--gradient-hero)] opacity-50"></div>
+    <div class="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[color:var(--surface-base)]"></div>
+    <div class="container relative">
+      <span class="badge">Emprendimiento</span>
+      <h1 class="mt-6 font-display text-5xl font-semibold leading-tight text-primary md:text-6xl">
+        Huitzo
+      </h1>
+      <p class="mt-4 max-w-2xl text-xl text-secondary">
+        Inteligencia como servicio — haciendo la IA avanzada accesible a organizaciones que necesitan resultados, no papers de investigación.
+      </p>
+    </div>
+  </section>
+
+  <section class="py-16">
+    <div class="container max-w-3xl space-y-12">
+      <div class="space-y-4">
+        <h2 class="font-display text-2xl font-semibold text-primary">Qué es Huitzo</h2>
+        <p class="text-muted">
+          Huitzo es una plataforma de inteligencia como servicio que empaqueta capacidades avanzadas de IA en pipelines modulares listos para producción. Ayudamos a empresas y startups a convertir datos crudos en insights accionables sin construir un equipo de IA desde cero.
+        </p>
+      </div>
+
+      <div class="space-y-4">
+        <h2 class="font-display text-2xl font-semibold text-primary">El Problema</h2>
+        <p class="text-muted">
+          La mayoría de las organizaciones saben que la IA puede transformar sus operaciones, pero la brecha entre modelos académicos y sistemas de producción es enorme. Construir, desplegar y mantener infraestructura de IA requiere talento especializado que es caro y escaso. Los equipos pierden meses en plomería en lugar de resultados.
+        </p>
+      </div>
+
+      <div class="space-y-4">
+        <h2 class="font-display text-2xl font-semibold text-primary">Por qué ahora</h2>
+        <p class="text-muted">
+          El panorama de infraestructura de IA ha madurado lo suficiente para modularizarse. Los modelos fundacionales, bases de datos vectoriales y marcos de orquestación hacen posible entregar inteligencia como bloques componibles en lugar de plataformas monolíticas.
+        </p>
+      </div>
+
+      <div class="space-y-4">
+        <h2 class="font-display text-2xl font-semibold text-primary">Por qué yo</h2>
+        <p class="text-muted">
+          Verifico silicio de aceleración de IA en Microsoft — entiendo el hardware sobre el que corren estos modelos. He entregado infraestructura de producción en contextos de cloud, embebidos e investigación. Mi experiencia abarca el stack completo desde transistores hasta APIs.
+        </p>
+      </div>
+
+      <div class="space-y-4">
+        <h2 class="font-display text-2xl font-semibold text-primary">Etapa actual</h2>
+        <p class="text-muted">
+          Huitzo está en desarrollo activo. Estamos construyendo la plataforma central, incorporando socios de diseño tempranos y validando el modelo de servicio con cargas de trabajo reales. Este es trabajo independiente, no afiliado con Microsoft.
+        </p>
+      </div>
+
+      <div class="space-y-4">
+        <h2 class="font-display text-2xl font-semibold text-primary">Visión</h2>
+        <p class="text-muted">
+          Un mundo donde cualquier organización — sin importar tamaño o experiencia en IA — pueda desplegar sistemas inteligentes que aprendan, se adapten y entreguen valor medible. No hype de AGI. Inteligencia práctica, confiable y de grado empresarial.
+        </p>
+      </div>
+
+      <div class="mt-12 rounded-lg border border-soft bg-overlay p-8 text-center">
+        <h3 class="font-display text-xl font-semibold text-primary">¿Interesado en Huitzo?</h3>
+        <p class="mt-2 text-sm text-muted">
+          Ya seas un potencial socio de diseño, inversionista, o simplemente tengas curiosidad — me encantaría saber de ti.
+        </p>
+        <div class="mt-6 flex flex-wrap justify-center gap-4">
+          <a href="https://huitzo.com" target="_blank" rel="noreferrer" class="button-primary" data-goatcounter-click="huitzo-page-visit-site">
+            Visitar huitzo.com
+          </a>
+          <a href={`mailto:${siteMeta.data.contact.email}?subject=${encodeURIComponent('Huitzo — Conversemos')}`} class="button-ghost" data-goatcounter-click="huitzo-page-contact">
+            Iniciar conversación
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</SiteLayout>

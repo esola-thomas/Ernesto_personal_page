@@ -22,7 +22,7 @@ const socials = [
       <p class="max-w-xl text-sm text-muted">
         {t.footer.description}
       </p>
-      <a href="mailto:ernesto@solathomas.com" class="button-primary px-6 py-2">
+      <a href="mailto:ernesto@solathomas.com" class="button-primary px-6 py-2" data-goatcounter-click="footer-email-cta">
         ernesto@solathomas.com
       </a>
     </div>
@@ -32,7 +32,7 @@ const socials = [
         <ul class="mt-4 space-y-3">
           {socials.map((social) => (
             <li>
-              <a class="transition hover:text-primary" href={social.href} rel="noreferrer" target="_blank">
+              <a class="transition hover:text-primary" href={social.href} rel="noreferrer" target="_blank" data-goatcounter-click={`footer-${social.label.toLowerCase()}`}>
                 {social.label}
               </a>
             </li>
