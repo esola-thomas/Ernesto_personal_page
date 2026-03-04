@@ -6,6 +6,12 @@ interface HeroData {
   title: string;
   tagline: string;
   statements: string[];
+  buildingNow?: {
+    label: string;
+    name: string;
+    oneliner: string;
+    href: string;
+  };
   ctas: { label: string; href: string }[];
 }
 
@@ -47,6 +53,18 @@ const t = getTranslations(locale);
             </li>
           ))}
         </ul>
+        {hero.buildingNow && (
+          <a href={hero.buildingNow.href} target="_blank" rel="noopener noreferrer" class="group flex items-start gap-4 rounded-xl border border-[var(--color-accent)]/30 bg-overlay px-5 py-4 transition hover:border-[var(--color-accent)]/70 hover:bg-[var(--color-accent)]/5 no-underline">
+            <div class="flex-1 min-w-0">
+              <p class="text-xs uppercase tracking-[0.35em] text-[var(--color-accent)] mb-1">{hero.buildingNow.label}</p>
+              <p class="font-display text-lg font-semibold text-primary leading-snug">{hero.buildingNow.name}</p>
+              <p class="mt-1 text-sm text-muted">{hero.buildingNow.oneliner}</p>
+            </div>
+            <svg aria-hidden="true" class="mt-1 flex-none text-soft transition group-hover:text-[var(--color-accent)]" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M7 17 17 7M7 7h10v10" />
+            </svg>
+          </a>
+        )}
         <div class="flex flex-wrap items-center gap-4">
           {hero.ctas.map((cta, index) => (
             index === 0 ? (
