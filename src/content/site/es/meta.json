@@ -1,22 +1,27 @@
 {
   "hero": {
     "name": "Ernesto Sola-Thomas",
-    "title": "Ingeniero Eléctrico y de Computación",
-    "tagline": "Ingeniero en la intersección de Hardware, Software, Silicio, Inteligencia Artificial, Sistemas Seguros y mi Curiosidad.",
+    "title": "Ingeniero de Silicio · Fundador",
+    "tagline": "Construyendo Huitzo — una plataforma de inteligencia IA para empresas. Ingeniero de silicio en Microsoft con la profundidad técnica para hacerlo realidad.",
     "statements": [
-      "Ingeniero de verificación de silicio en Microsoft.",
-      "Llevando investigación de blockchain + criptografía post-cuántica a plataformas prácticas.",
-      "Arquitectando sistemas resilientes de nube y hardware de extremo a extremo."
+      "Fundador de Huitzo: inteligencia como servicio que da a las organizaciones profundidad real en IA, no demostraciones.",
+      "Ingeniero de verificación de silicio en Microsoft — infraestructura de chips IA, verificación formal y profundidad de sistemas."
     ],
+    "buildingNow": {
+      "label": "Construyendo Ahora",
+      "name": "Huitzo",
+      "oneliner": "Una plataforma de inteligencia que convierte capacidades avanzadas de IA en resultados empresariales. Etapa temprana, arquitectura seria.",
+      "href": "https://huitzo.com"
+    },
     "ctas": [
-      { "label": "Ver Experiencia", "href": "#experience" },
+      { "label": "Explorar Huitzo", "href": "https://huitzo.com" },
       { "label": "Colaboremos", "href": "#contact" }
     ]
   },
   "quickFacts": [
-    { "label": "Actual", "value": "Ingeniero de verificación de silicio IA · Microsoft" },
-    { "label": "Proyectos independientes", "value": "Personal, no-Microsoft (Huitzo • Findmily • Knowonomy • ST Solutions)" },
-    { "label": "Enfoque", "value": "Silicio IA · Sistemas seguros · Construcción de empresas" }
+    { "label": "Construyendo", "value": "Huitzo — plataforma de inteligencia IA" },
+    { "label": "Rol", "value": "Ingeniero de silicio · Microsoft" },
+    { "label": "Ubicación", "value": "Raleigh, NC" }
   ],
   "contact": {
     "email": "ernesto@solathomas.com",

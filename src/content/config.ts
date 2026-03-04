@@ -70,6 +70,12 @@ const site = defineCollection({
       title: z.string(),
       tagline: z.string(),
       statements: z.array(z.string()),
+      buildingNow: z.object({
+        label: z.string(),
+        name: z.string(),
+        oneliner: z.string(),
+        href: z.string()
+      }).optional(),
       ctas: z.array(
         z.object({
           label: z.string(),
