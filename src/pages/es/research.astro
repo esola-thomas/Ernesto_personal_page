@@ -1,0 +1,125 @@
+---
+import SiteLayout from "../../layouts/SiteLayout.astro";
+import { getEntry } from "astro:content";
+
+const siteMeta = await getEntry("site", "es/meta");
+
+const publications = [
+  {
+    title: "Protocolo de Transferencia de Archivos Seguro Post-Cuántico con Auditabilidad Blockchain",
+    venue: "preprint arXiv",
+    year: "2025",
+    description: "Tesis de maestría presentando un protocolo de transferencia de archivos protegido contra amenazas de computación cuántica con registros de auditoría basados en blockchain.",
+    href: "https://arxiv.org/html/2504.07938v1"
+  },
+  {
+    title: "Silla de Ruedas Inteligente con Navegación Autónoma",
+    venue: "IEEE SoutheastCon 2021",
+    year: "2021",
+    description: "Plataforma de silla de ruedas autónoma de bajo costo con modos de control dual para navegación en interiores.",
+    href: "https://ieeexplore.ieee.org/abstract/document/9476093"
+  },
+  {
+    title: "Sistema de Silla de Ruedas Inteligente (Co-Autor)",
+    venue: "IEEE International Conference 2022",
+    year: "2022",
+    description: "Trabajo extendido en sistemas de silla de ruedas autónoma con fusión de sensores mejorada.",
+    href: "https://ieeexplore.ieee.org/abstract/document/9826969"
+  },
+  {
+    title: "Cámara Estéreo Wearable de Ultra-Bajo Consumo para Navegación de Invidentes",
+    venue: "IEEE SoutheastCon 2021",
+    year: "2021",
+    description: "Dispositivo asistivo wearable con procesamiento de redes neuronales a bordo para detección de objetos en tiempo real.",
+    href: "https://ieeexplore.ieee.org/abstract/document/9401833"
+  },
+  {
+    title: "Reconocimiento de Emociones Basado en ECG (Co-Autor)",
+    venue: "IEEE 2024",
+    year: "2024",
+    description: "Reconocimiento de emociones mejorado usando datos de ECG wearable y modelos de aprendizaje automático.",
+    href: "https://ieeexplore.ieee.org/abstract/document/10754745"
+  },
+  {
+    title: "Procesamiento de Visión FPGA para Manos Protésicas",
+    venue: "IEEE 2023",
+    year: "2023",
+    description: "Control automatizado basado en visión para manos protésicas usando procesadores FPGA con detección de objetos.",
+    href: "https://ieeexplore.ieee.org/abstract/document/10174491"
+  }
+];
+
+const researchInterests = [
+  "Verificación de silicio de IA y arquitecturas de aceleradores",
+  "Criptografía post-cuántica y sistemas distribuidos seguros",
+  "Robótica asistiva y hardware centrado en humanos",
+  "Aprendizaje automático embebido e inteligencia en el borde",
+  "Neurotecnología e interfaces cerebro-computadora"
+];
+---
+<SiteLayout
+  title="Investigación y Publicaciones | Ernesto Sola-Thomas"
+  description="Publicaciones, intereses de investigación y trabajo académico de Ernesto Sola-Thomas."
+  siteMeta={siteMeta}
+  locale="es"
+>
+  <section class="relative overflow-hidden pb-16 pt-32">
+    <div aria-hidden="true" class="absolute inset-0 bg-[var(--gradient-hero)] opacity-40"></div>
+    <div class="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[color:var(--surface-base)]"></div>
+    <div class="container relative">
+      <span class="badge">Académico</span>
+      <h1 class="mt-6 font-display text-5xl font-semibold leading-tight text-primary md:text-6xl">
+        Investigación y Publicaciones
+      </h1>
+      <p class="mt-4 max-w-2xl text-xl text-secondary">
+        Trabajo revisado por pares en la intersección de hardware, IA, seguridad y sistemas centrados en humanos.
+      </p>
+    </div>
+  </section>
+
+  <section class="py-16">
+    <div class="container max-w-3xl space-y-16">
+      <div class="space-y-8">
+        <h2 class="font-display text-2xl font-semibold text-primary">Publicaciones</h2>
+        <div class="space-y-6">
+          {publications.map((pub) => (
+            <article class="bento-card p-6">
+              <div class="space-y-2">
+                <h3 class="font-display text-lg font-semibold text-primary">{pub.title}</h3>
+                <p class="text-xs uppercase tracking-[0.3em] text-soft">{pub.venue} · {pub.year}</p>
+                <p class="text-sm text-muted">{pub.description}</p>
+              </div>
+              <a href={pub.href} target="_blank" rel="noreferrer" class="mt-4 inline-flex items-center gap-1 text-sm font-medium text-[var(--color-accent)] hover:underline" data-goatcounter-click={`research-pub-${pub.year}`}>
+                Leer publicación →
+              </a>
+            </article>
+          ))}
+        </div>
+      </div>
+
+      <div class="space-y-6">
+        <h2 class="font-display text-2xl font-semibold text-primary">Intereses de Investigación</h2>
+        <ul class="space-y-3 text-muted">
+          {researchInterests.map((interest) => (
+            <li class="flex items-start gap-3">
+              <span aria-hidden="true" class="mt-2 inline-flex h-1.5 w-1.5 flex-none rounded-full bg-[var(--color-accent)]"></span>
+              <span>{interest}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="rounded-lg border border-soft bg-overlay p-8 text-center">
+        <h3 class="font-display text-xl font-semibold text-primary">¿Interesado en colaborar?</h3>
+        <p class="mt-2 text-sm text-muted">
+          Estoy abierto a colaboraciones de investigación en sistemas post-cuánticos, tecnología asistiva e infraestructura de IA.
+        </p>
+        <div class="mt-6">
+          <a href={`mailto:${siteMeta.data.contact.email}?subject=${encodeURIComponent('Colaboración de Investigación')}`} class="button-primary" data-goatcounter-click="research-collaborate-cta">
+            Iniciar conversación
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</SiteLayout>

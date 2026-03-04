@@ -1,0 +1,89 @@
+---
+import SiteLayout from "../layouts/SiteLayout.astro";
+import { getTranslations } from "../i18n/translations";
+import { getEntry } from "astro:content";
+
+const siteMeta = await getEntry("site", "meta");
+const t = getTranslations("en");
+---
+<SiteLayout
+  title="Huitzo — Intelligence as a Service | Ernesto Sola-Thomas"
+  description="Huitzo delivers advanced AI capabilities as a service, making intelligence accessible to enterprises and startups building the future."
+  siteMeta={siteMeta}
+  locale="en"
+>
+  <section class="relative overflow-hidden pb-16 pt-32">
+    <div aria-hidden="true" class="absolute inset-0 bg-[var(--gradient-hero)] opacity-50"></div>
+    <div class="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[color:var(--surface-base)]"></div>
+    <div class="container relative">
+      <span class="badge">Venture</span>
+      <h1 class="mt-6 font-display text-5xl font-semibold leading-tight text-primary md:text-6xl">
+        Huitzo
+      </h1>
+      <p class="mt-4 max-w-2xl text-xl text-secondary">
+        Intelligence as a service — making advanced AI accessible to organizations that need results, not research papers.
+      </p>
+    </div>
+  </section>
+
+  <section class="py-16">
+    <div class="container max-w-3xl space-y-12">
+      <div class="space-y-4">
+        <h2 class="font-display text-2xl font-semibold text-primary">What Huitzo Is</h2>
+        <p class="text-muted">
+          Huitzo is an intelligence-as-a-service platform that packages advanced AI capabilities into modular, production-ready pipelines. We help enterprises and startups turn raw data into decision-ready insights without building an AI team from scratch.
+        </p>
+      </div>
+
+      <div class="space-y-4">
+        <h2 class="font-display text-2xl font-semibold text-primary">The Problem</h2>
+        <p class="text-muted">
+          Most organizations know AI can transform their operations, but the gap between academic models and production systems is vast. Building, deploying, and maintaining AI infrastructure requires specialized talent that is expensive and scarce. Teams waste months on plumbing instead of outcomes.
+        </p>
+      </div>
+
+      <div class="space-y-4">
+        <h2 class="font-display text-2xl font-semibold text-primary">Why Now</h2>
+        <p class="text-muted">
+          The AI infrastructure landscape has matured enough to modularize. Foundation models, vector databases, and orchestration frameworks now make it possible to deliver intelligence as composable building blocks rather than monolithic platforms. The window is open for platforms that abstract complexity without sacrificing control.
+        </p>
+      </div>
+
+      <div class="space-y-4">
+        <h2 class="font-display text-2xl font-semibold text-primary">Why Me</h2>
+        <p class="text-muted">
+          I verify AI acceleration silicon at Microsoft — I understand the hardware these models run on. I have shipped production infrastructure across cloud, embedded, and research contexts. My background spans the full stack from transistors to APIs, which lets me build systems that are efficient at every layer.
+        </p>
+      </div>
+
+      <div class="space-y-4">
+        <h2 class="font-display text-2xl font-semibold text-primary">Current Stage</h2>
+        <p class="text-muted">
+          Huitzo is in active development. We are building the core platform, onboarding early design partners, and validating the service model with real workloads. This is independent work, not affiliated with Microsoft.
+        </p>
+      </div>
+
+      <div class="space-y-4">
+        <h2 class="font-display text-2xl font-semibold text-primary">Vision</h2>
+        <p class="text-muted">
+          A world where any organization — regardless of size or AI expertise — can deploy intelligent systems that learn, adapt, and deliver measurable value. Not AGI hype. Practical, reliable, business-grade intelligence.
+        </p>
+      </div>
+
+      <div class="mt-12 rounded-lg border border-soft bg-overlay p-8 text-center">
+        <h3 class="font-display text-xl font-semibold text-primary">Interested in Huitzo?</h3>
+        <p class="mt-2 text-sm text-muted">
+          Whether you're a potential design partner, investor, or just curious — I'd love to hear from you.
+        </p>
+        <div class="mt-6 flex flex-wrap justify-center gap-4">
+          <a href="https://huitzo.com" target="_blank" rel="noreferrer" class="button-primary" data-goatcounter-click="huitzo-page-visit-site">
+            Visit huitzo.com
+          </a>
+          <a href={`mailto:${siteMeta.data.contact.email}?subject=${encodeURIComponent('Huitzo — Let\'s discuss')}`} class="button-ghost" data-goatcounter-click="huitzo-page-contact">
+            Start a conversation
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</SiteLayout>

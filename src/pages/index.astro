@@ -3,26 +3,19 @@ import { getCollection, getEntry } from "astro:content";
 import SiteLayout from "../layouts/SiteLayout.astro";
 import Hero from "../components/Hero.astro";
 import ExperienceTimeline from "../components/ExperienceTimeline.astro";
-import VenturesGrid from "../components/VenturesGrid.astro";
 import ProjectsShowcase from "../components/ProjectsShowcase.astro";
-import SkillsShowcase from "../components/SkillsShowcase.astro";
-import PersonalSection from "../components/PersonalSection.astro";
 import ContactSection from "../components/ContactSection.astro";
 import AchievementsSection from "../components/AchievementsSection.astro";
+import SelectedProof from "../components/SelectedProof.astro";
+import TrustStrip from "../components/TrustStrip.astro";
+import WaysICanHelp from "../components/WaysICanHelp.astro";
 import Reveal from "../components/motion/Reveal.tsx";
 
 const siteMeta = await getEntry("site", "meta");
-const skillsEntry = await getEntry("skills", "catalog");
 
 const experiences = (await getCollection("experience", ({ id }) => !id.startsWith("es/"))).sort(
   (a, b) => Number(b.data.start) - Number(a.data.start)
 );
-
-const ventures = (await getCollection("ventures", ({ id }) => !id.startsWith("es/"))).sort((a, b) => {
-  const aYear = a.data.founded ? Number(a.data.founded) : 0;
-  const bYear = b.data.founded ? Number(b.data.founded) : 0;
-  return bYear - aYear;
-});
 
 const parseTimeframe = (value: string) => {
   const years = value.match(/\d{4}/g);
@@ -31,38 +24,94 @@ const parseTimeframe = (value: string) => {
   return Number(last);
 };
 
-const projects = (await getCollection("projects", ({ id }) => !id.startsWith("es/"))).sort(
-  (a, b) => parseTimeframe(b.data.timeframe) - parseTimeframe(a.data.timeframe)
-);
-
-const personal = await getCollection("personal", ({ id }) => !id.startsWith("es/"));
+const projects = (await getCollection("projects", ({ id }) => !id.startsWith("es/")))
+  .sort((a, b) => parseTimeframe(b.data.timeframe) - parseTimeframe(a.data.timeframe))
+  .slice(0, 5);
 
 const achievements = [
   {
-    title: "Professional focus",
-    description: "Delivering as a silicon verification engineer, building reusable testing environments for RTL. Expanding my horizons with personal projects."
+    title: "Silicon verification",
+    description: "Building reusable UVM test environments for RTL at Microsoft, covering floating-point pipelines, constrained-random testing, and coverage automation."
   },
   {
-    title: "Chip design & verification",
-    description: "Deep experience across floating point pipelines, constrained random testing, coverage automation, formal and functional verification."
+    title: "AI & hardware systems",
+    description: "Verification of AI accelerator silicon and chip-level architectures spanning formal methods, functional coverage, and synthesis-ready design."
   },
   {
-    title: "Cloud-native architecture",
-    description: "Deploy personal and side projects as resilient, production-grade platforms using Kubernetes, Docker, Supabase, Stripe, Terraform, and end-to-end CI/CD with observability and automated rollouts.",
+    title: "Cloud infrastructure",
+    description: "Deploying production-grade platforms with Kubernetes, Docker, Terraform, and CI/CD pipelines for personal ventures and client engagements."
   },
   {
-    title: "Secure emerging tech",
-    description: "I feed my curiosity through research in blockchain, post-quantum cryptography, neurotech, and human-centered robotics."
+    title: "Applied research",
+    description: "Post-quantum cryptography, assistive robotics, and neurotech — translating academic research into working prototypes."
+  }
+];
+
+const proofCards = [
+  {
+    title: "AI Accelerator Silicon — Microsoft",
+    challenge: "Verify floating-point pipelines and coverage closure for next-gen AI chips.",
+    result: "Built reusable UVM environments and automation adopted across the org.",
+  },
+  {
+    title: "Huitzo — Intelligence as a Service",
+    challenge: "Make advanced AI capabilities accessible to enterprises and startups.",
+    result: "Designing scalable AI infrastructure with modular data pipelines.",
+    href: "/huitzo"
+  },
+  {
+    title: "Post-Quantum Secure File Transfer",
+    challenge: "Protect file transfers against quantum computing threats.",
+    result: "Published a PQ-secured protocol with blockchain auditability (arXiv).",
+    href: "https://arxiv.org/html/2504.07938v1"
+  },
+  {
+    title: "Autonomous Wheelchair Platform",
+    challenge: "Enable hands-free indoor navigation for mobility-impaired users.",
+    result: "Published at IEEE — low-cost, open-source design with dual control modes.",
+    href: "https://ieeexplore.ieee.org/abstract/document/9476093"
+  },
+  {
+    title: "Cloud-Native Platform Ops",
+    challenge: "Ship production-grade billing and auth for multi-tenant SaaS.",
+    result: "Automated CI/CD pipelines enabling weekly iteration with confidence.",
+  }
+];
+
+const offers = [
+  {
+    title: "Technical due diligence",
+    description: "Evaluate architecture, code quality, and scalability risks for investment decisions or acquisition targets."
+  },
+  {
+    title: "Prototype & system architecture",
+    description: "Design and build proof-of-concept systems spanning hardware, firmware, cloud, and AI pipelines."
+  },
+  {
+    title: "AI + hardware systems strategy",
+    description: "Advise on AI accelerator integration, silicon-software co-design, and intelligent infrastructure planning."
+  },
+  {
+    title: "Product & engineering advisory",
+    description: "Help early-stage teams make high-leverage technical decisions — from stack selection to team structure."
+  },
+  {
+    title: "Early-stage technical direction",
+    description: "Partner with founders to translate vision into architecture, roadmap, and first working system."
   }
 ];
 ---
 <SiteLayout
-  title="Ernesto Sola-Thomas • Electrical & Computer Engineer"
-  description="Portfolio, ventures, and research from Ernesto Sola-Thomas—silicon engineer, founder, and systems builder."
+  title="Ernesto Sola-Thomas • Silicon Engineer & Founder"
+  description="Ernesto Sola-Thomas — founder of Huitzo (AI intelligence platform) and silicon verification engineer at Microsoft. Technical depth, venture conviction."
   siteMeta={siteMeta}
   locale="en"
 >
   <Hero hero={siteMeta.data.hero} quickFacts={siteMeta.data.quickFacts} locale="en" />
+  <TrustStrip locale="en" />
+  <Reveal client:visible>
+    <SelectedProof cards={proofCards} locale="en" />
+  </Reveal>
   <Reveal client:visible>
     <AchievementsSection achievements={achievements} locale="en" />
   </Reveal>
@@ -70,16 +119,10 @@ const achievements = [
     <ExperienceTimeline entries={experiences} locale="en" />
   </Reveal>
   <Reveal client:visible>
-    <VenturesGrid entries={ventures} locale="en" />
+    <WaysICanHelp offers={offers} locale="en" />
   </Reveal>
   <Reveal client:visible>
     <ProjectsShowcase entries={projects} locale="en" />
-  </Reveal>
-  <Reveal client:visible>
-    <SkillsShowcase groups={skillsEntry.data} locale="en" />
-  </Reveal>
-  <Reveal client:visible>
-    <PersonalSection entries={personal} locale="en" />
   </Reveal>
   <Reveal client:visible>
     <ContactSection contact={siteMeta.data.contact} locale="en" />

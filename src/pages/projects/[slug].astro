@@ -1,0 +1,130 @@
+---
+import { getCollection } from "astro:content";
+import { getEntry } from "astro:content";
+import SiteLayout from "../../layouts/SiteLayout.astro";
+
+export async function getStaticPaths() {
+  const projects = await getCollection("projects", ({ id }) => !id.startsWith("es/"));
+  return projects.map((project) => ({
+    params: { slug: project.id.replace(/\.mdx?$/, "") },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const { Content } = await project.render();
+const siteMeta = await getEntry("site", "meta");
+const d = project.data;
+---
+<SiteLayout
+  title={`${d.title} | Ernesto Sola-Thomas`}
+  description={d.summary}
+  siteMeta={siteMeta}
+  locale="en"
+>
+  <section class="relative overflow-hidden pb-16 pt-32">
+    <div aria-hidden="true" class="absolute inset-0 bg-[var(--gradient-hero)] opacity-40"></div>
+    <div class="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[color:var(--surface-base)]"></div>
+    <div class="container relative">
+      <div class="flex items-center gap-3">
+        <span class="badge">{d.category}</span>
+        <span class="rounded-md border border-soft px-3 py-1 text-xs uppercase tracking-[0.3em] text-soft">{d.status}</span>
+      </div>
+      <h1 class="mt-6 font-display text-4xl font-semibold leading-tight text-primary md:text-5xl">
+        {d.title}
+      </h1>
+      <p class="mt-4 max-w-2xl text-lg text-secondary">{d.summary}</p>
+      <div class="mt-6 flex flex-wrap gap-2">
+        {d.stack.map((tech: string) => (
+          <span class="tag">{tech}</span>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16">
+    <div class="container max-w-3xl space-y-12">
+      {d.context && (
+        <div class="space-y-3">
+          <h2 class="font-display text-2xl font-semibold text-primary">Context</h2>
+          <p class="text-muted">{d.context}</p>
+        </div>
+      )}
+
+      {d.problem && (
+        <div class="space-y-3">
+          <h2 class="font-display text-2xl font-semibold text-primary">Problem</h2>
+          <p class="text-muted">{d.problem}</p>
+        </div>
+      )}
+
+      {d.constraints && (
+        <div class="space-y-3">
+          <h2 class="font-display text-2xl font-semibold text-primary">Constraints</h2>
+          <p class="text-muted">{d.constraints}</p>
+        </div>
+      )}
+
+      {d.approach && (
+        <div class="space-y-3">
+          <h2 class="font-display text-2xl font-semibold text-primary">Approach</h2>
+          <p class="text-muted">{d.approach}</p>
+        </div>
+      )}
+
+      {d.impact.length > 0 && (
+        <div class="space-y-3">
+          <h2 class="font-display text-2xl font-semibold text-primary">Impact</h2>
+          <ul class="space-y-3 text-muted">
+            {d.impact.map((item: string) => (
+              <li class="flex items-start gap-3">
+                <span aria-hidden="true" class="mt-2 inline-flex h-1.5 w-1.5 flex-none rounded-full bg-[var(--color-accent)]"></span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {d.outcome && (
+        <div class="space-y-3">
+          <h2 class="font-display text-2xl font-semibold text-primary">Outcome</h2>
+          <p class="text-muted">{d.outcome}</p>
+        </div>
+      )}
+
+      {d.lessons && (
+        <div class="space-y-3">
+          <h2 class="font-display text-2xl font-semibold text-primary">Lessons Learned</h2>
+          <p class="text-muted">{d.lessons}</p>
+        </div>
+      )}
+
+      <div class="prose prose-invert max-w-none text-muted">
+        <Content />
+      </div>
+
+      {d.links.length > 0 && (
+        <div class="flex flex-wrap gap-3">
+          {d.links.map((link: { label: string; href: string }) => (
+            <a
+              href={link.href}
+              class="button-ghost px-4 py-2"
+              target="_blank"
+              rel="noreferrer"
+              data-goatcounter-click={`project-${project.id}-${link.label.toLowerCase()}`}
+            >
+              {link.label}
+            </a>
+          ))}
+        </div>
+      )}
+
+      <div class="pt-8">
+        <a href="/#projects" class="text-sm font-medium text-[var(--color-accent)] hover:underline">
+          ← Back to all projects
+        </a>
+      </div>
+    </div>
+  </section>
+</SiteLayout>

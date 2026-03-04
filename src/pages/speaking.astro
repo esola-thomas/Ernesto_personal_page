@@ -1,0 +1,126 @@
+---
+import SiteLayout from "../layouts/SiteLayout.astro";
+import { getEntry } from "astro:content";
+
+const siteMeta = await getEntry("site", "meta");
+
+const topics = [
+  {
+    title: "Building Intelligent Systems Across Hardware and Software",
+    description: "How silicon verification, embedded systems, and cloud infrastructure converge in AI-era product development."
+  },
+  {
+    title: "From Silicon Verification to Startup Building",
+    description: "Lessons from bridging deep technical work at Microsoft with founding Huitzo and shipping real products."
+  },
+  {
+    title: "Purpose-Driven Technology and Practical Innovation",
+    description: "Why the most impactful technology starts with human problems, not technical solutions."
+  },
+  {
+    title: "AI Infrastructure, Productization, and Execution",
+    description: "Making AI work in production — from model selection to deployment pipelines to measuring business outcomes."
+  },
+  {
+    title: "Lessons from Bridging Research, Engineering, and Venture Building",
+    description: "Navigating the transition from academic research to industry engineering to entrepreneurship."
+  }
+];
+
+const shortBio = "Ernesto Sola-Thomas is a silicon engineer at Microsoft and founder of Huitzo, an intelligence-as-a-service platform. He verifies AI acceleration silicon by day and builds AI infrastructure for enterprises and startups independently. His work spans hardware verification, post-quantum cryptography, assistive robotics, and cloud systems. He holds degrees from Clarkson University and has published in IEEE on assistive technology and secure systems.";
+
+const longBio = "Ernesto Sola-Thomas is a silicon verification engineer at Microsoft, where he builds reusable UVM test environments for AI accelerator chips — verifying floating-point pipelines, driving coverage closure, and developing automation adopted across verification teams. Outside Microsoft, he founded Huitzo, an intelligence-as-a-service platform that makes advanced AI accessible to organizations without dedicated AI teams. Ernesto's technical range spans the full stack from transistors to APIs. He has published peer-reviewed research at IEEE on autonomous wheelchairs for indoor hospital navigation, ultra-low-power wearable vision systems for blind users, FPGA-based prosthetic hand control, and ECG-based emotion recognition. His master's thesis at Clarkson University introduced a post-quantum secured file transfer protocol with blockchain auditability. Through Sola-Thomas Solutions LLC, he has delivered 15+ consulting engagements across fintech, logistics, healthcare, and consumer tech — helping founders de-risk architecture and ship production-grade infrastructure. Ernesto is driven by the belief that technology should create long-term value and expand human potential, not just chase trends.";
+---
+<SiteLayout
+  title="Speaking & Media | Ernesto Sola-Thomas"
+  description="Speaker bios, suggested topics, and booking information for Ernesto Sola-Thomas — silicon engineer, founder, and systems builder."
+  siteMeta={siteMeta}
+  locale="en"
+>
+  <section class="relative overflow-hidden pb-16 pt-32">
+    <div aria-hidden="true" class="absolute inset-0 bg-[var(--gradient-hero)] opacity-40"></div>
+    <div class="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[color:var(--surface-base)]"></div>
+    <div class="container relative">
+      <span class="badge">Media</span>
+      <h1 class="mt-6 font-display text-5xl font-semibold leading-tight text-primary md:text-6xl">
+        Speaking & Media
+      </h1>
+      <p class="mt-4 max-w-2xl text-xl text-secondary">
+        Available for conferences, podcasts, panels, and interviews on hardware, AI, entrepreneurship, and human-centered technology.
+      </p>
+    </div>
+  </section>
+
+  <section class="py-16">
+    <div class="container max-w-3xl space-y-16">
+      <div class="grid gap-8 md:grid-cols-[200px_1fr] md:items-start">
+        <div class="relative h-48 w-48 overflow-hidden rounded-lg border border-soft bg-overlay md:h-auto md:w-full">
+          <img
+            src="https://tse1.mm.bing.net/th/id/OIP.hPYSzHHEbkC3WzghsU_xjAHaHa?rs=1&pid=ImgDetMain&o=7&rm=3"
+            alt="Ernesto Sola-Thomas — Speaker Headshot"
+            width="200"
+            height="200"
+            loading="lazy"
+            class="h-full w-full object-cover"
+          />
+        </div>
+        <div class="space-y-6">
+          <div class="space-y-3">
+            <h2 class="font-display text-xl font-semibold text-primary">Short Bio</h2>
+            <p class="text-sm text-muted">{shortBio}</p>
+          </div>
+          <div class="space-y-3">
+            <h2 class="font-display text-xl font-semibold text-primary">Full Bio</h2>
+            <p class="text-sm text-muted">{longBio}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="space-y-8">
+        <h2 class="font-display text-2xl font-semibold text-primary">Suggested Topics</h2>
+        <div class="space-y-4">
+          {topics.map((topic) => (
+            <article class="bento-card p-6">
+              <h3 class="font-display text-lg font-semibold text-primary">{topic.title}</h3>
+              <p class="mt-2 text-sm text-muted">{topic.description}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+
+      <div class="space-y-4">
+        <h2 class="font-display text-2xl font-semibold text-primary">Why Ernesto</h2>
+        <ul class="space-y-3 text-muted">
+          <li class="flex items-start gap-3">
+            <span aria-hidden="true" class="mt-2 inline-flex h-1.5 w-1.5 flex-none rounded-full bg-[var(--color-accent)]"></span>
+            <span>Rare combination of silicon engineering depth and startup execution experience</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span aria-hidden="true" class="mt-2 inline-flex h-1.5 w-1.5 flex-none rounded-full bg-[var(--color-accent)]"></span>
+            <span>6+ peer-reviewed IEEE publications on assistive technology and secure systems</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span aria-hidden="true" class="mt-2 inline-flex h-1.5 w-1.5 flex-none rounded-full bg-[var(--color-accent)]"></span>
+            <span>Actively building at Microsoft and independently — speaks from current experience, not past glory</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span aria-hidden="true" class="mt-2 inline-flex h-1.5 w-1.5 flex-none rounded-full bg-[var(--color-accent)]"></span>
+            <span>Bilingual (English/Spanish) with cross-cultural perspective</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="rounded-lg border border-soft bg-overlay p-8 text-center">
+        <h3 class="font-display text-xl font-semibold text-primary">Book Ernesto for your event</h3>
+        <p class="mt-2 text-sm text-muted">
+          Reach out with event details, audience, and format. I'm flexible on virtual and in-person.
+        </p>
+        <div class="mt-6 flex flex-wrap justify-center gap-4">
+          <a href={`mailto:${siteMeta.data.contact.email}?subject=${encodeURIComponent('Speaking / Podcast Inquiry')}`} class="button-primary" data-goatcounter-click="speaking-contact-cta">
+            Get in touch
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</SiteLayout>

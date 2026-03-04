@@ -97,6 +97,15 @@ const groups = Object.entries(categoryLabels)
                 <div class="space-y-4 text-muted">
                   <Content />
                 </div>
+                {entry.data.context && (
+                  <a
+                    href={`/projects/${entry.id.replace(/\.mdx?$/, "")}`}
+                    class="mt-auto inline-flex items-center gap-1 text-sm font-medium text-[var(--color-accent)] hover:underline"
+                    data-goatcounter-click={`project-case-study-${entry.id}`}
+                  >
+                    View case study →
+                  </a>
+                )}
               </article>
             ))}
           </div>

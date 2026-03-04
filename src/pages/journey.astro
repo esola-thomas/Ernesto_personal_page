@@ -1,0 +1,117 @@
+---
+import SiteLayout from "../layouts/SiteLayout.astro";
+import { getEntry } from "astro:content";
+
+const siteMeta = await getEntry("site", "meta");
+
+const lessons = [
+  {
+    title: "Start building before you feel ready",
+    description: "My first app was a calculator with no decimal support. It shipped anyway, and it taught me more than any textbook. Momentum beats perfection."
+  },
+  {
+    title: "The best learning happens at intersections",
+    description: "My strongest work came from combining fields — hardware + software, research + entrepreneurship, engineering + design thinking. Don't silo yourself."
+  },
+  {
+    title: "Publish your work, even if it's not perfect",
+    description: "Every IEEE paper I published had things I'd change. But putting work out there created opportunities I never expected — collaborations, citations, and credibility."
+  },
+  {
+    title: "Build things that help people",
+    description: "The projects I'm most proud of — the wheelchair, the vision glasses — were driven by real human need. Technology matters most when it serves someone."
+  },
+  {
+    title: "Your background is your superpower",
+    description: "I came from a non-traditional path. That perspective — seeing problems differently — turned out to be the most valuable thing I brought to every team."
+  },
+  {
+    title: "Say yes to the hard problems",
+    description: "Post-quantum cryptography, AI silicon, embedded ML — these felt impossible at first. But hard problems are where the growth is, and where fewer people compete."
+  }
+];
+
+const resources = [
+  { title: "Learn SystemVerilog", description: "chipverify.com — free, comprehensive, and practical for hardware verification.", href: "https://www.chipverify.com" },
+  { title: "Embedded Systems", description: "Start with Arduino, graduate to STM32. Build something physical early.", href: "https://www.arduino.cc" },
+  { title: "Cloud & Infrastructure", description: "Docker → Kubernetes → Terraform. Build one real deployment before learning the next tool.", href: "https://kubernetes.io/docs/tutorials/" },
+  { title: "AI/ML Foundations", description: "Andrew Ng's courses remain the best starting point. Then build something with real data.", href: "https://www.coursera.org/specializations/deep-learning" },
+  { title: "Research Writing", description: "Read 10 papers in your field before writing one. Understand the structure and conventions.", href: "https://scholar.google.com" },
+  { title: "Startup Thinking", description: "Y Combinator's Startup School is free and honest about what building a company actually takes.", href: "https://www.startupschool.org" }
+];
+---
+<SiteLayout
+  title="My Journey — Notes for Students & Aspiring Engineers | Ernesto Sola-Thomas"
+  description="Personal journey, lessons learned, and resources for students and aspiring engineers from Ernesto Sola-Thomas."
+  siteMeta={siteMeta}
+  locale="en"
+>
+  <section class="relative overflow-hidden pb-16 pt-32">
+    <div aria-hidden="true" class="absolute inset-0 bg-[var(--gradient-hero)] opacity-40"></div>
+    <div class="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[color:var(--surface-base)]"></div>
+    <div class="container relative">
+      <span class="badge">For Students</span>
+      <h1 class="mt-6 font-display text-5xl font-semibold leading-tight text-primary md:text-6xl">
+        My Journey
+      </h1>
+      <p class="mt-4 max-w-2xl text-xl text-secondary">
+        Notes, lessons, and resources for students and aspiring engineers who want to build things that matter.
+      </p>
+    </div>
+  </section>
+
+  <section class="py-16">
+    <div class="container max-w-3xl space-y-16">
+      <div class="space-y-6">
+        <h2 class="font-display text-2xl font-semibold text-primary">The Short Version</h2>
+        <div class="space-y-4 text-muted">
+          <p>
+            I built my first app at 13 — a calculator in Xcode with no decimal support. I built my first circuit at 15 — a piano made of 555 timers. I discovered water quality problems at my school at 16 and turned it into a science fair project that taught me more about engineering than any class.
+          </p>
+          <p>
+            At Clarkson University, I went from undergraduate to graduate researcher, publishing papers on autonomous wheelchairs and assistive vision systems at IEEE. My master's thesis tackled post-quantum cryptography — securing file transfers against threats that don't exist yet.
+          </p>
+          <p>
+            Today I verify AI acceleration silicon at Microsoft and build Huitzo — an intelligence-as-a-service platform — independently. I've shipped 15+ consulting engagements, published 6 peer-reviewed papers, and learned that the most important skill isn't any single technology. It's the ability to learn fast, build fast, and care about the people your work serves.
+          </p>
+        </div>
+      </div>
+
+      <div class="space-y-8">
+        <h2 class="font-display text-2xl font-semibold text-primary">Lessons I Wish I Knew Earlier</h2>
+        <div class="space-y-4">
+          {lessons.map((lesson) => (
+            <article class="bento-card p-6">
+              <h3 class="font-display text-lg font-semibold text-primary">{lesson.title}</h3>
+              <p class="mt-2 text-sm text-muted">{lesson.description}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+
+      <div class="space-y-8">
+        <h2 class="font-display text-2xl font-semibold text-primary">Resources I Recommend</h2>
+        <div class="grid gap-4 md:grid-cols-2">
+          {resources.map((resource) => (
+            <a href={resource.href} target="_blank" rel="noreferrer" class="bento-card block p-5 transition-colors hover:border-[var(--color-accent)]" data-goatcounter-click={`journey-resource-${resource.title.toLowerCase().replace(/\s+/g, '-').slice(0, 20)}`}>
+              <h3 class="font-display text-base font-semibold text-primary">{resource.title}</h3>
+              <p class="mt-1 text-xs text-muted">{resource.description}</p>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <div class="rounded-lg border border-soft bg-overlay p-8 text-center">
+        <h3 class="font-display text-xl font-semibold text-primary">Want to connect?</h3>
+        <p class="mt-2 text-sm text-muted">
+          If you're a student or early-career engineer and my story resonates, feel free to reach out. I'm happy to share advice when I can.
+        </p>
+        <div class="mt-6">
+          <a href={`mailto:${siteMeta.data.contact.email}?subject=${encodeURIComponent('Student / Mentee Reaching Out')}`} class="button-primary" data-goatcounter-click="journey-contact-cta">
+            Say hello
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</SiteLayout>

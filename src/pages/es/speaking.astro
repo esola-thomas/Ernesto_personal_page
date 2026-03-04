@@ -1,0 +1,104 @@
+---
+import SiteLayout from "../../layouts/SiteLayout.astro";
+import { getEntry } from "astro:content";
+
+const siteMeta = await getEntry("site", "es/meta");
+
+const topics = [
+  {
+    title: "Construyendo Sistemas Inteligentes entre Hardware y Software",
+    description: "Cómo la verificación de silicio, los sistemas embebidos y la infraestructura cloud convergen en el desarrollo de productos de la era de IA."
+  },
+  {
+    title: "De la Verificación de Silicio a la Construcción de Startups",
+    description: "Lecciones de vincular trabajo técnico profundo en Microsoft con fundar Huitzo y enviar productos reales."
+  },
+  {
+    title: "Tecnología con Propósito e Innovación Práctica",
+    description: "Por qué la tecnología más impactante comienza con problemas humanos, no con soluciones técnicas."
+  },
+  {
+    title: "Infraestructura de IA, Productización y Ejecución",
+    description: "Hacer que la IA funcione en producción — desde selección de modelos hasta pipelines de despliegue."
+  },
+  {
+    title: "Lecciones al Vincular Investigación, Ingeniería y Emprendimiento",
+    description: "Navegando la transición de investigación académica a ingeniería industrial a emprendimiento."
+  }
+];
+
+const shortBio = "Ernesto Sola-Thomas es ingeniero de silicio en Microsoft y fundador de Huitzo, una plataforma de inteligencia como servicio. Verifica silicio de aceleración de IA durante el día y construye infraestructura de IA para empresas y startups de forma independiente. Su trabajo abarca verificación de hardware, criptografía post-cuántica, robótica asistiva y sistemas cloud. Tiene títulos de Clarkson University y ha publicado en IEEE sobre tecnología asistiva y sistemas seguros.";
+
+const longBio = "Ernesto Sola-Thomas es ingeniero de verificación de silicio en Microsoft, donde construye entornos de prueba UVM reutilizables para chips aceleradores de IA — verificando pipelines de punto flotante, cerrando cobertura y desarrollando automatización adoptada en toda la organización. Fuera de Microsoft, fundó Huitzo, una plataforma de inteligencia como servicio que hace la IA avanzada accesible a organizaciones sin equipos de IA dedicados. Su rango técnico abarca el stack completo desde transistores hasta APIs. Ha publicado investigación revisada por pares en IEEE sobre sillas de ruedas autónomas, sistemas de visión wearable para invidentes, control de manos protésicas con FPGA, y reconocimiento de emociones basado en ECG. Su tesis de maestría en Clarkson University introdujo un protocolo de transferencia de archivos seguro post-cuántico con auditabilidad blockchain. A través de Sola-Thomas Solutions LLC, ha entregado más de 15 compromisos de consultoría en fintech, logística, salud y tecnología de consumo.";
+---
+<SiteLayout
+  title="Charlas y Medios | Ernesto Sola-Thomas"
+  description="Biografías de ponente, temas sugeridos e información de reservas para Ernesto Sola-Thomas."
+  siteMeta={siteMeta}
+  locale="es"
+>
+  <section class="relative overflow-hidden pb-16 pt-32">
+    <div aria-hidden="true" class="absolute inset-0 bg-[var(--gradient-hero)] opacity-40"></div>
+    <div class="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[color:var(--surface-base)]"></div>
+    <div class="container relative">
+      <span class="badge">Medios</span>
+      <h1 class="mt-6 font-display text-5xl font-semibold leading-tight text-primary md:text-6xl">
+        Charlas y Medios
+      </h1>
+      <p class="mt-4 max-w-2xl text-xl text-secondary">
+        Disponible para conferencias, podcasts, paneles y entrevistas sobre hardware, IA, emprendimiento y tecnología centrada en humanos.
+      </p>
+    </div>
+  </section>
+
+  <section class="py-16">
+    <div class="container max-w-3xl space-y-16">
+      <div class="grid gap-8 md:grid-cols-[200px_1fr] md:items-start">
+        <div class="relative h-48 w-48 overflow-hidden rounded-lg border border-soft bg-overlay md:h-auto md:w-full">
+          <img
+            src="https://tse1.mm.bing.net/th/id/OIP.hPYSzHHEbkC3WzghsU_xjAHaHa?rs=1&pid=ImgDetMain&o=7&rm=3"
+            alt="Ernesto Sola-Thomas — Foto de Ponente"
+            width="200"
+            height="200"
+            loading="lazy"
+            class="h-full w-full object-cover"
+          />
+        </div>
+        <div class="space-y-6">
+          <div class="space-y-3">
+            <h2 class="font-display text-xl font-semibold text-primary">Biografía Corta</h2>
+            <p class="text-sm text-muted">{shortBio}</p>
+          </div>
+          <div class="space-y-3">
+            <h2 class="font-display text-xl font-semibold text-primary">Biografía Completa</h2>
+            <p class="text-sm text-muted">{longBio}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="space-y-8">
+        <h2 class="font-display text-2xl font-semibold text-primary">Temas Sugeridos</h2>
+        <div class="space-y-4">
+          {topics.map((topic) => (
+            <article class="bento-card p-6">
+              <h3 class="font-display text-lg font-semibold text-primary">{topic.title}</h3>
+              <p class="mt-2 text-sm text-muted">{topic.description}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+
+      <div class="rounded-lg border border-soft bg-overlay p-8 text-center">
+        <h3 class="font-display text-xl font-semibold text-primary">Reserva a Ernesto para tu evento</h3>
+        <p class="mt-2 text-sm text-muted">
+          Escríbeme con detalles del evento, audiencia y formato. Flexible para virtual y presencial.
+        </p>
+        <div class="mt-6">
+          <a href={`mailto:${siteMeta.data.contact.email}?subject=${encodeURIComponent('Consulta de Charla / Podcast')}`} class="button-primary" data-goatcounter-click="speaking-contact-cta">
+            Contactar
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</SiteLayout>

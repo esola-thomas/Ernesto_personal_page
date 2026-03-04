@@ -1,22 +1,27 @@
 {
   "hero": {
     "name": "Ernesto Sola-Thomas",
-    "title": "Electrical & Computer Engineer",
-    "tagline": "Engineer at the Intersection of Hardware, Software, Silicon, Artificial Inteligence, Secure Systems, and my Curiosity.",
+    "title": "Silicon Engineer · Founder",
+    "tagline": "Building Huitzo — an AI intelligence platform for enterprise. Microsoft silicon engineer with the technical depth to make it real.",
     "statements": [
-      "Silicon verification engineer at Microsoft.",
-      "Bringing blockchain + post-quantum cryptography research into practical platforms.",
-      "Architecting resilient cloud and hardware systems end-to-end."
+      "Founder of Huitzo: intelligence-as-a-service that gives organizations real AI depth, not demos.",
+      "Silicon verification engineer at Microsoft — AI chip infrastructure, formal verification, and systems depth."
     ],
+    "buildingNow": {
+      "label": "Building Now",
+      "name": "Huitzo",
+      "oneliner": "An intelligence platform turning advanced AI into enterprise outcomes. Early-stage, serious architecture.",
+      "href": "https://huitzo.com"
+    },
     "ctas": [
-      { "label": "View Experience", "href": "#experience" },
+      { "label": "Explore Huitzo", "href": "https://huitzo.com" },
       { "label": "Let's Collaborate", "href": "#contact" }
     ]
   },
   "quickFacts": [
-    { "label": "Current", "value": "AI silicon verification engineer · Microsoft" },
-    { "label": "Independent projects", "value": "Personal, non-Microsoft (Huitzo • Findmily • Knowonomy • ST Solutions)" },
-    { "label": "Focus", "value": "AI silicon · Secure systems · Venture building" }
+    { "label": "Building", "value": "Huitzo — AI intelligence platform" },
+    { "label": "Role", "value": "Silicon engineer · Microsoft" },
+    { "label": "Location", "value": "Raleigh, NC" }
   ],
   "contact": {
     "email": "ernesto@solathomas.com",

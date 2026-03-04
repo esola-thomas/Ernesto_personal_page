@@ -50,7 +50,14 @@ const projects = defineCollection({
           href: z.string()
         })
       )
-      .default([])
+      .default([]),
+    // Optional case-study fields
+    context: z.string().optional(),
+    problem: z.string().optional(),
+    constraints: z.string().optional(),
+    approach: z.string().optional(),
+    outcome: z.string().optional(),
+    lessons: z.string().optional()
   })
 });
 
@@ -70,6 +77,12 @@ const site = defineCollection({
       title: z.string(),
       tagline: z.string(),
       statements: z.array(z.string()),
+      buildingNow: z.object({
+        label: z.string(),
+        name: z.string(),
+        oneliner: z.string(),
+        href: z.string()
+      }).optional(),
       ctas: z.array(
         z.object({
           label: z.string(),

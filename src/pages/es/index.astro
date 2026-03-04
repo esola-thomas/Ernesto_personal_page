@@ -3,25 +3,19 @@ import { getCollection, getEntry } from "astro:content";
 import SiteLayout from "../../layouts/SiteLayout.astro";
 import Hero from "../../components/Hero.astro";
 import ExperienceTimeline from "../../components/ExperienceTimeline.astro";
-import VenturesGrid from "../../components/VenturesGrid.astro";
 import ProjectsShowcase from "../../components/ProjectsShowcase.astro";
-import SkillsShowcase from "../../components/SkillsShowcase.astro";
-import PersonalSection from "../../components/PersonalSection.astro";
 import ContactSection from "../../components/ContactSection.astro";
 import AchievementsSection from "../../components/AchievementsSection.astro";
+import SelectedProof from "../../components/SelectedProof.astro";
+import TrustStrip from "../../components/TrustStrip.astro";
+import WaysICanHelp from "../../components/WaysICanHelp.astro";
+import Reveal from "../../components/motion/Reveal.tsx";
 
 const siteMeta = await getEntry("site", "es/meta");
-const skillsEntry = await getEntry("skills", "es/catalog");
 
 const experiences = (await getCollection("experience", ({ id }) => id.startsWith("es/"))).sort(
   (a, b) => Number(b.data.start) - Number(a.data.start)
 );
-
-const ventures = (await getCollection("ventures", ({ id }) => id.startsWith("es/"))).sort((a, b) => {
-  const aYear = a.data.founded ? Number(a.data.founded) : 0;
-  const bYear = b.data.founded ? Number(b.data.founded) : 0;
-  return bYear - aYear;
-});
 
 const parseTimeframe = (value: string) => {
   const years = value.match(/\d{4}/g);
@@ -30,43 +24,107 @@ const parseTimeframe = (value: string) => {
   return Number(last);
 };
 
-const projects = (await getCollection("projects", ({ id }) => id.startsWith("es/"))).sort(
-  (a, b) => parseTimeframe(b.data.timeframe) - parseTimeframe(a.data.timeframe)
-);
-
-const personal = await getCollection("personal", ({ id }) => id.startsWith("es/"));
+const projects = (await getCollection("projects", ({ id }) => id.startsWith("es/")))
+  .sort((a, b) => parseTimeframe(b.data.timeframe) - parseTimeframe(a.data.timeframe))
+  .slice(0, 5);
 
 const achievements = [
   {
-    title: "Enfoque profesional",
-    description: "Entregando como ingeniero de verificación de silicio, construyendo entornos de prueba reutilizables para RTL. Expandiendo mis horizontes con proyectos personales."
+    title: "Verificación de silicio",
+    description: "Construyendo entornos de prueba UVM reutilizables para RTL en Microsoft, cubriendo pipelines de punto flotante, pruebas aleatorias restringidas y automatización de cobertura."
   },
   {
-    title: "Diseño y verificación de chips",
-    description: "Experiencia profunda en pipelines de punto flotante, pruebas aleatorias restringidas, automatización de cobertura, verificación formal y funcional."
+    title: "IA y sistemas de hardware",
+    description: "Verificación de silicio para aceleradores de IA y arquitecturas a nivel de chip, abarcando métodos formales, cobertura funcional y diseño listo para síntesis."
   },
   {
-    title: "Arquitectura cloud-native",
-    description: "Despliego proyectos personales y paralelos como plataformas resilientes de grado de producción usando Kubernetes, Docker, Supabase, Stripe, Terraform, y CI/CD de extremo a extremo con observabilidad y despliegues automatizados.",
+    title: "Infraestructura cloud",
+    description: "Desplegando plataformas de grado producción con Kubernetes, Docker, Terraform y pipelines CI/CD para emprendimientos personales y clientes."
   },
   {
-    title: "Tecnología emergente segura",
-    description: "Alimento mi curiosidad a través de investigación en blockchain, criptografía post-cuántica, neurotecnología y robótica centrada en humanos."
+    title: "Investigación aplicada",
+    description: "Criptografía post-cuántica, robótica asistiva y neurotecnología — traduciendo investigación académica en prototipos funcionales."
+  }
+];
+
+const proofCards = [
+  {
+    title: "Silicio para Acelerador de IA — Microsoft",
+    challenge: "Verificar pipelines de punto flotante y cierre de cobertura para chips de IA.",
+    result: "Entornos UVM reutilizables y automatización adoptados en toda la organización.",
+  },
+  {
+    title: "Huitzo — Inteligencia como Servicio",
+    challenge: "Hacer capacidades avanzadas de IA accesibles para empresas y startups.",
+    result: "Diseñando infraestructura de IA escalable con pipelines de datos modulares.",
+    href: "/huitzo"
+  },
+  {
+    title: "Transferencia Segura Post-Cuántica",
+    challenge: "Proteger transferencias de archivos contra amenazas de computación cuántica.",
+    result: "Protocolo PQ publicado con auditabilidad blockchain (arXiv).",
+    href: "https://arxiv.org/html/2504.07938v1"
+  },
+  {
+    title: "Plataforma de Silla de Ruedas Autónoma",
+    challenge: "Habilitar navegación autónoma en interiores para usuarios con movilidad reducida.",
+    result: "Publicado en IEEE — diseño open-source de bajo costo con modos de control dual.",
+    href: "https://ieeexplore.ieee.org/abstract/document/9476093"
+  },
+  {
+    title: "Operaciones de Plataforma Cloud-Native",
+    challenge: "Enviar facturación y autenticación para SaaS multi-tenant.",
+    result: "Pipelines CI/CD automatizados para iteración semanal con confianza.",
+  }
+];
+
+const offers = [
+  {
+    title: "Due diligence técnico",
+    description: "Evaluar arquitectura, calidad de código y riesgos de escalabilidad para decisiones de inversión o adquisición."
+  },
+  {
+    title: "Prototipo y arquitectura de sistemas",
+    description: "Diseñar y construir sistemas de prueba de concepto que abarcan hardware, firmware, cloud y pipelines de IA."
+  },
+  {
+    title: "Estrategia de IA + sistemas de hardware",
+    description: "Asesorar en integración de aceleradores de IA, co-diseño silicio-software y planificación de infraestructura inteligente."
+  },
+  {
+    title: "Asesoría de producto e ingeniería",
+    description: "Ayudar a equipos en etapa temprana a tomar decisiones técnicas de alto impacto — desde selección de stack hasta estructura de equipo."
+  },
+  {
+    title: "Dirección técnica temprana",
+    description: "Acompañar a fundadores para traducir visión en arquitectura, roadmap y primer sistema funcional."
   }
 ];
 ---
 <SiteLayout
-  title="Ernesto Sola-Thomas • Ingeniero Eléctrico y de Computación"
-  description="Portafolio, emprendimientos e investigación de Ernesto Sola-Thomas—ingeniero de silicio, fundador y constructor de sistemas."
+  title="Ernesto Sola-Thomas • Ingeniero de Silicio y Fundador"
+  description="Ernesto Sola-Thomas — fundador de Huitzo (plataforma de inteligencia IA) e ingeniero de verificación de silicio en Microsoft. Profundidad técnica, convicción fundadora."
   siteMeta={siteMeta}
   locale="es"
 >
   <Hero hero={siteMeta.data.hero} quickFacts={siteMeta.data.quickFacts} locale="es" />
-  <AchievementsSection achievements={achievements} locale="es" />
-  <ExperienceTimeline entries={experiences} locale="es" />
-  <VenturesGrid entries={ventures} locale="es" />
-  <ProjectsShowcase entries={projects} locale="es" />
-  <SkillsShowcase groups={skillsEntry.data} locale="es" />
-  <PersonalSection entries={personal} locale="es" />
-  <ContactSection contact={siteMeta.data.contact} locale="es" />
+  <TrustStrip locale="es" />
+  <Reveal client:visible>
+    <SelectedProof cards={proofCards} locale="es" />
+  </Reveal>
+  <Reveal client:visible>
+    <AchievementsSection achievements={achievements} locale="es" />
+  </Reveal>
+  <Reveal client:visible>
+    <ExperienceTimeline entries={experiences} locale="es" />
+  </Reveal>
+  <Reveal client:visible>
+    <WaysICanHelp offers={offers} locale="es" />
+  </Reveal>
+  <Reveal client:visible>
+    <ProjectsShowcase entries={projects} locale="es" />
+  </Reveal>
+  <Reveal client:visible>
+    <ContactSection contact={siteMeta.data.contact} locale="es" />
+  </Reveal>
 </SiteLayout>

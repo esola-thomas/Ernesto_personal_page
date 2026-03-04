@@ -1,0 +1,52 @@
+---
+import SectionHeading from "./SectionHeading.astro";
+import { getTranslations, type Locale } from "../i18n/translations";
+
+interface ProofCard {
+  title: string;
+  challenge: string;
+  result: string;
+  href?: string;
+}
+
+interface Props {
+  cards: ProofCard[];
+  locale?: Locale;
+}
+
+const { cards, locale = 'en' } = Astro.props;
+const t = getTranslations(locale);
+---
+<section id="proof" class="py-24">
+  <div class="container section-grid">
+    <SectionHeading
+      eyebrow={t.headings.proofEyebrow}
+      title={t.headings.proof}
+      description={t.headings.proofDesc}
+    />
+
+    <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {cards.map((card) => (
+        <article class="bento-card flex flex-col gap-4 p-6">
+          <h3 class="font-display text-lg font-semibold text-primary">{card.title}</h3>
+          <p class="text-sm text-muted">{card.challenge}</p>
+          <p class="text-sm font-medium text-secondary">{card.result}</p>
+          {card.href && (
+            <a
+              href={card.href}
+              class="mt-auto inline-flex items-center gap-1 text-sm font-medium text-[var(--color-accent)] hover:underline"
+              target={card.href.startsWith("http") ? "_blank" : undefined}
+              rel={card.href.startsWith("http") ? "noreferrer" : undefined}
+              data-goatcounter-click={`proof-${card.title.toLowerCase().replace(/\s+/g, '-').slice(0, 30)}`}
+            >
+              {t.proof.learnMore}
+              <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 12h14" /><path d="m12 5 7 7-7 7" />
+              </svg>
+            </a>
+          )}
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

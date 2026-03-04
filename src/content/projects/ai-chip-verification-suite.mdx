@@ -12,5 +12,11 @@ impact:
   - Reduced test debug time through targeted stimulus and health dashboards.
   - Improved confidence in floating point paths for production delivery.
 links: []
+context: "As AI workloads demand specialized silicon, the verification of AI accelerator chips becomes critical to shipping reliable hardware. This project grew out of my daily work at Microsoft, where I identified opportunities to systematize verification approaches."
+problem: "Verification teams often rebuild test environments from scratch for each new chip program, leading to duplicated effort, inconsistent coverage, and slow ramp-up times for new engineers."
+constraints: "Must integrate with existing design workflows, support multiple verification methodologies (UVM, formal, constrained-random), and remain adaptable across different chip architectures."
+approach: "Designed modular UVM environments with configurable stimulus generators, automated coverage collection pipelines, and health dashboards that surface debug insights in real time."
+outcome: "Reduced test debug time and improved floating-point pipeline confidence for production delivery. The framework is being adopted across verification teams."
+lessons: "Reusable verification infrastructure pays compound interest — the upfront cost of abstraction is small compared to the time saved across programs. Investing in observability (dashboards, metrics) changes how teams make decisions."
 ---
 A focused initiative extending core verification work into reusable frameworks and knowledge transfer artifacts for future silicon programs.
