@@ -9,6 +9,7 @@ import AchievementsSection from "../../components/AchievementsSection.astro";
 import SelectedProof from "../../components/SelectedProof.astro";
 import TrustStrip from "../../components/TrustStrip.astro";
 import WaysICanHelp from "../../components/WaysICanHelp.astro";
+import VideoHighlights from "../../components/VideoHighlights.astro";
 import Reveal from "../../components/motion/Reveal.tsx";
 
 const siteMeta = await getEntry("site", "es/meta");
@@ -100,6 +101,30 @@ const offers = [
     description: "Acompañar a fundadores para traducir visión en arquitectura, roadmap y primer sistema funcional."
   }
 ];
+
+const videoHighlights = [
+  {
+    title: "Plataforma de Silla de Ruedas Autónoma",
+    description: "Una silla de ruedas autónoma de bajo costo y código abierto construida sobre una silla manual estándar. Demostró navegación autónoma sin manos en interiores usando cámara de profundidad estéreo, LiDAR y Nvidia Jetson. Publicada en IEEE.",
+    timeframe: "2021",
+    youtubeId: "F6w_CqB0bZM",
+    href: "https://youtu.be/F6w_CqB0bZM"
+  },
+  {
+    title: "Mano Protésica EMG NBI",
+    description: "Una mano protésica accionada por señales musculares EMG. El sistema traduce la actividad eléctrica muscular en actuación multi-agarre, restaurando confianza y capacidad a través de biofeedback.",
+    timeframe: "2021",
+    youtubeId: "ThzdBNYLVCs",
+    href: "https://www.youtube.com/watch?v=ThzdBNYLVCs"
+  },
+  {
+    title: "Monitor de Calidad del Agua Schumilop",
+    description: "Proyecto de feria de ciencias nacido al descubrir algas en el suministro de agua escolar. Combinó electrólisis y electrónica de sensores para construir un instrumento de detección de calidad del agua.",
+    timeframe: "2019",
+    youtubeId: "V4YPrQcctF0",
+    href: "https://www.youtube.com/watch?v=V4YPrQcctF0"
+  }
+];
 ---
 <SiteLayout
   title="Ernesto Sola-Thomas • Ingeniero de Silicio y Fundador"
@@ -123,6 +148,9 @@ const offers = [
   </Reveal>
   <Reveal client:visible>
     <ProjectsShowcase entries={projects} locale="es" />
+  </Reveal>
+  <Reveal client:visible>
+    <VideoHighlights videos={videoHighlights} locale="es" />
   </Reveal>
   <Reveal client:visible>
     <ContactSection contact={siteMeta.data.contact} locale="es" />
