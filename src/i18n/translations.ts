@@ -38,7 +38,10 @@ export const translations = {
       waysIHelpDesc: "Outcome-driven engagements for founders, teams, and organizations building at the edge of what's possible.",
       contact: "Let's build what's next",
       contactEyebrow: "Collaborate",
-      contactDesc: "Whether you're shipping silicon, scaling a venture, or exploring secure systems, I'd love to hear about the challenge."
+      contactDesc: "Whether you're shipping silicon, scaling a venture, or exploring secure systems, I'd love to hear about the challenge.",
+      videoHighlights: "Projects in Motion",
+      videoHighlightsEyebrow: "Video Archive",
+      videoHighlightsDesc: "Recorded demos and documentation of past hardware and research projects — a window into earlier engineering work."
     },
     // Proof section
     proof: {
@@ -98,6 +101,10 @@ export const translations = {
       location: "Location",
       availability: "Current availability",
       availabilityText: "Open for select advisory, prototyping engagements, and speaking with founders shaping technology."
+    },
+    // Video Highlights section
+    videoHighlights: {
+      watchOnYouTube: "Watch on YouTube"
     },
     // Ways I Can Help section
     waysIHelp: {
@@ -161,7 +168,10 @@ export const translations = {
       waysIHelpDesc: "Compromisos orientados a resultados para fundadores, equipos y organizaciones construyendo al límite de lo posible.",
       contact: "Construyamos lo que sigue",
       contactEyebrow: "Colaborar",
-      contactDesc: "Ya sea que estés escalando un emprendimiento o explorando sistemas seguros, me encantaría conocer el desafío."
+      contactDesc: "Ya sea que estés escalando un emprendimiento o explorando sistemas seguros, me encantaría conocer el desafío.",
+      videoHighlights: "Proyectos en Movimiento",
+      videoHighlightsEyebrow: "Archivo de Video",
+      videoHighlightsDesc: "Demos grabados y documentación de proyectos pasados de hardware e investigación — una ventana a trabajos de ingeniería anteriores."
     },
     // Sección de prueba
     proof: {
@@ -221,6 +231,10 @@ export const translations = {
       location: "Ubicación",
       availability: "Disponibilidad actual",
       availabilityText: "Abierto para asesoría selecta, compromisos de prototipado y conversaciones con fundadores que dan forma a la tecnología."
+    },
+    // Sección de Destacados de Video
+    videoHighlights: {
+      watchOnYouTube: "Ver en YouTube"
     },
     // Sección de formas en que puedo ayudar
     waysIHelp: {

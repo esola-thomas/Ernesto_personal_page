@@ -9,6 +9,7 @@ import AchievementsSection from "../components/AchievementsSection.astro";
 import SelectedProof from "../components/SelectedProof.astro";
 import TrustStrip from "../components/TrustStrip.astro";
 import WaysICanHelp from "../components/WaysICanHelp.astro";
+import VideoHighlights from "../components/VideoHighlights.astro";
 import Reveal from "../components/motion/Reveal.tsx";
 
 const siteMeta = await getEntry("site", "meta");
@@ -100,6 +101,30 @@ const offers = [
     description: "Partner with founders to translate vision into architecture, roadmap, and first working system."
   }
 ];
+
+const videoHighlights = [
+  {
+    title: "Autonomous Wheelchair Platform",
+    description: "A low-cost, open-source autonomous wheelchair built on a standard manual chair. Demonstrated hands-free indoor navigation using stereo depth camera, LiDAR, and Nvidia Jetson. Published at IEEE.",
+    timeframe: "2021",
+    youtubeId: "F6w_CqB0bZM",
+    href: "https://youtu.be/F6w_CqB0bZM"
+  },
+  {
+    title: "NBI EMG Prosthetic Hand",
+    description: "A prosthetic hand driven by EMG muscle signals. The system translates electrical muscle activity into multi-grip actuation, restoring confidence and capability through biofeedback.",
+    timeframe: "2021",
+    youtubeId: "ThzdBNYLVCs",
+    href: "https://www.youtube.com/watch?v=ThzdBNYLVCs"
+  },
+  {
+    title: "Schumilop Water Quality Monitor",
+    description: "A science fair project born from discovering algae in the school water supply. Combined electrolysis and sensor electronics to build a working water quality detection instrument.",
+    timeframe: "2019",
+    youtubeId: "V4YPrQcctF0",
+    href: "https://www.youtube.com/watch?v=V4YPrQcctF0"
+  }
+];
 ---
 <SiteLayout
   title="Ernesto Sola-Thomas • Silicon Engineer & Founder"
@@ -123,6 +148,9 @@ const offers = [
   </Reveal>
   <Reveal client:visible>
     <ProjectsShowcase entries={projects} locale="en" />
+  </Reveal>
+  <Reveal client:visible>
+    <VideoHighlights videos={videoHighlights} locale="en" />
   </Reveal>
   <Reveal client:visible>
     <ContactSection contact={siteMeta.data.contact} locale="en" />
