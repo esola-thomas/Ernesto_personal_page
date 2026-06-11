@@ -1,0 +1,51 @@
+---
+import SectionHeading from "./SectionHeading.astro";
+import { getTranslations, type Locale } from "../i18n/translations";
+
+interface Chapter {
+  num: string;
+  years: string;
+  title: string;
+  text: string;
+  href: string;
+  linkLabel: string;
+}
+
+interface Props {
+  chapters: Chapter[];
+  locale?: Locale;
+}
+
+const { chapters, locale = 'en' } = Astro.props;
+const t = getTranslations(locale);
+---
+<section id="story" class="py-24">
+  <div class="container section-grid">
+    <SectionHeading
+      eyebrow={t.headings.storyEyebrow}
+      title={t.headings.story}
+      description={t.headings.storyDesc}
+    />
+
+    <ol class="story-grid">
+      {chapters.map((chapter) => (
+        <li class="story-chapter stagger-item">
+          <p class="story-num">{chapter.num} <span class="text-soft">/ {chapter.years}</span></p>
+          <span class="story-node" aria-hidden="true"></span>
+          <h3 class="font-display text-xl font-semibold text-primary">{chapter.title}</h3>
+          <p class="mt-3 text-sm text-muted">{chapter.text}</p>
+          <a
+            href={chapter.href}
+            class="mt-4 inline-flex items-center gap-1 text-sm font-medium text-[var(--color-accent)] hover:underline"
+            data-goatcounter-click={`story-${chapter.num}`}
+          >
+            {chapter.linkLabel}
+            <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14" /><path d="m12 5 7 7-7 7" />
+            </svg>
+          </a>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>

@@ -2,11 +2,12 @@ export const translations = {
   en: {
     // Navigation
     nav: {
-      about: "About",
       experience: "Experience",
-      ventures: "Ventures",
       projects: "Projects",
-      skills: "Skills",
+      research: "Research",
+      journey: "Journey",
+      speaking: "Speaking",
+      huitzo: "Huitzo",
       contact: "Contact",
       collaborate: "Collaborate"
     },
@@ -27,8 +28,8 @@ export const translations = {
       skills: "Skills & Capabilities",
       skillsEyebrow: "Expertise",
       skillsDesc: "A toolbox tuned for silicon verification, secure systems, venture delivery, and multidisciplinary experimentation.",
-      personal: "Personal Dimensions",
-      personalEyebrow: "Beyond Engineering",
+      personal: "Beyond the lab",
+      personalEyebrow: "the human side",
       personalDesc: "The passions and values that keep me grounded and curious outside of the lab.",
       proof: "Selected Proof",
       proofEyebrow: "Track Record",
@@ -41,15 +42,21 @@ export const translations = {
       contactDesc: "Whether you're shipping silicon, scaling a venture, or exploring secure systems, I'd love to hear about the challenge.",
       videoHighlights: "Projects in Motion",
       videoHighlightsEyebrow: "Video Archive",
-      videoHighlightsDesc: "Recorded demos and documentation of past hardware and research projects — a window into earlier engineering work."
+      videoHighlightsDesc: "Recorded demos and documentation of past hardware and research projects, a window into earlier engineering work.",
+      story: "Builder since 13",
+      storyEyebrow: "origin story",
+      storyDesc: "Four chapters of one throughline: learn fast, build real things, and point them at people who need them."
     },
     // Proof section
     proof: {
-      learnMore: "Learn more"
+      learnMore: "Learn more",
+      challenge: "challenge",
+      result: "result"
     },
     // Experience section
     experience: {
       present: "Present",
+      current: "Active",
       highlights: "Key Highlights",
       stack: "Tech Stack"
     },
@@ -83,7 +90,8 @@ export const translations = {
       timeframe: "Timeframe",
       impact: "Impact",
       stack: "Stack",
-      links: "Links"
+      links: "Links",
+      viewCaseStudy: "View case study →"
     },
     // Contact section
     contact: {
@@ -113,30 +121,35 @@ export const translations = {
     },
     // Trust strip
     trustStrip: {
-      label: "Trusted by and affiliated with"
+      label: "Affiliations and published work"
     },
     // Hero section
     hero: {
-      creatingWithPassion: "Creating with Passion",
-      exploreProfile: "Explore Profile"
+      creatingWithPassion: "Silicon · Systems · Ventures",
+      exploreProfile: "Explore Profile",
+      bootHost: "ernesto@solathomas",
+      bootCommand: "whoami",
+      roles: ["Silicon Engineer", "Founder", "Researcher", "Builder"]
     },
     // Footer
     footer: {
       collaborate: "Let's collaborate",
       tagline: "Building resilient systems that uplift people.",
-      description: "I'm actively exploring new collaborations building/creating new technology. Drop a line and let's architect what's next.",
+      description: "I'm actively exploring new collaborations. Drop a line and let's architect what's next.",
       connect: "Connect",
+      explore: "Explore",
       copyright: "Created with curiosity."
     }
   },
   es: {
     // Navegación
     nav: {
-      about: "Acerca",
       experience: "Experiencia",
-      ventures: "Emprendimientos",
       projects: "Proyectos",
-      skills: "Habilidades",
+      research: "Investigación",
+      journey: "Trayectoria",
+      speaking: "Charlas",
+      huitzo: "Huitzo",
       contact: "Contacto",
       collaborate: "Colaborar"
     },
@@ -157,8 +170,8 @@ export const translations = {
       skills: "Habilidades y Capacidades",
       skillsEyebrow: "Experiencia",
       skillsDesc: "Una caja de herramientas afinada para verificación de silicio, sistemas seguros, entrega de emprendimientos y experimentación multidisciplinaria.",
-      personal: "Dimensiones Personales",
-      personalEyebrow: "Más Allá de la Ingeniería",
+      personal: "Más allá del laboratorio",
+      personalEyebrow: "el lado humano",
       personalDesc: "Las pasiones y valores que me mantienen conectado y curioso fuera del laboratorio.",
       proof: "Pruebas Seleccionadas",
       proofEyebrow: "Trayectoria",
@@ -171,15 +184,21 @@ export const translations = {
       contactDesc: "Ya sea que estés escalando un emprendimiento o explorando sistemas seguros, me encantaría conocer el desafío.",
       videoHighlights: "Proyectos en Movimiento",
       videoHighlightsEyebrow: "Archivo de Video",
-      videoHighlightsDesc: "Demos grabados y documentación de proyectos pasados de hardware e investigación — una ventana a trabajos de ingeniería anteriores."
+      videoHighlightsDesc: "Demos grabados y documentación de proyectos pasados de hardware e investigación, una ventana a trabajos de ingeniería anteriores.",
+      story: "Constructor desde los 13",
+      storyEyebrow: "historia de origen",
+      storyDesc: "Cuatro capítulos con un mismo hilo conductor: aprender rápido, construir cosas reales y ponerlas al servicio de quienes las necesitan."
     },
     // Sección de prueba
     proof: {
-      learnMore: "Conocer más"
+      learnMore: "Conocer más",
+      challenge: "desafío",
+      result: "resultado"
     },
     // Sección de experiencia
     experience: {
       present: "Presente",
+      current: "Activo",
       highlights: "Aspectos Destacados",
       stack: "Stack Tecnológico"
     },
@@ -213,7 +232,8 @@ export const translations = {
       timeframe: "Período",
       impact: "Impacto",
       stack: "Stack",
-      links: "Enlaces"
+      links: "Enlaces",
+      viewCaseStudy: "Ver caso de estudio →"
     },
     // Sección de contacto
     contact: {
@@ -243,19 +263,23 @@ export const translations = {
     },
     // Franja de confianza
     trustStrip: {
-      label: "Afiliado y reconocido por"
+      label: "Afiliaciones y trabajo publicado"
     },
     // Sección hero
     hero: {
-      creatingWithPassion: "Creando con Pasión",
-      exploreProfile: "Explorar Perfil"
+      creatingWithPassion: "Silicio · Sistemas · Empresas",
+      exploreProfile: "Explorar Perfil",
+      bootHost: "ernesto@solathomas",
+      bootCommand: "whoami",
+      roles: ["Ingeniero de Silicio", "Fundador", "Investigador", "Constructor"]
     },
     // Pie de página
     footer: {
       collaborate: "Colaboremos",
-      tagline: "Construyendo la tecnologia del mañana.",
-      description: "Estoy explorando activamente nuevas colaboraciones construyendo/creando nueva tecnología. Escríbeme y arquitectuemos lo que sigue.",
+      tagline: "Construyendo la tecnología del mañana.",
+      description: "Estoy explorando activamente nuevas colaboraciones. Escríbeme y diseñemos juntos lo que sigue.",
       connect: "Conectar",
+      explore: "Explorar",
       copyright: "Creado con curiosidad."
     }
   }

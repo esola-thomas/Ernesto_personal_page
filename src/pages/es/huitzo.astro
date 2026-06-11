@@ -1,14 +1,12 @@
 ---
 import SiteLayout from "../../layouts/SiteLayout.astro";
-import { getTranslations } from "../../i18n/translations";
 import { getEntry } from "astro:content";
 
 const siteMeta = await getEntry("site", "es/meta");
-const t = getTranslations("es");
 ---
 <SiteLayout
-  title="Huitzo — Inteligencia como Servicio | Ernesto Sola-Thomas"
-  description="Huitzo ofrece capacidades avanzadas de IA como servicio, haciendo la inteligencia accesible a empresas y startups que construyen el futuro."
+  title="Huitzo: El Sistema Operativo para la Inteligencia | Ernesto Sola-Thomas"
+  description="Huitzo es un runtime de IA auto-hospedado que permite a empresas reguladas ejecutar aplicaciones de IA (Intelligence Packs) dentro de su propia infraestructura, sin que los datos sensibles salgan de su entorno."
   siteMeta={siteMeta}
   locale="es"
 >
@@ -21,7 +19,7 @@ const t = getTranslations("es");
         Huitzo
       </h1>
       <p class="mt-4 max-w-2xl text-xl text-secondary">
-        Inteligencia como servicio — haciendo la IA avanzada accesible a organizaciones que necesitan resultados, no papers de investigación.
+        El sistema operativo para la inteligencia. Infraestructura de IA que realmente posees.
       </p>
     </div>
   </section>
@@ -31,55 +29,55 @@ const t = getTranslations("es");
       <div class="space-y-4">
         <h2 class="font-display text-2xl font-semibold text-primary">Qué es Huitzo</h2>
         <p class="text-muted">
-          Huitzo es una plataforma de inteligencia como servicio que empaqueta capacidades avanzadas de IA en pipelines modulares listos para producción. Ayudamos a empresas y startups a convertir datos crudos en insights accionables sin construir un equipo de IA desde cero.
+          Huitzo es un runtime de IA auto-hospedado para empresas reguladas. Ejecuta aplicaciones de IA, llamadas Intelligence Packs, dentro de tu infraestructura existente, de modo que los datos sensibles nunca salen de tu entorno. El runtime es agnóstico al modelo: cambia de proveedor sin reescribir código. Despliégalo como Huitzo Cloud, auto-hospedado, nube privada o híbrido.
         </p>
       </div>
 
       <div class="space-y-4">
         <h2 class="font-display text-2xl font-semibold text-primary">El Problema</h2>
         <p class="text-muted">
-          La mayoría de las organizaciones saben que la IA puede transformar sus operaciones, pero la brecha entre modelos académicos y sistemas de producción es enorme. Construir, desplegar y mantener infraestructura de IA requiere talento especializado que es caro y escaso. Los equipos pierden meses en plomería en lugar de resultados.
+          Las industrias que más tienen que ganar con la IA (seguros, salud, servicios financieros, gobierno, legal) son las que menos pueden adoptarla, porque sus datos no pueden salir de su perímetro. Los desarrollos internos a medida toman de 12 a 18 meses y un equipo especializado. El resultado es un punto muerto entre el control de datos y la capacidad de IA.
         </p>
       </div>
 
       <div class="space-y-4">
         <h2 class="font-display text-2xl font-semibold text-primary">Por qué ahora</h2>
         <p class="text-muted">
-          El panorama de infraestructura de IA ha madurado lo suficiente para modularizarse. Los modelos fundacionales, bases de datos vectoriales y marcos de orquestación hacen posible entregar inteligencia como bloques componibles en lugar de plataformas monolíticas.
+          Los modelos fundacionales se están comoditizando; el plano de control no. Lo que las organizaciones reguladas necesitan es un runtime que lleve los modelos a sus datos, con registro de ejecución para auditorías, aislamiento por equipos y despliegue por licencia que nunca llama a casa. La ventana está abierta para infraestructura que entregue control sin sacrificar capacidad.
         </p>
       </div>
 
       <div class="space-y-4">
         <h2 class="font-display text-2xl font-semibold text-primary">Por qué yo</h2>
         <p class="text-muted">
-          Verifico silicio de aceleración de IA en Microsoft — entiendo el hardware sobre el que corren estos modelos. He entregado infraestructura de producción en contextos de cloud, embebidos e investigación. Mi experiencia abarca el stack completo desde transistores hasta APIs.
+          Verifico silicio de aceleración de IA en Microsoft, así que entiendo el hardware sobre el que corren estos modelos. He construido infraestructura de producción en contextos de cloud, embebidos e investigación. Mi experiencia abarca el stack completo desde transistores hasta APIs, lo que me permite construir sistemas eficientes y confiables en cada capa.
         </p>
       </div>
 
       <div class="space-y-4">
         <h2 class="font-display text-2xl font-semibold text-primary">Etapa actual</h2>
         <p class="text-muted">
-          Huitzo está en desarrollo activo. Estamos construyendo la plataforma central, incorporando socios de diseño tempranos y validando el modelo de servicio con cargas de trabajo reales. Este es trabajo independiente, no afiliado con Microsoft.
+          Huitzo está en desarrollo activo, validando product-market fit con equipos de industrias reguladas. Busco socios de diseño tempranos que quieran IA funcionando dentro de su propio perímetro. Este es trabajo independiente, no afiliado con Microsoft.
         </p>
       </div>
 
       <div class="space-y-4">
         <h2 class="font-display text-2xl font-semibold text-primary">Visión</h2>
         <p class="text-muted">
-          Un mundo donde cualquier organización — sin importar tamaño o experiencia en IA — pueda desplegar sistemas inteligentes que aprendan, se adapten y entreguen valor medible. No hype de AGI. Inteligencia práctica, confiable y de grado empresarial.
+          Un mundo donde cualquier organización, sin importar sus restricciones regulatorias, pueda operar sistemas inteligentes que posee por completo: auditables, aislados y responsables. No hype de AGI. Inteligencia práctica, confiable y de grado empresarial, en tus propios términos.
         </p>
       </div>
 
       <div class="mt-12 rounded-lg border border-soft bg-overlay p-8 text-center">
         <h3 class="font-display text-xl font-semibold text-primary">¿Interesado en Huitzo?</h3>
         <p class="mt-2 text-sm text-muted">
-          Ya seas un potencial socio de diseño, inversionista, o simplemente tengas curiosidad — me encantaría saber de ti.
+          Ya seas un potencial socio de diseño, inversionista, o simplemente tengas curiosidad, me encantaría saber de ti.
         </p>
         <div class="mt-6 flex flex-wrap justify-center gap-4">
           <a href="https://huitzo.com" target="_blank" rel="noreferrer" class="button-primary" data-goatcounter-click="huitzo-page-visit-site">
             Visitar huitzo.com
           </a>
-          <a href={`mailto:${siteMeta.data.contact.email}?subject=${encodeURIComponent('Huitzo — Conversemos')}`} class="button-ghost" data-goatcounter-click="huitzo-page-contact">
+          <a href={`mailto:${siteMeta.data.contact.email}?subject=${encodeURIComponent('Huitzo: Conversemos')}`} class="button-ghost" data-goatcounter-click="huitzo-page-contact">
             Iniciar conversación
           </a>
         </div>

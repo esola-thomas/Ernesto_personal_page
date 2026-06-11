@@ -2,15 +2,15 @@
   "hero": {
     "name": "Ernesto Sola-Thomas",
     "title": "Ingeniero de Silicio · Fundador",
-    "tagline": "Construyendo Huitzo — una plataforma de inteligencia IA para empresas. Ingeniero de silicio en Microsoft con la profundidad técnica para hacerlo realidad.",
+    "tagline": "Construyendo Huitzo, el sistema operativo para la inteligencia. Ingeniero de silicio en Microsoft con la profundidad técnica para hacerlo realidad.",
     "statements": [
-      "Fundador de Huitzo: inteligencia como servicio que da a las organizaciones profundidad real en IA, no demostraciones.",
-      "Ingeniero de verificación de silicio en Microsoft — infraestructura de chips IA, verificación formal y profundidad de sistemas."
+      "Fundador de Huitzo: un runtime de IA auto-hospedado que permite a empresas reguladas ejecutar IA dentro de su propia infraestructura. Los datos nunca salen.",
+      "Ingeniero de verificación de silicio en Microsoft: infraestructura de chips IA, verificación formal y profundidad de sistemas."
     ],
     "buildingNow": {
       "label": "Construyendo Ahora",
       "name": "Huitzo",
-      "oneliner": "Una plataforma de inteligencia que convierte capacidades avanzadas de IA en resultados empresariales. Etapa temprana, arquitectura seria.",
+      "oneliner": "El sistema operativo para la inteligencia: infraestructura de IA auto-hospedada que realmente posees. Despliega en semanas, no meses.",
       "href": "https://huitzo.com"
     },
     "ctas": [
@@ -19,7 +19,7 @@
     ]
   },
   "quickFacts": [
-    { "label": "Construyendo", "value": "Huitzo — plataforma de inteligencia IA" },
+    { "label": "Construyendo", "value": "Huitzo · runtime de IA auto-hospedado" },
     { "label": "Rol", "value": "Ingeniero de silicio · Microsoft" },
     { "label": "Ubicación", "value": "Raleigh, NC" }
   ],

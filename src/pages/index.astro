@@ -5,12 +5,12 @@ import Hero from "../components/Hero.astro";
 import ExperienceTimeline from "../components/ExperienceTimeline.astro";
 import ProjectsShowcase from "../components/ProjectsShowcase.astro";
 import ContactSection from "../components/ContactSection.astro";
-import AchievementsSection from "../components/AchievementsSection.astro";
 import SelectedProof from "../components/SelectedProof.astro";
 import TrustStrip from "../components/TrustStrip.astro";
 import WaysICanHelp from "../components/WaysICanHelp.astro";
 import VideoHighlights from "../components/VideoHighlights.astro";
-import Reveal from "../components/motion/Reveal.tsx";
+import StorySection from "../components/StorySection.astro";
+import BeyondSection from "../components/BeyondSection.astro";
 
 const siteMeta = await getEntry("site", "meta");
 
@@ -29,35 +29,53 @@ const projects = (await getCollection("projects", ({ id }) => !id.startsWith("es
   .sort((a, b) => parseTimeframe(b.data.timeframe) - parseTimeframe(a.data.timeframe))
   .slice(0, 5);
 
-const achievements = [
+const personalEntries = await getCollection("personal", ({ id }) => !id.startsWith("es/"));
+
+const chapters = [
   {
-    title: "Silicon verification",
-    description: "Building reusable UVM test environments for RTL at Microsoft, covering floating-point pipelines, constrained-random testing, and coverage automation."
+    num: "01",
+    years: "2015–2019",
+    title: "First builds",
+    text: "A calculator app at 13. A piano wired from 555 timers. A water-quality instrument after finding algae in the school supply. Building before feeling ready became the habit.",
+    href: "/journey/",
+    linkLabel: "The journey"
   },
   {
-    title: "AI & hardware systems",
-    description: "Verification of AI accelerator silicon and chip-level architectures spanning formal methods, functional coverage, and synthesis-ready design."
+    num: "02",
+    years: "2020–2025",
+    title: "Research years",
+    text: "Clarkson University: IEEE-published autonomous wheelchair, wearable vision for blind users, prosthetic control, capped by a post-quantum cryptography master's thesis.",
+    href: "/research/",
+    linkLabel: "Research & publications"
   },
   {
-    title: "Cloud infrastructure",
-    description: "Deploying production-grade platforms with Kubernetes, Docker, Terraform, and CI/CD pipelines for personal ventures and client engagements."
+    num: "03",
+    years: "2022–now",
+    title: "Silicon at scale",
+    text: "Verifying AI accelerator silicon at Microsoft: UVM environments, floating-point pipelines, and automation adopted across verification teams.",
+    href: "#experience",
+    linkLabel: "Experience"
   },
   {
-    title: "Applied research",
-    description: "Post-quantum cryptography, assistive robotics, and neurotech — translating academic research into working prototypes."
+    num: "04",
+    years: "2025–now",
+    title: "Founder",
+    text: "Huitzo, the operating system for intelligence: self-hosted AI for regulated enterprises.",
+    href: "/huitzo/",
+    linkLabel: "Huitzo"
   }
 ];
 
 const proofCards = [
   {
-    title: "AI Accelerator Silicon — Microsoft",
+    title: "AI Accelerator Silicon · Microsoft",
     challenge: "Verify floating-point pipelines and coverage closure for next-gen AI chips.",
     result: "Built reusable UVM environments and automation adopted across the org.",
   },
   {
-    title: "Huitzo — Intelligence as a Service",
-    challenge: "Make advanced AI capabilities accessible to enterprises and startups.",
-    result: "Designing scalable AI infrastructure with modular data pipelines.",
+    title: "Huitzo · The Operating System for Intelligence",
+    challenge: "Regulated enterprises can't ship sensitive data to third-party AI services.",
+    result: "Building a self-hosted AI runtime that runs Intelligence Packs inside customer infrastructure.",
     href: "/huitzo"
   },
   {
@@ -69,7 +87,7 @@ const proofCards = [
   {
     title: "Autonomous Wheelchair Platform",
     challenge: "Enable hands-free indoor navigation for mobility-impaired users.",
-    result: "Published at IEEE — low-cost, open-source design with dual control modes.",
+    result: "Published at IEEE: low-cost, open-source design with dual control modes.",
     href: "https://ieeexplore.ieee.org/abstract/document/9476093"
   },
   {
@@ -94,7 +112,7 @@ const offers = [
   },
   {
     title: "Product & engineering advisory",
-    description: "Help early-stage teams make high-leverage technical decisions — from stack selection to team structure."
+    description: "Help early-stage teams make high-leverage technical decisions, from stack selection to team structure."
   },
   {
     title: "Early-stage technical direction",
@@ -128,31 +146,34 @@ const videoHighlights = [
 ---
 <SiteLayout
   title="Ernesto Sola-Thomas • Silicon Engineer & Founder"
-  description="Ernesto Sola-Thomas — founder of Huitzo (AI intelligence platform) and silicon verification engineer at Microsoft. Technical depth, venture conviction."
+  description="Ernesto Sola-Thomas: founder of Huitzo, the self-hosted AI runtime for regulated enterprises, and silicon verification engineer at Microsoft."
   siteMeta={siteMeta}
   locale="en"
 >
   <Hero hero={siteMeta.data.hero} quickFacts={siteMeta.data.quickFacts} locale="en" />
   <TrustStrip locale="en" />
-  <Reveal client:visible>
-    <SelectedProof cards={proofCards} locale="en" />
-  </Reveal>
-  <Reveal client:visible>
-    <AchievementsSection achievements={achievements} locale="en" />
-  </Reveal>
-  <Reveal client:visible>
+  <div data-reveal>
+    <StorySection chapters={chapters} locale="en" />
+  </div>
+  <div data-reveal>
     <ExperienceTimeline entries={experiences} locale="en" />
-  </Reveal>
-  <Reveal client:visible>
-    <WaysICanHelp offers={offers} locale="en" />
-  </Reveal>
-  <Reveal client:visible>
+  </div>
+  <div data-reveal>
+    <SelectedProof cards={proofCards} locale="en" />
+  </div>
+  <div data-reveal>
     <ProjectsShowcase entries={projects} locale="en" />
-  </Reveal>
-  <Reveal client:visible>
+  </div>
+  <div data-reveal>
     <VideoHighlights videos={videoHighlights} locale="en" />
-  </Reveal>
-  <Reveal client:visible>
+  </div>
+  <div data-reveal>
+    <WaysICanHelp offers={offers} locale="en" />
+  </div>
+  <div data-reveal>
+    <BeyondSection entries={personalEntries} locale="en" />
+  </div>
+  <div data-reveal>
     <ContactSection contact={siteMeta.data.contact} locale="en" />
-  </Reveal>
+  </div>
 </SiteLayout>

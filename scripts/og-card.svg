@@ -1,0 +1,41 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1100 80) scale(700 420)">
+      <stop offset="0" stop-color="#00FF7F" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#00FF7F" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow2" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(100 600) scale(600 360)">
+      <stop offset="0" stop-color="#00FF7F" stop-opacity="0.10"/>
+      <stop offset="1" stop-color="#00FF7F" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="#0A0A0A"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <rect width="1200" height="630" fill="url(#glow2)"/>
+
+  <!-- circuit traces -->
+  <g stroke="#1F3D2E" stroke-width="2" fill="none">
+    <path d="M 920 540 H 1040 L 1090 490 V 380"/>
+    <path d="M 960 580 H 1080 L 1130 530 V 420"/>
+    <circle cx="1090" cy="380" r="5" fill="#1F3D2E"/>
+    <circle cx="1130" cy="420" r="5" fill="#1F3D2E"/>
+    <path d="M 80 120 H 180 L 220 80 H 320"/>
+    <circle cx="320" cy="80" r="5" fill="#1F3D2E"/>
+  </g>
+
+  <!-- monogram -->
+  <g transform="translate(92,150)">
+    <rect width="96" height="96" rx="20" fill="#0A0A0A" stroke="#00FF7F" stroke-width="3"/>
+    <rect x="22" y="22" width="52" height="10" rx="3" fill="#00FF7F"/>
+    <rect x="22" y="43" width="36" height="10" rx="3" fill="#00FF7F"/>
+    <rect x="22" y="64" width="52" height="10" rx="3" fill="#00FF7F"/>
+  </g>
+
+  <text x="92" y="335" font-family="Space Grotesk" font-weight="bold" font-size="76" fill="#EAEAEA">Ernesto Sola-Thomas</text>
+  <text x="92" y="402" font-family="Space Grotesk" font-weight="500" font-size="36" fill="#00FF7F">Silicon Engineer · Founder · Builder</text>
+  <text x="92" y="470" font-family="Space Grotesk" font-size="27" fill="#9A9A9A">AI silicon verification at Microsoft · Building Huitzo · IEEE-published researcher</text>
+
+  <rect x="92" y="520" width="64" height="6" rx="3" fill="#00FF7F"/>
+  <text x="92" y="572" font-family="Space Grotesk" font-size="26" fill="#777777">ernesto.solathomas.com</text>
+</svg>

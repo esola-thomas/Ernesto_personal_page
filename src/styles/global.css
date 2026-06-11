@@ -4,8 +4,10 @@
 
 :root {
   color-scheme: light;
-  --font-display: "Space Grotesk", "Inter", system-ui, sans-serif;
-  --font-sans: "Inter", system-ui, sans-serif;
+  --font-display: "Space Grotesk Variable", "Inter Variable", system-ui, sans-serif;
+  --font-sans: "Inter Variable", system-ui, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", "Cascadia Code", "JetBrains Mono", Menlo, Consolas, monospace;
+  --grid-line: rgba(4, 120, 87, 0.05);
 
   --surface-base: #FDFDFD;
   --surface-elevated: #FFFFFF;
@@ -20,12 +22,13 @@
   --text-muted: rgba(17, 17, 17, 0.7);
   --text-soft: rgba(17, 17, 17, 0.5);
 
-  --color-accent: #FF4F00; /* Original Orange */
-  --color-highlight: #FF7A33; /* Original Lighter Orange */
+  /* Brand green, darkened for WCAG contrast on light surfaces */
+  --color-accent: #047857;
+  --color-highlight: #059669;
   --color-muted: #888888;
-  --color-on-accent: #FFFFFF; /* White */
+  --color-on-accent: #FFFFFF;
 
-  --gradient-hero: radial-gradient(circle at 20% 20%, rgba(255, 79, 0, 0.1), transparent 40%); /* Original orange gradient */
+  --gradient-hero: radial-gradient(circle at 20% 20%, rgba(4, 120, 87, 0.08), transparent 40%);
   --radius-card: 0.5rem; /* 8px */
   --radius-button: 0.25rem; /* 4px */
 }
@@ -45,16 +48,18 @@
   --text-muted: rgba(234, 234, 234, 0.7);
   --text-soft: rgba(234, 234, 234, 0.5);
 
-  --color-accent: #00FF7F; /* Changed to green */
-  --color-highlight: #FF4F00; /* Changed to orange */
+  /* Brand green at full neon on dark surfaces */
+  --color-accent: #00FF7F;
+  --color-highlight: #66FFB2;
   --color-muted: #999999;
-  --color-on-accent: #000000; /* Changed to black for contrast on green */
+  --color-on-accent: #000000;
 
-  --gradient-hero: radial-gradient(circle at top right, rgba(0, 255, 127, 0.15), transparent 45%); /* Updated to green */
+  --gradient-hero: radial-gradient(circle at top right, rgba(0, 255, 127, 0.15), transparent 45%);
+  --grid-line: rgba(0, 255, 127, 0.045);
 }
 
 ::selection {
-  background: rgba(0, 255, 127, 0.25); /* Changed to green */
+  background: rgba(0, 255, 127, 0.25);
   color: var(--text-primary);
 }
 
@@ -62,7 +67,17 @@ body {
   @apply min-h-dvh font-sans antialiased transition-colors duration-300 ease-out;
   font-family: var(--font-sans);
   background-color: var(--surface-base);
+  /* Die-grid atmosphere: a faint silicon-die grid behind everything */
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 56px 56px;
+  background-attachment: fixed;
   color: var(--text-primary);
+}
+
+.font-mono {
+  font-family: var(--font-mono);
 }
 
 a {
@@ -95,8 +110,14 @@ main {
 }
 
 .section-heading .eyebrow {
-  @apply text-xs uppercase tracking-[0.4em] font-semibold;
+  @apply text-xs lowercase tracking-[0.2em] font-semibold;
+  font-family: var(--font-mono);
   color: var(--color-muted);
+}
+
+.section-heading .eyebrow::before {
+  content: "// ";
+  color: var(--color-accent);
 }
 
 .section-heading h2 {
@@ -276,4 +297,472 @@ main {
 .bento-card:hover {
   border-color: var(--color-accent);
   transform: scale(1.02);
+}
+
+/* ------------------------------------------------------------------ */
+/* Immersive motion system: pure CSS, gated on prefers-reduced-motion */
+/* ------------------------------------------------------------------ */
+
+/* Scroll reveal: JS adds .in-view via IntersectionObserver; without JS
+   (or with reduced motion) content stays fully visible. */
+@media (prefers-reduced-motion: no-preference) {
+  .js [data-reveal] {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+  }
+
+  .js [data-reveal].in-view {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Staggered children inside a revealed block */
+  .js [data-reveal] .stagger-item {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+
+  .js [data-reveal].in-view .stagger-item {
+    opacity: 1;
+    transform: none;
+  }
+
+  .js [data-reveal].in-view .stagger-item:nth-child(2) { transition-delay: 0.1s; }
+  .js [data-reveal].in-view .stagger-item:nth-child(3) { transition-delay: 0.2s; }
+  .js [data-reveal].in-view .stagger-item:nth-child(4) { transition-delay: 0.3s; }
+  .js [data-reveal].in-view .stagger-item:nth-child(5) { transition-delay: 0.4s; }
+  .js [data-reveal].in-view .stagger-item:nth-child(6) { transition-delay: 0.5s; }
+}
+
+/* Scroll progress trace along the top of the viewport */
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      z-index: 100;
+      pointer-events: none;
+      transform-origin: 0 50%;
+      transform: scaleX(0);
+      background: linear-gradient(90deg, var(--color-highlight), var(--color-accent));
+      box-shadow: 0 0 10px color-mix(in srgb, var(--color-accent) 70%, transparent);
+      animation: progress-grow linear forwards;
+      animation-timeline: scroll(root);
+    }
+  }
+}
+
+@keyframes progress-grow {
+  to { transform: scaleX(1); }
+}
+
+/* Hero boot line + blinking cursor */
+.boot-line {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  color: var(--text-soft);
+}
+
+.boot-line .prompt {
+  color: var(--color-accent);
+}
+
+.boot-cursor {
+  display: inline-block;
+  width: 0.55em;
+  height: 1.1em;
+  margin-left: 0.2em;
+  vertical-align: text-bottom;
+  background: var(--color-accent);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .boot-cursor {
+    animation: cursor-blink 1.1s steps(1) infinite;
+  }
+}
+
+@keyframes cursor-blink {
+  50% { opacity: 0; }
+}
+
+/* Hero name power-on */
+@media (prefers-reduced-motion: no-preference) {
+  .power-on {
+    clip-path: inset(0 100% 0 0);
+    animation: power-on 0.9s ease-out 0.25s forwards;
+  }
+}
+
+@keyframes power-on {
+  to { clip-path: inset(0 0 0 0); }
+}
+
+/* Rotating identity words */
+.word-rotator {
+  display: inline-grid;
+  text-align: left;
+}
+
+.word-rotator > span {
+  grid-area: 1 / 1;
+  opacity: 0;
+  white-space: nowrap;
+}
+
+.word-rotator > span:first-child {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .word-rotator > span {
+    animation: word-cycle 12s infinite;
+  }
+  .word-rotator > span:first-child { opacity: 0; animation-delay: 0s; }
+  .word-rotator > span:nth-child(2) { animation-delay: 3s; }
+  .word-rotator > span:nth-child(3) { animation-delay: 6s; }
+  .word-rotator > span:nth-child(4) { animation-delay: 9s; }
+}
+
+@keyframes word-cycle {
+  0% { opacity: 0; transform: translateY(10px); }
+  4%, 25% { opacity: 1; transform: none; }
+  29%, 100% { opacity: 0; transform: translateY(-10px); }
+}
+
+/* Self-drawing hero circuit traces */
+.hero-trace path {
+  fill: none;
+  stroke: var(--color-accent);
+  stroke-width: 1.5;
+  opacity: 0.35;
+}
+
+.hero-trace circle {
+  fill: var(--color-accent);
+  opacity: 0.45;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-trace path {
+    stroke-dasharray: 900;
+    stroke-dashoffset: 900;
+    animation: trace-draw 2.4s ease-out 0.4s forwards;
+  }
+  .hero-trace circle {
+    opacity: 0;
+    animation: pad-on 0.5s ease-out 2.4s forwards;
+  }
+}
+
+@keyframes trace-draw {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes pad-on {
+  to { opacity: 0.45; }
+}
+
+/* Die frame around the headshot: static pad ring + rotating glow */
+.die-frame {
+  position: relative;
+  border-radius: 1rem;
+  padding: 6px;
+  background: var(--surface-elevated);
+  border: 1px solid var(--border-soft);
+}
+
+.die-frame::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: 1rem;
+  padding: 1px;
+  background: conic-gradient(
+    from var(--die-angle, 0deg),
+    transparent 0deg,
+    var(--color-accent) 60deg,
+    transparent 130deg
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.die-frame img {
+  border-radius: 0.65rem;
+}
+
+@property --die-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .die-frame::before {
+    animation: die-spin 7s linear infinite;
+  }
+}
+
+@keyframes die-spin {
+  to { --die-angle: 360deg; }
+}
+
+/* Pulsing status dot (e.g. "Building Now") */
+.status-dot {
+  display: inline-block;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 9999px;
+  background: var(--color-accent);
+  box-shadow: 0 0 0 0 color-mix(in srgb, var(--color-accent) 60%, transparent);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .status-dot {
+    animation: status-pulse 2.2s ease-out infinite;
+  }
+}
+
+@keyframes status-pulse {
+  0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--color-accent) 55%, transparent); }
+  70% { box-shadow: 0 0 0 9px transparent; }
+  100% { box-shadow: 0 0 0 0 transparent; }
+}
+
+/* Experience bus-trace timeline */
+.timeline {
+  position: relative;
+  padding-left: 2.5rem;
+}
+
+@media (min-width: 768px) {
+  .timeline {
+    padding-left: 7.5rem;
+  }
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  top: 0.4rem;
+  bottom: 0.4rem;
+  left: 0.4375rem;
+  width: 2px;
+  background: linear-gradient(
+    to bottom,
+    var(--color-accent),
+    color-mix(in srgb, var(--color-accent) 35%, transparent) 60%,
+    var(--border-soft)
+  );
+}
+
+@media (min-width: 768px) {
+  .timeline::before {
+    left: 5.4375rem;
+  }
+}
+
+/* Glowing signal that travels down the bus as you scroll */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .timeline::after {
+      content: "";
+      position: absolute;
+      top: 0.4rem;
+      left: calc(0.4375rem - 2px);
+      width: 6px;
+      height: 64px;
+      border-radius: 9999px;
+      background: var(--color-accent);
+      filter: blur(4px);
+      animation: signal-travel linear forwards;
+      animation-timeline: view();
+      animation-range: entry 20% exit 80%;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      .timeline::after {
+        left: calc(5.4375rem - 2px);
+      }
+    }
+  }
+}
+
+@keyframes signal-travel {
+  from { top: 0.4rem; opacity: 1; }
+  to { top: calc(100% - 4.5rem); opacity: 0.8; }
+}
+
+.timeline-item {
+  position: relative;
+  padding-bottom: 2.5rem;
+}
+
+.timeline-item:last-child {
+  padding-bottom: 0;
+}
+
+/* Chip pad (via) node */
+.timeline-pad {
+  position: absolute;
+  top: 0.4rem;
+  left: -2.5rem;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 0.2rem;
+  border: 2px solid var(--color-accent);
+  background: var(--surface-base);
+}
+
+.timeline-pad::after {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  border-radius: 0.1rem;
+  background: var(--color-accent);
+}
+
+@media (min-width: 768px) {
+  .timeline-pad {
+    left: -2.5rem;
+  }
+}
+
+.timeline-item.is-current .timeline-pad::after {
+  box-shadow: 0 0 10px var(--color-accent);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .timeline-item.is-current .timeline-pad::after {
+    animation: status-pulse 2.2s ease-out infinite;
+  }
+}
+
+/* Stub trace from the bus into each card */
+.timeline-stub {
+  position: absolute;
+  top: 0.85rem;
+  left: -1.5rem;
+  width: 1.5rem;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-accent), var(--border-soft));
+}
+
+/* Mono year marker in the left gutter (desktop) */
+.timeline-year {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .timeline-year {
+    display: block;
+    position: absolute;
+    top: 0.3rem;
+    left: -7.5rem;
+    width: 4rem;
+    text-align: right;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    color: var(--text-soft);
+  }
+}
+
+.timeline-card {
+  transition: border-color 0.25s ease-out, box-shadow 0.25s ease-out, transform 0.25s ease-out;
+}
+
+.timeline-card:hover {
+  border-color: color-mix(in srgb, var(--color-accent) 60%, var(--border-soft));
+  box-shadow: 0 0 32px -12px color-mix(in srgb, var(--color-accent) 45%, transparent);
+  transform: translateY(-2px);
+}
+
+/* Mono chip badge, e.g. ACTIVE on the current role */
+.chip-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  border: 1px solid color-mix(in srgb, var(--color-accent) 45%, transparent);
+  border-radius: 0.25rem;
+  padding: 0.2rem 0.6rem;
+}
+
+/* Story arc chapters */
+.story-grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+@media (min-width: 1024px) {
+  .story-grid {
+    grid-template-columns: repeat(4, 1fr);
+    position: relative;
+  }
+
+  /* Horizontal trace connecting the chapters */
+  .story-grid::before {
+    content: "";
+    position: absolute;
+    top: 2.6rem;
+    left: 2rem;
+    right: 2rem;
+    height: 2px;
+    background: linear-gradient(
+      90deg,
+      var(--border-soft),
+      color-mix(in srgb, var(--color-accent) 55%, var(--border-soft)),
+      var(--border-soft)
+    );
+  }
+}
+
+.story-chapter {
+  position: relative;
+}
+
+.story-num {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.3em;
+  color: var(--color-accent);
+}
+
+.story-node {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  width: 1rem;
+  height: 1rem;
+  margin: 0.85rem 0;
+  border-radius: 0.2rem;
+  border: 2px solid var(--color-accent);
+  background: var(--surface-base);
+}
+
+.story-node::after {
+  content: "";
+  position: absolute;
+  inset: 2px;
+  border-radius: 0.1rem;
+  background: var(--color-accent);
+  opacity: 0.85;
 }
