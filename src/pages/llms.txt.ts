@@ -38,7 +38,7 @@ ${essayLines ? `\n${essayLines}` : "\n(coming soon)"}
 
 - GitHub: https://github.com/esola-thomas
 - LinkedIn: https://www.linkedin.com/in/sola-thomas
-- IEEE author page: https://ieeexplore.ieee.org/author/37089713498
+- IEEE author page: https://ieeexplore.ieee.org/author/37088854705
 `;
 
   return new Response(text, {
