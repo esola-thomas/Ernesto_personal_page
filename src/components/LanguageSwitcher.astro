@@ -5,10 +5,16 @@ interface Props {
 
 const { currentLocale } = Astro.props;
 
-// Define available languages - easy to extend in the future
+// Build language URLs from the current path so switching keeps you on the
+// same page (e.g. /speaking/ <-> /es/speaking/).
+const path = Astro.url.pathname;
+const isSpanish = path === "/es" || path.startsWith("/es/");
+const enPath = isSpanish ? path.replace(/^\/es\/?/, "/") : path;
+const esPath = isSpanish ? path : `/es${path === "/" ? "/" : path}`;
+
 const languages = [
-  { code: 'en', label: 'EN', name: 'English', url: '/' },
-  { code: 'es', label: 'ES', name: 'Español', url: '/es' }
+  { code: 'en', label: 'EN', name: 'English', url: enPath },
+  { code: 'es', label: 'ES', name: 'Español', url: esPath }
 ];
 
 const currentLanguage = languages.find(lang => lang.code === currentLocale) || languages[0];
@@ -17,8 +23,9 @@ const currentLanguage = languages.find(lang => lang.code === currentLocale) || l
 <div class="language-switcher">
   <button
     type="button"
-    class="language-button"
+    class="language-button surface-chip"
     aria-label="Select language"
+    aria-haspopup="true"
     data-language-toggle
   >
     <svg
@@ -38,7 +45,7 @@ const currentLanguage = languages.find(lang => lang.code === currentLocale) || l
       <path d="m22 22-5-10-5 10"/>
       <path d="M14 18h6"/>
     </svg>
-    <span class="language-label">{currentLanguage.label}</span>
+    <span class="sr-only">{currentLanguage.name}</span>
   </button>
 
   <div class="language-menu" data-language-menu>
@@ -63,24 +70,16 @@ const currentLanguage = languages.find(lang => lang.code === currentLocale) || l
   .language-button {
     display: inline-flex;
     align-items: center;
-    gap: 0.375rem;
+    justify-content: center;
     height: 2.5rem;
     width: 2.5rem;
-    justify-content: center;
-    border-radius: 9999px;
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: rgb(var(--color-soft));
+    border-radius: 0.375rem;
+    color: var(--text-soft);
     transition: color 0.2s;
-    background: rgb(var(--color-surface) / 0.5);
   }
 
   .language-button:hover {
-    color: rgb(var(--color-primary));
-  }
-
-  .language-label {
-    display: none;
+    color: var(--text-primary);
   }
 
   .language-menu {
@@ -88,9 +87,8 @@ const currentLanguage = languages.find(lang => lang.code === currentLocale) || l
     top: calc(100% + 0.5rem);
     right: 0;
     min-width: 9rem;
-    background: rgb(var(--color-surface));
-    backdrop-filter: blur(12px) saturate(180%);
-    border: 1px solid rgb(var(--color-soft) / 0.3);
+    background: var(--surface-elevated);
+    border: 1px solid var(--border-soft);
     border-radius: 0.5rem;
     padding: 0.25rem;
     opacity: 0;
@@ -99,15 +97,6 @@ const currentLanguage = languages.find(lang => lang.code === currentLocale) || l
     transition: all 0.2s ease;
     z-index: 50;
     box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.3), 0 4px 6px -4px rgb(0 0 0 / 0.2);
-  }
-
-  .language-menu::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: rgb(var(--color-surface));
-    border-radius: 0.5rem;
-    z-index: -1;
   }
 
   .language-menu[data-open="true"] {
@@ -122,21 +111,19 @@ const currentLanguage = languages.find(lang => lang.code === currentLocale) || l
     gap: 0.75rem;
     padding: 0.5rem 0.75rem;
     border-radius: 0.375rem;
-    color: rgb(var(--color-muted));
+    color: var(--text-muted);
     text-decoration: none;
     transition: all 0.15s ease;
-    position: relative;
-    z-index: 1;
   }
 
   .language-option:hover {
-    background: rgb(var(--color-soft) / 0.2);
-    color: rgb(var(--color-primary));
+    background: var(--surface-muted);
+    color: var(--text-primary);
   }
 
   .language-option.active {
-    background: rgb(var(--color-accent) / 0.15);
-    color: rgb(var(--color-accent));
+    background: color-mix(in srgb, var(--color-accent) 15%, transparent);
+    color: var(--color-accent);
   }
 
   .language-option-label {
@@ -149,6 +136,18 @@ const currentLanguage = languages.find(lang => lang.code === currentLocale) || l
 
   .language-option-name {
     font-size: 0.875rem;
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
   }
 
   @media (max-width: 768px) {
@@ -176,21 +175,18 @@ const currentLanguage = languages.find(lang => lang.code === currentLocale) || l
 
     if (!toggleButton || !menu) return;
 
-    // Toggle menu
     toggleButton.addEventListener('click', (e) => {
       e.stopPropagation();
       const isOpen = menu.getAttribute('data-open') === 'true';
       menu.setAttribute('data-open', isOpen ? 'false' : 'true');
     });
 
-    // Close menu when clicking outside
     document.addEventListener('click', (e) => {
       if (!menu.contains(e.target as Node) && e.target !== toggleButton) {
         menu.setAttribute('data-open', 'false');
       }
     });
 
-    // Close on escape key
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
         menu.setAttribute('data-open', 'false');
@@ -198,7 +194,6 @@ const currentLanguage = languages.find(lang => lang.code === currentLocale) || l
     });
   }
 
-  // Support both regular page loads and Astro view transitions
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initLanguageSwitcher);
   } else {

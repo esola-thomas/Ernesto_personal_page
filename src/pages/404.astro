@@ -1,0 +1,30 @@
+---
+import { getEntry } from "astro:content";
+import SiteLayout from "../layouts/SiteLayout.astro";
+
+const siteMeta = await getEntry("site", "meta");
+---
+<SiteLayout
+  title="Page not found | Ernesto Sola-Thomas"
+  description="The page you're looking for doesn't exist. Explore Ernesto Sola-Thomas' work in silicon, AI, research, and ventures."
+  siteMeta={siteMeta}
+  locale="en"
+>
+  <section class="relative overflow-hidden pb-24 pt-32">
+    <div aria-hidden="true" class="absolute inset-0 bg-[var(--gradient-hero)] opacity-50"></div>
+    <div class="container relative text-center">
+      <p class="font-display text-8xl font-semibold text-[var(--color-accent)]">404</p>
+      <h1 class="mt-6 font-display text-3xl font-semibold text-primary md:text-4xl">
+        This page doesn't exist
+      </h1>
+      <p class="mx-auto mt-4 max-w-xl text-muted">
+        The signal you're probing isn't on this net. Head back home, or jump straight to the work.
+      </p>
+      <div class="mt-10 flex flex-wrap justify-center gap-4">
+        <a href="/" class="button-primary">Back home</a>
+        <a href="/#projects" class="button-ghost">Explore projects</a>
+        <a href="/research/" class="button-ghost">Research</a>
+      </div>
+    </div>
+  </section>
+</SiteLayout>

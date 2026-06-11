@@ -1,14 +1,12 @@
 ---
 import SiteLayout from "../layouts/SiteLayout.astro";
-import { getTranslations } from "../i18n/translations";
 import { getEntry } from "astro:content";
 
 const siteMeta = await getEntry("site", "meta");
-const t = getTranslations("en");
 ---
 <SiteLayout
-  title="Huitzo — Intelligence as a Service | Ernesto Sola-Thomas"
-  description="Huitzo delivers advanced AI capabilities as a service, making intelligence accessible to enterprises and startups building the future."
+  title="Huitzo: The Operating System for Intelligence | Ernesto Sola-Thomas"
+  description="Huitzo is a self-hosted AI runtime that lets regulated enterprises run AI applications (Intelligence Packs) inside their own infrastructure, so sensitive data never leaves."
   siteMeta={siteMeta}
   locale="en"
 >
@@ -21,7 +19,7 @@ const t = getTranslations("en");
         Huitzo
       </h1>
       <p class="mt-4 max-w-2xl text-xl text-secondary">
-        Intelligence as a service — making advanced AI accessible to organizations that need results, not research papers.
+        The operating system for intelligence. AI infrastructure you actually own.
       </p>
     </div>
   </section>
@@ -31,55 +29,55 @@ const t = getTranslations("en");
       <div class="space-y-4">
         <h2 class="font-display text-2xl font-semibold text-primary">What Huitzo Is</h2>
         <p class="text-muted">
-          Huitzo is an intelligence-as-a-service platform that packages advanced AI capabilities into modular, production-ready pipelines. We help enterprises and startups turn raw data into decision-ready insights without building an AI team from scratch.
+          Huitzo is a self-hosted AI runtime for regulated enterprises. It runs AI applications, called Intelligence Packs, inside your existing infrastructure, so sensitive data never leaves your environment. The runtime is model-agnostic: swap providers without rewriting code. Deploy it as Huitzo Cloud, self-hosted, private cloud, or hybrid.
         </p>
       </div>
 
       <div class="space-y-4">
         <h2 class="font-display text-2xl font-semibold text-primary">The Problem</h2>
         <p class="text-muted">
-          Most organizations know AI can transform their operations, but the gap between academic models and production systems is vast. Building, deploying, and maintaining AI infrastructure requires specialized talent that is expensive and scarce. Teams waste months on plumbing instead of outcomes.
+          The industries with the most to gain from AI (insurance, healthcare, financial services, government, legal) are the least able to adopt it, because their data cannot leave their perimeter. Custom in-house builds take 12–18 months and a specialized team. The result is a standoff between data control and AI capability.
         </p>
       </div>
 
       <div class="space-y-4">
         <h2 class="font-display text-2xl font-semibold text-primary">Why Now</h2>
         <p class="text-muted">
-          The AI infrastructure landscape has matured enough to modularize. Foundation models, vector databases, and orchestration frameworks now make it possible to deliver intelligence as composable building blocks rather than monolithic platforms. The window is open for platforms that abstract complexity without sacrificing control.
+          Foundation models are commoditizing; the control plane is not. What regulated organizations need is a runtime that brings models to their data, with execution logging for audit trails, isolation scoped to teams, and license-based deployment that never phones home. The window is open for infrastructure that delivers control without sacrificing capability.
         </p>
       </div>
 
       <div class="space-y-4">
         <h2 class="font-display text-2xl font-semibold text-primary">Why Me</h2>
         <p class="text-muted">
-          I verify AI acceleration silicon at Microsoft — I understand the hardware these models run on. I have shipped production infrastructure across cloud, embedded, and research contexts. My background spans the full stack from transistors to APIs, which lets me build systems that are efficient at every layer.
+          I verify AI acceleration silicon at Microsoft, so I understand the hardware these models run on. I have shipped production infrastructure across cloud, embedded, and research contexts. My background spans the full stack from transistors to APIs, which lets me build systems that are efficient and trustworthy at every layer.
         </p>
       </div>
 
       <div class="space-y-4">
         <h2 class="font-display text-2xl font-semibold text-primary">Current Stage</h2>
         <p class="text-muted">
-          Huitzo is in active development. We are building the core platform, onboarding early design partners, and validating the service model with real workloads. This is independent work, not affiliated with Microsoft.
+          Huitzo is in active development, validating product-market fit with teams in regulated industries. I'm looking for early design partners who want AI working inside their own perimeter. This is independent work, not affiliated with Microsoft.
         </p>
       </div>
 
       <div class="space-y-4">
         <h2 class="font-display text-2xl font-semibold text-primary">Vision</h2>
         <p class="text-muted">
-          A world where any organization — regardless of size or AI expertise — can deploy intelligent systems that learn, adapt, and deliver measurable value. Not AGI hype. Practical, reliable, business-grade intelligence.
+          A world where any organization, regardless of regulatory constraints, can run intelligent systems it fully owns: auditable, isolated, and accountable. Not AGI hype. Practical, reliable, business-grade intelligence on your own terms.
         </p>
       </div>
 
       <div class="mt-12 rounded-lg border border-soft bg-overlay p-8 text-center">
         <h3 class="font-display text-xl font-semibold text-primary">Interested in Huitzo?</h3>
         <p class="mt-2 text-sm text-muted">
-          Whether you're a potential design partner, investor, or just curious — I'd love to hear from you.
+          Whether you're a potential design partner, investor, or just curious, I'd love to hear from you.
         </p>
         <div class="mt-6 flex flex-wrap justify-center gap-4">
           <a href="https://huitzo.com" target="_blank" rel="noreferrer" class="button-primary" data-goatcounter-click="huitzo-page-visit-site">
             Visit huitzo.com
           </a>
-          <a href={`mailto:${siteMeta.data.contact.email}?subject=${encodeURIComponent('Huitzo — Let\'s discuss')}`} class="button-ghost" data-goatcounter-click="huitzo-page-contact">
+          <a href={`mailto:${siteMeta.data.contact.email}?subject=${encodeURIComponent('Huitzo: Let\'s discuss')}`} class="button-ghost" data-goatcounter-click="huitzo-page-contact">
             Start a conversation
           </a>
         </div>

@@ -95,7 +95,8 @@ const site = defineCollection({
       email: z.string(),
       calendly: z.string().optional(),
       location: z.string().optional()
-    })
+    }),
+    disclaimer: z.string().optional()
   })
 });
 

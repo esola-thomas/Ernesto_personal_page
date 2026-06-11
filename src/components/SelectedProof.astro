@@ -27,10 +27,16 @@ const t = getTranslations(locale);
 
     <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
       {cards.map((card) => (
-        <article class="bento-card flex flex-col gap-4 p-6">
+        <article class="bento-card stagger-item flex flex-col gap-4 p-6">
           <h3 class="font-display text-lg font-semibold text-primary">{card.title}</h3>
-          <p class="text-sm text-muted">{card.challenge}</p>
-          <p class="text-sm font-medium text-secondary">{card.result}</p>
+          <div>
+            <p class="font-mono text-[0.65rem] uppercase tracking-[0.25em] text-soft"><span class="text-[var(--color-accent)]">//</span> {t.proof.challenge}</p>
+            <p class="mt-1 text-sm text-muted">{card.challenge}</p>
+          </div>
+          <div>
+            <p class="font-mono text-[0.65rem] uppercase tracking-[0.25em] text-soft"><span class="text-[var(--color-accent)]">//</span> {t.proof.result}</p>
+            <p class="mt-1 text-sm font-medium text-secondary">{card.result}</p>
+          </div>
           {card.href && (
             <a
               href={card.href}

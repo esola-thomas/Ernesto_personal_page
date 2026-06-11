@@ -9,33 +9,35 @@ interface Props {
 const { locale = "en" } = Astro.props;
 const t = getTranslations(locale);
 
+const base = locale === "es" ? "/es/" : "/";
+
 const navItems = [
-  { href: "#about", label: t.nav.about },
-  { href: "#experience", label: t.nav.experience },
-  { href: "#ventures", label: t.nav.ventures },
-  { href: "#projects", label: t.nav.projects },
-  { href: "#skills", label: t.nav.skills },
-  { href: "#contact", label: t.nav.contact }
+  { href: `${base}#experience`, label: t.nav.experience },
+  { href: `${base}#projects`, label: t.nav.projects },
+  { href: `${base}research/`, label: t.nav.research },
+  { href: `${base}speaking/`, label: t.nav.speaking },
+  { href: `${base}journey/`, label: t.nav.journey },
+  { href: `${base}huitzo/`, label: t.nav.huitzo }
 ];
 ---
 <header class="sticky top-0 z-50">
   <div class="header-shell">
     <div class="container flex h-20 items-center justify-between">
       <a
-        href="/"
-        class="inline-flex items-center gap-3 rounded-md border border-soft px-4 py-2 font-display text-sm uppercase tracking-[0.6em] text-muted"
+        href={base}
+        class="inline-flex items-center gap-3 rounded-md border border-soft px-4 py-2 font-display text-sm uppercase text-muted"
         aria-label="Ernesto Sola-Thomas home"
       >
-        <span>EST</span>
+        <span class="tracking-[0.6em]">EST</span>
         <span class="hidden text-[color:var(--color-accent)] sm:inline">/</span>
-        <span class="hidden sm:inline">Visionary Engineer</span>
+        <span class="hidden tracking-[0.15em] lg:inline">Ernesto Sola-Thomas</span>
       </a>
 
       <nav class="hidden items-center gap-8 text-sm font-medium tracking-wide text-muted md:flex">
         {navItems.map(({ href, label }) => (
           <a
             href={href}
-            class="relative transition-colors duration-200 hover:text-primary"
+            class="relative text-muted transition-colors duration-200 hover:text-primary"
           >
             <span>{label}</span>
           </a>
@@ -76,7 +78,7 @@ const navItems = [
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z" />
           </svg>
         </button>
-        <a href="#contact" class="button-primary px-6 py-2">
+        <a href={`${base}#contact`} class="button-primary px-6 py-2">
           {t.nav.collaborate}
         </a>
       </div>

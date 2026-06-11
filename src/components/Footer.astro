@@ -3,19 +3,31 @@ import { getTranslations, type Locale } from "../i18n/translations";
 
 interface Props {
   locale?: Locale;
+  disclaimer?: string;
 }
 
-const { locale = 'en' } = Astro.props;
+const { locale = 'en', disclaimer } = Astro.props;
 const t = getTranslations(locale);
+
+const base = locale === "es" ? "/es/" : "/";
 
 const socials = [
   { href: "https://www.linkedin.com/in/sola-thomas", label: "LinkedIn" },
   { href: "https://github.com/esola-thomas", label: "GitHub" },
+  { href: "https://ieeexplore.ieee.org/author/37089713498", label: "IEEE" },
   { href: "mailto:ernesto@solathomas.com", label: "Email" }
+];
+
+const pages = [
+  { href: `${base}huitzo/`, label: t.nav.huitzo },
+  { href: `${base}research/`, label: t.nav.research },
+  { href: `${base}speaking/`, label: t.nav.speaking },
+  { href: `${base}journey/`, label: t.nav.journey },
+  { href: `${base}#contact`, label: t.nav.contact }
 ];
 ---
 <footer class="border-t border-soft bg-overlay">
-  <div class="container grid gap-10 py-12 md:grid-cols-[1.25fr_1fr] md:gap-16">
+  <div class="container grid gap-10 py-12 md:grid-cols-[1.25fr_1fr_1fr] md:gap-16">
     <div class="space-y-6">
       <span class="badge">{t.footer.collaborate}</span>
       <h3 class="font-display text-3xl font-semibold text-primary">{t.footer.tagline}</h3>
@@ -25,6 +37,18 @@ const socials = [
       <a href="mailto:ernesto@solathomas.com" class="button-primary px-6 py-2" data-goatcounter-click="footer-email-cta">
         ernesto@solathomas.com
       </a>
+    </div>
+    <div class="text-sm text-soft">
+      <p class="uppercase tracking-[0.4em] text-xs text-soft">{t.footer.explore}</p>
+      <ul class="mt-4 space-y-3">
+        {pages.map((page) => (
+          <li>
+            <a class="transition hover:text-primary" href={page.href} data-goatcounter-click={`footer-page-${page.label.toLowerCase()}`}>
+              {page.label}
+            </a>
+          </li>
+        ))}
+      </ul>
     </div>
     <div class="flex flex-col justify-between gap-6 text-sm text-soft">
       <div>
@@ -42,4 +66,11 @@ const socials = [
       <p class="text-xs text-soft">© {new Date().getFullYear()} Ernesto Sola-Thomas. {t.footer.copyright}</p>
     </div>
   </div>
+  {disclaimer && (
+    <div class="border-t border-soft">
+      <div class="container py-6">
+        <p class="max-w-4xl text-xs leading-relaxed text-soft">{disclaimer}</p>
+      </div>
+    </div>
+  )}
 </footer>

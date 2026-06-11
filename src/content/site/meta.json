@@ -2,15 +2,15 @@
   "hero": {
     "name": "Ernesto Sola-Thomas",
     "title": "Silicon Engineer · Founder",
-    "tagline": "Building Huitzo — an AI intelligence platform for enterprise. Microsoft silicon engineer with the technical depth to make it real.",
+    "tagline": "Building Huitzo, the operating system for intelligence. Microsoft silicon engineer with the technical depth to make it real.",
     "statements": [
-      "Founder of Huitzo: intelligence-as-a-service that gives organizations real AI depth, not demos.",
-      "Silicon verification engineer at Microsoft — AI chip infrastructure, formal verification, and systems depth."
+      "Founder of Huitzo: a self-hosted AI runtime that lets regulated enterprises run AI inside their own infrastructure. Data never leaves.",
+      "Silicon verification engineer at Microsoft: AI chip infrastructure, formal verification, and systems depth."
     ],
     "buildingNow": {
       "label": "Building Now",
       "name": "Huitzo",
-      "oneliner": "An intelligence platform turning advanced AI into enterprise outcomes. Early-stage, serious architecture.",
+      "oneliner": "The operating system for intelligence: self-hosted AI infrastructure you actually own. Deploy in weeks, not months.",
       "href": "https://huitzo.com"
     },
     "ctas": [
@@ -19,7 +19,7 @@
     ]
   },
   "quickFacts": [
-    { "label": "Building", "value": "Huitzo — AI intelligence platform" },
+    { "label": "Building", "value": "Huitzo · self-hosted AI runtime" },
     { "label": "Role", "value": "Silicon engineer · Microsoft" },
     { "label": "Location", "value": "Raleigh, NC" }
   ],

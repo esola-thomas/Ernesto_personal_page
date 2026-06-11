@@ -5,12 +5,12 @@ import Hero from "../../components/Hero.astro";
 import ExperienceTimeline from "../../components/ExperienceTimeline.astro";
 import ProjectsShowcase from "../../components/ProjectsShowcase.astro";
 import ContactSection from "../../components/ContactSection.astro";
-import AchievementsSection from "../../components/AchievementsSection.astro";
 import SelectedProof from "../../components/SelectedProof.astro";
 import TrustStrip from "../../components/TrustStrip.astro";
 import WaysICanHelp from "../../components/WaysICanHelp.astro";
 import VideoHighlights from "../../components/VideoHighlights.astro";
-import Reveal from "../../components/motion/Reveal.tsx";
+import StorySection from "../../components/StorySection.astro";
+import BeyondSection from "../../components/BeyondSection.astro";
 
 const siteMeta = await getEntry("site", "es/meta");
 
@@ -29,35 +29,53 @@ const projects = (await getCollection("projects", ({ id }) => id.startsWith("es/
   .sort((a, b) => parseTimeframe(b.data.timeframe) - parseTimeframe(a.data.timeframe))
   .slice(0, 5);
 
-const achievements = [
+const personalEntries = await getCollection("personal", ({ id }) => id.startsWith("es/"));
+
+const chapters = [
   {
-    title: "Verificación de silicio",
-    description: "Construyendo entornos de prueba UVM reutilizables para RTL en Microsoft, cubriendo pipelines de punto flotante, pruebas aleatorias restringidas y automatización de cobertura."
+    num: "01",
+    years: "2015–2019",
+    title: "Primeras construcciones",
+    text: "Una app de calculadora a los 13. Un piano cableado con timers 555. Un instrumento de calidad del agua tras hallar algas en el suministro escolar. Construir antes de sentirse listo se volvió el hábito.",
+    href: "/es/journey/",
+    linkLabel: "La trayectoria"
   },
   {
-    title: "IA y sistemas de hardware",
-    description: "Verificación de silicio para aceleradores de IA y arquitecturas a nivel de chip, abarcando métodos formales, cobertura funcional y diseño listo para síntesis."
+    num: "02",
+    years: "2020–2025",
+    title: "Años de investigación",
+    text: "Clarkson University: silla de ruedas autónoma publicada en IEEE, visión wearable para invidentes, control protésico, coronado por una tesis de maestría en criptografía post-cuántica.",
+    href: "/es/research/",
+    linkLabel: "Investigación y publicaciones"
   },
   {
-    title: "Infraestructura cloud",
-    description: "Desplegando plataformas de grado producción con Kubernetes, Docker, Terraform y pipelines CI/CD para emprendimientos personales y clientes."
+    num: "03",
+    years: "2022–hoy",
+    title: "Silicio a escala",
+    text: "Verificando silicio de aceleradores de IA en Microsoft: entornos UVM, pipelines de punto flotante y automatización adoptada en los equipos de verificación.",
+    href: "#experience",
+    linkLabel: "Experiencia"
   },
   {
-    title: "Investigación aplicada",
-    description: "Criptografía post-cuántica, robótica asistiva y neurotecnología — traduciendo investigación académica en prototipos funcionales."
+    num: "04",
+    years: "2025–hoy",
+    title: "Fundador",
+    text: "Huitzo, el sistema operativo para la inteligencia: IA auto-hospedada para empresas reguladas.",
+    href: "/es/huitzo/",
+    linkLabel: "Huitzo"
   }
 ];
 
 const proofCards = [
   {
-    title: "Silicio para Acelerador de IA — Microsoft",
+    title: "Silicio para Acelerador de IA · Microsoft",
     challenge: "Verificar pipelines de punto flotante y cierre de cobertura para chips de IA.",
     result: "Entornos UVM reutilizables y automatización adoptados en toda la organización.",
   },
   {
-    title: "Huitzo — Inteligencia como Servicio",
-    challenge: "Hacer capacidades avanzadas de IA accesibles para empresas y startups.",
-    result: "Diseñando infraestructura de IA escalable con pipelines de datos modulares.",
+    title: "Huitzo · El Sistema Operativo para la Inteligencia",
+    challenge: "Las empresas reguladas no pueden enviar datos sensibles a servicios de IA de terceros.",
+    result: "Construyendo un runtime de IA auto-hospedado que ejecuta Intelligence Packs dentro de la infraestructura del cliente.",
     href: "/huitzo"
   },
   {
@@ -69,12 +87,12 @@ const proofCards = [
   {
     title: "Plataforma de Silla de Ruedas Autónoma",
     challenge: "Habilitar navegación autónoma en interiores para usuarios con movilidad reducida.",
-    result: "Publicado en IEEE — diseño open-source de bajo costo con modos de control dual.",
+    result: "Publicado en IEEE: diseño open-source de bajo costo con modos de control dual.",
     href: "https://ieeexplore.ieee.org/abstract/document/9476093"
   },
   {
     title: "Operaciones de Plataforma Cloud-Native",
-    challenge: "Enviar facturación y autenticación para SaaS multi-tenant.",
+    challenge: "Lanzar facturación y autenticación de grado producción para SaaS multi-tenant.",
     result: "Pipelines CI/CD automatizados para iteración semanal con confianza.",
   }
 ];
@@ -94,7 +112,7 @@ const offers = [
   },
   {
     title: "Asesoría de producto e ingeniería",
-    description: "Ayudar a equipos en etapa temprana a tomar decisiones técnicas de alto impacto — desde selección de stack hasta estructura de equipo."
+    description: "Ayudar a equipos en etapa temprana a tomar decisiones técnicas de alto impacto, desde selección de stack hasta estructura de equipo."
   },
   {
     title: "Dirección técnica temprana",
@@ -128,31 +146,34 @@ const videoHighlights = [
 ---
 <SiteLayout
   title="Ernesto Sola-Thomas • Ingeniero de Silicio y Fundador"
-  description="Ernesto Sola-Thomas — fundador de Huitzo (plataforma de inteligencia IA) e ingeniero de verificación de silicio en Microsoft. Profundidad técnica, convicción fundadora."
+  description="Ernesto Sola-Thomas: fundador de Huitzo, el runtime de IA auto-hospedado para empresas reguladas, e ingeniero de verificación de silicio en Microsoft."
   siteMeta={siteMeta}
   locale="es"
 >
   <Hero hero={siteMeta.data.hero} quickFacts={siteMeta.data.quickFacts} locale="es" />
   <TrustStrip locale="es" />
-  <Reveal client:visible>
-    <SelectedProof cards={proofCards} locale="es" />
-  </Reveal>
-  <Reveal client:visible>
-    <AchievementsSection achievements={achievements} locale="es" />
-  </Reveal>
-  <Reveal client:visible>
+  <div data-reveal>
+    <StorySection chapters={chapters} locale="es" />
+  </div>
+  <div data-reveal>
     <ExperienceTimeline entries={experiences} locale="es" />
-  </Reveal>
-  <Reveal client:visible>
-    <WaysICanHelp offers={offers} locale="es" />
-  </Reveal>
-  <Reveal client:visible>
+  </div>
+  <div data-reveal>
+    <SelectedProof cards={proofCards} locale="es" />
+  </div>
+  <div data-reveal>
     <ProjectsShowcase entries={projects} locale="es" />
-  </Reveal>
-  <Reveal client:visible>
+  </div>
+  <div data-reveal>
     <VideoHighlights videos={videoHighlights} locale="es" />
-  </Reveal>
-  <Reveal client:visible>
+  </div>
+  <div data-reveal>
+    <WaysICanHelp offers={offers} locale="es" />
+  </div>
+  <div data-reveal>
+    <BeyondSection entries={personalEntries} locale="es" />
+  </div>
+  <div data-reveal>
     <ContactSection contact={siteMeta.data.contact} locale="es" />
-  </Reveal>
+  </div>
 </SiteLayout>

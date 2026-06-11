@@ -29,34 +29,70 @@ interface Props {
 const { hero, quickFacts, locale = 'en' } = Astro.props;
 const t = getTranslations(locale);
 ---
-<section id="hero" class="relative overflow-hidden pb-28 pt-28">
+<section id="hero" class="relative overflow-hidden pb-28 pt-24">
   <div aria-hidden="true" class="absolute inset-0 bg-[var(--gradient-hero)] opacity-70"></div>
   <div class="absolute inset-x-0 bottom-0 h-64 bg-gradient-to-t from-[color:var(--surface-base)]"></div>
 
+  <!-- Self-drawing circuit traces -->
+  <svg
+    aria-hidden="true"
+    class="hero-trace pointer-events-none absolute inset-0 hidden h-full w-full lg:block"
+    viewBox="0 0 1440 700"
+    fill="none"
+    preserveAspectRatio="xMaxYMid slice"
+  >
+    <path d="M 1440 90 H 1240 L 1190 140 V 260" />
+    <path d="M 1440 620 H 1180 L 1120 560 V 470" />
+    <path d="M 980 700 V 640 L 1040 580 H 1140" />
+    <path d="M 0 560 H 120 L 170 510 H 290" />
+    <path d="M 0 120 H 90 L 130 160 V 230" />
+    <circle cx="1190" cy="260" r="4" />
+    <circle cx="1120" cy="470" r="4" />
+    <circle cx="1140" cy="580" r="4" />
+    <circle cx="290" cy="510" r="4" />
+    <circle cx="130" cy="230" r="4" />
+  </svg>
+
   <div class="container relative">
     <div class="grid grid-cols-1 gap-16 lg:grid-cols-12 lg:gap-8">
-      <div class="space-y-10 lg:col-span-7">
-        <span class="badge">{hero.title}</span>
-        <div class="space-y-6">
-          <h1 class="font-display text-5xl font-semibold leading-tight text-primary md:text-6xl">
+      <div class="space-y-9 lg:col-span-7">
+        <p class="boot-line" aria-hidden="true">
+          <span class="prompt">{t.hero.bootHost}</span>:~$ {t.hero.bootCommand}<span class="boot-cursor"></span>
+        </p>
+
+        <div class="space-y-5">
+          <h1 class="power-on font-display text-5xl font-semibold leading-tight text-primary md:text-7xl">
             {hero.name}
           </h1>
+          <p class="font-mono text-lg text-secondary md:text-xl">
+            <span aria-hidden="true" class="text-[var(--color-accent)]">&gt;&nbsp;</span><span class="word-rotator">
+              {t.hero.roles.map((role) => (
+                <span>{role}</span>
+              ))}
+            </span>
+            <span class="sr-only">{t.hero.roles.join(" · ")}</span>
+          </p>
           <p class="max-w-2xl text-xl text-secondary">
             {hero.tagline}
           </p>
         </div>
+
         <ul class="space-y-4 text-base text-muted">
-          {hero.statements.map((statement, index) => (
-            <li class="flex items-start gap-3" key={`statement-${index}`}>
-              <span aria-hidden="true" class="mt-1.5 inline-flex h-2 w-2 flex-none rounded-full bg-[var(--color-accent)]"></span>
+          {hero.statements.map((statement) => (
+            <li class="flex items-start gap-3">
+              <span aria-hidden="true" class="mt-1.5 inline-flex h-2 w-2 flex-none rounded-[2px] bg-[var(--color-accent)]"></span>
               <span>{statement}</span>
             </li>
           ))}
         </ul>
+
         {hero.buildingNow && (
           <a href={hero.buildingNow.href} target="_blank" rel="noopener noreferrer" class="group flex items-start gap-4 rounded-xl border border-[var(--color-accent)]/30 bg-overlay px-5 py-4 transition hover:border-[var(--color-accent)]/70 hover:bg-[var(--color-accent)]/5 no-underline">
             <div class="flex-1 min-w-0">
-              <p class="text-xs uppercase tracking-[0.35em] text-[var(--color-accent)] mb-1">{hero.buildingNow.label}</p>
+              <p class="mb-1 flex items-center gap-2 font-mono text-xs uppercase tracking-[0.3em] text-[var(--color-accent)]">
+                <span class="status-dot" aria-hidden="true"></span>
+                {hero.buildingNow.label}
+              </p>
               <p class="font-display text-lg font-semibold text-primary leading-snug">{hero.buildingNow.name}</p>
               <p class="mt-1 text-sm text-muted">{hero.buildingNow.oneliner}</p>
             </div>
@@ -65,14 +101,15 @@ const t = getTranslations(locale);
             </svg>
           </a>
         )}
+
         <div class="flex flex-wrap items-center gap-4">
           {hero.ctas.map((cta, index) => (
             index === 0 ? (
-              <a key={cta.href} href={cta.href} class="button-primary" data-goatcounter-click="hero-cta-primary">
+              <a href={cta.href} class="button-primary" data-goatcounter-click="hero-cta-primary">
                 {cta.label}
               </a>
             ) : (
-              <a key={cta.href} href={cta.href} class="button-ghost" data-goatcounter-click="hero-cta-secondary">
+              <a href={cta.href} class="button-ghost" data-goatcounter-click="hero-cta-secondary">
                 {cta.label}
               </a>
             )
@@ -81,18 +118,26 @@ const t = getTranslations(locale);
       </div>
 
       <aside class="glass-panel relative grid gap-6 p-8 lg:col-span-5 lg:self-start">
-        <div class="absolute -top-4 left-10 hidden rounded-md border border-soft bg-overlay px-4 py-1 text-xs uppercase tracking-[0.4em] text-soft lg:inline-flex">
+        <div class="absolute -top-4 left-10 hidden rounded-md border border-soft bg-overlay px-4 py-1 font-mono text-xs uppercase tracking-[0.3em] text-soft lg:inline-flex">
           {t.hero.creatingWithPassion}
         </div>
         <div class="relative flex flex-col items-center gap-6 text-center">
-          <div class="relative h-48 w-48 overflow-hidden rounded-lg border border-soft bg-overlay">
-            <img src="https://tse1.mm.bing.net/th/id/OIP.hPYSzHHEbkC3WzghsU_xjAHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Ernesto Sola-Thomas - Professional Headshot" width="192" height="192" loading="lazy" class="w-full h-full object-cover" />
+          <div class="die-frame h-52 w-52">
+            <img
+              src="/images/ernesto-sola-thomas.jpg"
+              alt="Ernesto Sola-Thomas, professional headshot"
+              width="208"
+              height="208"
+              loading="eager"
+              fetchpriority="high"
+              class="h-full w-full object-cover"
+            />
           </div>
         </div>
-        <dl class="grid gap-3 text-sm text-left text-muted">
-          {quickFacts.map((fact, index) => (
-            <div class="flex items-center justify-between rounded-md border border-soft bg-overlay px-4 py-3" key={`fact-${index}`}>
-              <dt class="text-xs uppercase tracking-[0.35em] text-soft">{fact.label}</dt>
+        <dl class="grid gap-3 text-left text-sm text-muted">
+          {quickFacts.map((fact) => (
+            <div class="flex items-center justify-between gap-4 rounded-md border border-soft bg-overlay px-4 py-3">
+              <dt class="font-mono text-xs uppercase tracking-[0.25em] text-soft">{fact.label}</dt>
               <dd class="text-right text-sm font-medium text-primary">{fact.value}</dd>
             </div>
           ))}

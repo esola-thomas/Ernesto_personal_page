@@ -1,0 +1,41 @@
+---
+import type { CollectionEntry } from "astro:content";
+import SectionHeading from "./SectionHeading.astro";
+import { getTranslations, type Locale } from "../i18n/translations";
+
+interface Props {
+  entries: CollectionEntry<"personal">[];
+  locale?: Locale;
+}
+
+const { entries, locale = 'en' } = Astro.props as Props;
+const t = getTranslations(locale);
+
+const sorted = [...entries].sort((a, b) => a.data.order - b.data.order);
+const rendered = await Promise.all(
+  sorted.map(async (entry) => {
+    const { Content } = await entry.render();
+    return { entry, Content };
+  })
+);
+---
+<section id="beyond" class="py-24">
+  <div class="container section-grid">
+    <SectionHeading
+      eyebrow={t.headings.personalEyebrow}
+      title={t.headings.personal}
+      description={t.headings.personalDesc}
+    />
+
+    <div class="grid gap-6 md:grid-cols-2">
+      {rendered.map(({ entry, Content }) => (
+        <article class="bento-card stagger-item p-8">
+          <h3 class="font-display text-xl font-semibold text-primary">{entry.data.title}</h3>
+          <div class="personal-content mt-5 text-sm">
+            <Content />
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
