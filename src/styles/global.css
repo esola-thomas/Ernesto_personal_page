@@ -766,3 +766,87 @@ main {
   background: var(--color-accent);
   opacity: 0.85;
 }
+
+/* Essay body typography (.prose has no backing plugin; this is the real thing) */
+.essay-body {
+  color: var(--text-muted);
+  font-size: 1.0625rem;
+  line-height: 1.75;
+}
+
+.essay-body p {
+  margin-bottom: 1.25rem;
+}
+
+.essay-body h2 {
+  margin: 2.5rem 0 1rem;
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.essay-body h3 {
+  margin: 2rem 0 0.75rem;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.essay-body ul,
+.essay-body ol {
+  margin: 0 0 1.25rem 1.5rem;
+}
+
+.essay-body ul {
+  list-style: disc;
+}
+
+.essay-body ol {
+  list-style: decimal;
+}
+
+.essay-body li {
+  margin-bottom: 0.5rem;
+}
+
+.essay-body a {
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.essay-body blockquote {
+  margin: 1.5rem 0;
+  border-left: 2px solid var(--color-accent);
+  padding-left: 1.25rem;
+  font-style: italic;
+  color: var(--text-secondary);
+}
+
+.essay-body code {
+  border-radius: 0.25rem;
+  background: var(--surface-muted);
+  padding: 0.125rem 0.375rem;
+  font-size: 0.9em;
+}
+
+.essay-body pre {
+  margin: 1.5rem 0;
+  overflow-x: auto;
+  border-radius: 0.5rem;
+  border: 1px solid var(--border-soft);
+  background: var(--surface-muted);
+  padding: 1rem 1.25rem;
+}
+
+.essay-body pre code {
+  background: none;
+  padding: 0;
+}
+
+.essay-body hr {
+  margin: 2.5rem 0;
+  border-color: var(--border-soft);
+}

@@ -11,6 +11,14 @@ export interface Props {
   title?: string;
   description?: string;
   ogImage?: string;
+  ogType?: "website" | "article";
+  article?: {
+    headline: string;
+    description: string;
+    datePublished: string;
+    dateModified?: string;
+    image: string;
+  };
   siteMeta?: CollectionEntry<"site">;
   locale?: string;
 }
@@ -19,6 +27,8 @@ const {
   title = "Ernesto Sola-Thomas • Silicon Engineer & Founder",
   description = "Ernesto Sola-Thomas: silicon verification engineer at Microsoft, founder of Huitzo, and IEEE-published researcher building human-centered technology.",
   ogImage = new URL("og-default.png", Astro.site).href,
+  ogType = "website",
+  article,
   siteMeta,
   locale = "en"
 } = Astro.props as Props;
@@ -55,6 +65,23 @@ const jsonLd = JSON.stringify({
             url: Astro.url.href,
             name: title,
             mainEntity: { "@id": personId }
+          }
+        ]
+      : []),
+    ...(article
+      ? [
+          {
+            "@type": "BlogPosting",
+            "@id": `${Astro.url.href}#article`,
+            mainEntityOfPage: Astro.url.href,
+            headline: article.headline,
+            description: article.description,
+            datePublished: article.datePublished,
+            dateModified: article.dateModified ?? article.datePublished,
+            author: { "@id": personId },
+            publisher: { "@id": personId },
+            inLanguage: locale,
+            image: article.image
           }
         ]
       : []),
@@ -135,6 +162,7 @@ const jsonLd = JSON.stringify({
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     <meta name="generator" content={Astro.generator} />
     <link rel="canonical" href={Astro.url.href} />
+    <link rel="alternate" type="application/rss+xml" title="Ernesto Sola-Thomas: Writing" href="/rss.xml" />
 
     <link rel="alternate" hreflang="en" href={enUrl} />
     <link rel="alternate" hreflang="es" href={esUrl} />
@@ -148,7 +176,10 @@ const jsonLd = JSON.stringify({
 
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
+    {article && <meta property="article:published_time" content={article.datePublished} />}
+    {article && <meta property="article:modified_time" content={article.dateModified ?? article.datePublished} />}
+    {article && <meta property="article:author" content="Ernesto Sola-Thomas" />}
     <meta property="og:url" content={Astro.url.href} />
     <meta property="og:image" content={ogImage} />
     <meta property="og:image:width" content="1200" />
