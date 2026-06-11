@@ -4,12 +4,50 @@ export const translations = {
     nav: {
       experience: "Experience",
       projects: "Projects",
+      writing: "Writing",
       research: "Research",
       journey: "Journey",
       speaking: "Speaking",
       huitzo: "Huitzo",
       contact: "Contact",
       collaborate: "Collaborate"
+    },
+    writing: {
+      eyebrow: "Essays",
+      title: "Writing",
+      description:
+        "Essays on AI in regulated industries, what silicon verification teaches about trustworthy AI, and building Huitzo in the open.",
+      allPillars: "All",
+      pillars: {
+        "regulated-ai": "Regulated AI",
+        "silicon-to-software": "Silicon to Software",
+        "founder-journey": "Founder Journey"
+      },
+      published: "Published",
+      updated: "Updated",
+      readEssay: "Read essay →",
+      backToWriting: "← Back to all essays",
+      discussOnLinkedIn: "Discuss on LinkedIn",
+      empty: "Essays are coming soon. Subscribe to the RSS feed to catch the first one.",
+      rss: "RSS feed"
+    },
+    essayCta: {
+      "design-partner": {
+        title: "Building AI inside a regulated enterprise?",
+        body: "Huitzo is a self-hosted AI runtime for organizations that can't ship their data to third-party AI. I'm looking for design partners.",
+        button: "Start the conversation",
+        secondary: "Learn about Huitzo"
+      },
+      speaking: {
+        title: "Want this story on your stage or podcast?",
+        body: "I speak about AI silicon, sovereign AI deployments, and building in regulated industries, in English and Spanish.",
+        button: "Invite me to speak"
+      },
+      subscribe: {
+        title: "Follow the writing",
+        body: "One essay a month, no algorithm in between.",
+        button: "Subscribe via RSS"
+      }
     },
     // Section headings
     headings: {
@@ -146,12 +184,50 @@ export const translations = {
     nav: {
       experience: "Experiencia",
       projects: "Proyectos",
+      writing: "Escritos",
       research: "Investigación",
       journey: "Trayectoria",
       speaking: "Charlas",
       huitzo: "Huitzo",
       contact: "Contacto",
       collaborate: "Colaborar"
+    },
+    writing: {
+      eyebrow: "Ensayos",
+      title: "Escritos",
+      description:
+        "Ensayos sobre IA en industrias reguladas, lo que la verificación de silicio enseña sobre IA confiable, y la construcción de Huitzo en abierto.",
+      allPillars: "Todos",
+      pillars: {
+        "regulated-ai": "IA Regulada",
+        "silicon-to-software": "Del Silicio al Software",
+        "founder-journey": "Camino de Fundador"
+      },
+      published: "Publicado",
+      updated: "Actualizado",
+      readEssay: "Leer ensayo →",
+      backToWriting: "← Volver a todos los ensayos",
+      discussOnLinkedIn: "Comentar en LinkedIn",
+      empty: "Los ensayos llegan pronto. Suscríbete al feed RSS para recibir el primero.",
+      rss: "Feed RSS"
+    },
+    essayCta: {
+      "design-partner": {
+        title: "¿Construyes IA dentro de una empresa regulada?",
+        body: "Huitzo es un runtime de IA auto-alojado para organizaciones que no pueden enviar sus datos a IA de terceros. Busco socios de diseño.",
+        button: "Iniciar la conversación",
+        secondary: "Conocer Huitzo"
+      },
+      speaking: {
+        title: "¿Quieres esta historia en tu escenario o podcast?",
+        body: "Hablo sobre silicio para IA, despliegues de IA soberana y construcción en industrias reguladas, en inglés y español.",
+        button: "Invítame a hablar"
+      },
+      subscribe: {
+        title: "Sigue los escritos",
+        body: "Un ensayo al mes, sin algoritmo de por medio.",
+        button: "Suscribirse por RSS"
+      }
     },
     // Encabezados de sección
     headings: {

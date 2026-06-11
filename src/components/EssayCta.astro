@@ -1,0 +1,34 @@
+---
+import { getTranslations, type Locale } from "../i18n/translations";
+
+interface Props {
+  cta: "design-partner" | "speaking" | "subscribe";
+  locale?: Locale;
+  email?: string;
+}
+
+const { cta, locale = "en", email = "ernesto@solathomas.com" } = Astro.props;
+const t = getTranslations(locale);
+const copy = t.essayCta[cta];
+const base = locale === "es" ? "/es/" : "/";
+
+const mailtoSubject = locale === "es" ? "Socio de diseño de Huitzo" : "Huitzo design partner";
+const primaryHref =
+  cta === "design-partner"
+    ? `mailto:${email}?subject=${encodeURIComponent(mailtoSubject)}`
+    : cta === "speaking"
+      ? `${base}speaking/`
+      : "/rss.xml";
+---
+<aside class="rounded-lg border border-soft bg-overlay p-8 text-center" data-reveal>
+  <h2 class="font-display text-2xl font-semibold text-primary">{copy.title}</h2>
+  <p class="mx-auto mt-3 max-w-xl text-muted">{copy.body}</p>
+  <div class="mt-6 flex flex-wrap items-center justify-center gap-3">
+    <a href={primaryHref} class="button-primary px-6 py-3" data-goatcounter-click={`essay-cta-${cta}`}>
+      {copy.button}
+    </a>
+    {cta === "design-partner" && "secondary" in copy && (
+      <a href={`${base}huitzo/`} class="button-ghost px-6 py-3">{copy.secondary}</a>
+    )}
+  </div>
+</aside>

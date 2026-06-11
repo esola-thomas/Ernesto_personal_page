@@ -1,0 +1,106 @@
+---
+import { getEntry } from "astro:content";
+import SiteLayout from "../../layouts/SiteLayout.astro";
+import { getTranslations } from "../../i18n/translations";
+import { getEssays, essaySlug, formatEssayDate, PILLARS } from "../../lib/writing";
+
+const essays = await getEssays("en");
+const siteMeta = await getEntry("site", "meta");
+const t = getTranslations("en");
+---
+<SiteLayout
+  title="Writing | Ernesto Sola-Thomas"
+  description={t.writing.description}
+  siteMeta={siteMeta}
+  locale="en"
+>
+  <section class="relative overflow-hidden pb-16 pt-32">
+    <div aria-hidden="true" class="absolute inset-0 bg-[var(--gradient-hero)] opacity-40"></div>
+    <div class="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[color:var(--surface-base)]"></div>
+    <div class="container relative">
+      <span class="badge">{t.writing.eyebrow}</span>
+      <h1 class="mt-6 font-display text-5xl font-semibold leading-tight text-primary md:text-6xl">
+        {t.writing.title}
+      </h1>
+      <p class="mt-4 max-w-2xl text-xl text-secondary">{t.writing.description}</p>
+    </div>
+  </section>
+
+  <section class="pb-24">
+    <div class="container max-w-3xl">
+      {essays.length === 0 ? (
+        <p class="text-lg text-muted">
+          {t.writing.empty}
+          <a href="/rss.xml" class="ml-2 font-medium text-[var(--color-accent)] hover:underline">{t.writing.rss}</a>
+        </p>
+      ) : (
+        <>
+          <div class="mb-10 flex flex-wrap gap-2" role="group" aria-label="Filter essays by topic">
+            <button type="button" class="button-ghost px-4 py-2 text-sm" data-pillar-filter="all" aria-pressed="true">
+              {t.writing.allPillars}
+            </button>
+            {PILLARS.map((pillar) => (
+              <button type="button" class="button-ghost px-4 py-2 text-sm" data-pillar-filter={pillar} aria-pressed="false">
+                {t.writing.pillars[pillar]}
+              </button>
+            ))}
+          </div>
+
+          <div class="space-y-6">
+            {essays.map((essay) => (
+              <article class="bento-card p-8" data-pillar={essay.data.pillar} data-reveal>
+                <div class="flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.2em] text-soft">
+                  <span class="badge">{t.writing.pillars[essay.data.pillar]}</span>
+                  <time datetime={essay.data.pubDate.toISOString().slice(0, 10)}>
+                    {formatEssayDate(essay.data.pubDate, "en")}
+                  </time>
+                </div>
+                <h2 class="mt-4 font-display text-2xl font-semibold text-primary">
+                  <a href={`/writing/${essaySlug(essay)}/`} class="hover:text-[var(--color-accent)]">
+                    {essay.data.title}
+                  </a>
+                </h2>
+                <p class="mt-3 text-muted">{essay.data.description}</p>
+                <a
+                  href={`/writing/${essaySlug(essay)}/`}
+                  class="mt-4 inline-block text-sm font-medium text-[var(--color-accent)] hover:underline"
+                >
+                  {t.writing.readEssay}
+                </a>
+              </article>
+            ))}
+          </div>
+
+          <p class="mt-12 text-sm text-soft">
+            <a href="/rss.xml" class="font-medium text-[var(--color-accent)] hover:underline">{t.writing.rss}</a>
+          </p>
+        </>
+      )}
+    </div>
+  </section>
+
+  <script is:inline>
+    (function () {
+      const buttons = document.querySelectorAll("[data-pillar-filter]");
+      const cards = document.querySelectorAll("[data-pillar]");
+      if (!buttons.length || !cards.length) return;
+      function apply(filter) {
+        cards.forEach((card) => {
+          card.hidden = filter !== "all" && card.dataset.pillar !== filter;
+        });
+        buttons.forEach((btn) => {
+          btn.setAttribute("aria-pressed", String(btn.dataset.pillarFilter === filter));
+        });
+      }
+      buttons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const filter = btn.dataset.pillarFilter;
+          apply(filter);
+          history.replaceState(null, "", filter === "all" ? location.pathname : `#${filter}`);
+        });
+      });
+      const initial = location.hash.slice(1);
+      if (initial && [...buttons].some((b) => b.dataset.pillarFilter === initial)) apply(initial);
+    })();
+  </script>
+</SiteLayout>

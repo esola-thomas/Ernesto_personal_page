@@ -1,0 +1,95 @@
+---
+import { getCollection, getEntry } from "astro:content";
+import SiteLayout from "../../layouts/SiteLayout.astro";
+import EssayCta from "../../components/EssayCta.astro";
+import { getTranslations } from "../../i18n/translations";
+import { essaySlug, getOgImagePath, formatEssayDate } from "../../lib/writing";
+
+export async function getStaticPaths() {
+  const essays = await getCollection("writing", ({ id, data }) => !id.startsWith("es/") && !data.draft);
+  return essays.map((essay) => ({
+    params: { slug: essaySlug(essay) },
+    props: { essay },
+  }));
+}
+
+const { essay } = Astro.props;
+const { Content } = await essay.render();
+const siteMeta = await getEntry("site", "meta");
+const t = getTranslations("en");
+const d = essay.data;
+const slug = essaySlug(essay);
+const ogUrl = new URL(getOgImagePath(slug, "en", d.ogImage), Astro.site).href;
+---
+<SiteLayout
+  title={`${d.title} | Ernesto Sola-Thomas`}
+  description={d.description}
+  ogImage={ogUrl}
+  ogType="article"
+  article={{
+    headline: d.title,
+    description: d.description,
+    datePublished: d.pubDate.toISOString().slice(0, 10),
+    dateModified: d.updated?.toISOString().slice(0, 10),
+    image: ogUrl
+  }}
+  siteMeta={siteMeta}
+  locale="en"
+>
+  <section class="relative overflow-hidden pb-16 pt-32">
+    <div aria-hidden="true" class="absolute inset-0 bg-[var(--gradient-hero)] opacity-40"></div>
+    <div class="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[color:var(--surface-base)]"></div>
+    <div class="container relative max-w-3xl">
+      <div class="flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.2em] text-soft">
+        <span class="badge">{t.writing.pillars[d.pillar]}</span>
+        <time datetime={d.pubDate.toISOString().slice(0, 10)}>
+          {t.writing.published} {formatEssayDate(d.pubDate, "en")}
+        </time>
+        {d.updated && (
+          <time datetime={d.updated.toISOString().slice(0, 10)}>
+            · {t.writing.updated} {formatEssayDate(d.updated, "en")}
+          </time>
+        )}
+      </div>
+      <h1 class="mt-6 font-display text-4xl font-semibold leading-tight text-primary md:text-5xl">
+        {d.title}
+      </h1>
+      <p class="mt-4 text-lg text-secondary">{d.description}</p>
+      {d.heroQuote && (
+        <blockquote class="mt-6 border-l-2 border-[var(--color-accent)] pl-4 text-xl italic text-primary">
+          {d.heroQuote}
+        </blockquote>
+      )}
+    </div>
+  </section>
+
+  <article class="pb-24">
+    <div class="container max-w-3xl space-y-12">
+      <div class="essay-body">
+        <Content />
+      </div>
+
+      {d.linkedinPostUrl && (
+        <p>
+          <a
+            href={d.linkedinPostUrl}
+            target="_blank"
+            rel="noreferrer"
+            class="font-medium text-[var(--color-accent)] hover:underline"
+            data-goatcounter-click={`essay-linkedin-${slug}`}
+          >
+            {t.writing.discussOnLinkedIn} →
+          </a>
+        </p>
+      )}
+
+      <EssayCta cta={d.cta} locale="en" email={siteMeta?.data.contact.email} />
+
+      <div>
+        <a href="/writing/" class="text-sm font-medium text-[var(--color-accent)] hover:underline">
+          {t.writing.backToWriting}
+        </a>
+      </div>
+    </div>
+  </article>
+</SiteLayout>

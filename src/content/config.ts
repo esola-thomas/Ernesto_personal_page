@@ -61,6 +61,23 @@ const projects = defineCollection({
   })
 });
 
+const writing = defineCollection({
+  type: "content",
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    pubDate: z.coerce.date(),
+    updated: z.coerce.date().optional(),
+    pillar: z.enum(["regulated-ai", "silicon-to-software", "founder-journey"]),
+    draft: z.boolean().default(false),
+    heroQuote: z.string().optional(),
+    cta: z.enum(["design-partner", "speaking", "subscribe"]).default("design-partner"),
+    relatedVenture: z.string().optional(),
+    linkedinPostUrl: z.string().url().optional(),
+    ogImage: z.string().optional()
+  })
+});
+
 const personal = defineCollection({
   type: "content",
   schema: z.object({
@@ -114,6 +131,7 @@ export const collections = {
   experience,
   ventures,
   projects,
+  writing,
   personal,
   site,
   skills
