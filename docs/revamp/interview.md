@@ -38,7 +38,7 @@ You can answer here (edit the file) or in chat. Claude copies chat answers into 
 
 **1.8** Background (where you're from, languages, family business): how much is public, what's off-limits?
 
-> 
+> Born and raised in Mexico. Mexico City > Veracruz > Vermont > Up State NY > Raleigh NC. I learned spanish then english
 
 **1.9** Rank the audiences: partners, clients, investors, mentees. Anyone missing? Anyone you'd rather NOT attract?
 
